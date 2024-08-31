@@ -53,7 +53,8 @@ Selection; Program Options = 1-4, Exit Program = X:
 
 
 
-Listing available Ollama models...
+Listing Ollama models...
+
 NAME                                    ID              SIZE    MODIFIED
 L3-8B-Stheno-v3.2-IQ3_M-imat:latest     2c65ca6f7072    3.8 GB  3 weeks ago
 qwen2_57b:latest                        9dbf41c98d9e    47 GB   2 months ago
