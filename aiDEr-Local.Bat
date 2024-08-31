@@ -1,12 +1,7 @@
-:: Script: `.\aiDEr-Offline.Bat` 
+:: Script: `.\aiDEr-Local.Bat` 
 @echo off
-setlocal EnableDelayedExpansion
+setlocal enabledelayedexpansion
 
-:: Global Variables
-set "PYTHON_VERSION_NODECIMAL=312"
-set "PIP_EXE_TO_USE="
-set "PYTHON_EXE_TO_USE="
-set "PYTHON_FOLDER_TO_USE="
 set "OLLAMA_API_BASE=http://127.0.0.1:11434"
 set "model_selection_name=(Select A Model)"
 
@@ -16,53 +11,51 @@ set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
 
 :: Ensure the .\data\ folder exists
-if not exist ".\data\" (
-    mkdir ".\data"
-    echo Created .\data folder.
-)
+if not exist ".\data\" mkdir ".\data" 2>nul || (echo Error: Unable to create .\data folder. & goto :end_of_file)
 
 :: Check for persistance.txt and create it if it doesn't exist
 if not exist ".\data\persistance.txt" (
-    echo # This file stores configuration settings.> ".\data\persistance.txt"
-    echo Created persistance.txt.
+    (echo # This file stores configuration settings.
+    echo PYTHON_VERSION_NODECIMAL=0
+    echo model_selection_name=(Select A Model)) > ".\data\persistance.txt" || (echo Error: Unable to create persistance.txt. & goto :end_of_file)
 )
 
 :: Load settings from persistance.txt
-for /f "tokens=1,2 delims==" %%A in (.\\data\\persistance.txt) do (
-    if "%%A"=="PYTHON_VERSION_NODECIMAL" set "PYTHON_VERSION_NODECIMAL=%%B"
-    if "%%A"=="model_selection_name" set "model_selection_name=%%B"
+for /f "tokens=1,* delims==" %%A in ('type ".\data\persistance.txt" ^| findstr /v "^#"') do (
+    set "%%A=%%B"
+)
+
+:: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
+if "%PYTHON_VERSION_NODECIMAL%"=="0" (
+    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (no decimal), Eg 312, 39: "
+    call :update_persistence
 )
 
 :: Check for administrative privileges
-net session >nul 2>&1
-if %errorLevel% NEQ 0 (
-    echo Error: Admin Required!
-    echo Right Click, then Run As Administrator.
-    timeout /t 3 >nul
-    goto :end_of_file
+net session >nul 2>&1 || (
+    echo Error: Admin privileges required. Right-click and select "Run as administrator".
+    pause
+    exit /b 1
 )
-echo Admin Status: Administrator 
+echo Admin Status: Administrator
 
 :: Check Folder
 echo Working Folder: %Script_Directory%
-timeout /t 1 >nul
 
-:: Find Python %PYTHON_VERSION_NODECIMAL% and pip based on config folder location
+:: Find Python installation
 for %%I in (
     "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-    "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\"
-    "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\"
+    "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
+    "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
 ) do (
     if exist "%%~I" (
-        set "PYTHON_FOLDER_TO_USE=%%~I"
-        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
+        set "PYTHON_EXE_TO_USE=%%~I"
         set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
         goto :found_python
     )
 )
 
-:: Python Not Found
-echo Error: Install Python %PYTHON_VERSION_NODECIMAL%.
+echo Error: Python %PYTHON_VERSION_NODECIMAL% not found. Please install it or check your PYTHON_VERSION_NODECIMAL setting.
 goto :end_of_file
 
 :found_python
@@ -76,41 +69,26 @@ echo ===========================================================================
 echo                                                       Aider Local Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo.
-echo.
-echo.
-echo.
-echo                                                 1. Start Ollama Server Normally
-echo.
-echo.
-echo                                                 2. Ollama Models Management
-echo                                                         (%model_selection_name%)
-echo.
-echo                                                 3. Run Aider with Selected Model
-echo.
-echo.
-echo                                                 4. Run Aider with File and Model
-echo.
-echo.
-echo.
-echo.
+echo 1. Start Ollama Server Normally
+echo 2. Ollama Models Management (%model_selection_name%)
+echo 3. Run Aider with Selected Model
+echo 4. Run Aider with File and Model
 echo.
 echo ========================================================================================================================
-set /p choice="Selection; Program Options = 1-4, Exit Program = X: "
+set /p choice="Selection (1-4, or X to exit): "
 
-if /i "!choice!"=="X" goto end_of_file
-if "!choice!"=="1" goto start_server
-if "!choice!"=="2" goto manage_models
-if "!choice!"=="3" goto run_aider
-if "!choice!"=="4" goto run_with_file
-
-goto menu
+if /i "%choice%"=="X" goto :end_of_file
+if "%choice%"=="1" goto :start_server
+if "%choice%"=="2" goto :manage_models
+if "%choice%"=="3" goto :run_aider
+if "%choice%"=="4" goto :run_with_file
+goto :menu
 
 :start_server
 echo Starting Ollama server...
+start "" ollama serve
 timeout /t 2 >nul
-start ollama serve
-goto menu
+goto :menu
 
 :manage_models
 cls
@@ -118,77 +96,72 @@ echo ===========================================================================
 echo                                                 Ollama Model Management
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo.
-echo.
-echo.
-echo.
-echo                                                Available Ollama models:
-echo.
+echo Available Ollama models:
 ollama list
 echo.
-echo.
-echo.
-echo.
-echo.
 echo ========================================================================================================================
-set /p "model_choice=Selection, Select Model = S, Delete Model = D, Back To Menu = B: "
-if /i "!model_choice!"=="B" goto menu
-if /i "!model_choice!"=="S" goto select_model
-if /i "!model_choice!"=="D" goto delete_model_prompt
-goto manage_models
+set /p "model_choice=Selection (S=Select Model, D=Delete Model, B=Back to Menu): "
+if /i "%model_choice%"=="B" goto :menu
+if /i "%model_choice%"=="S" goto :select_model
+if /i "%model_choice%"=="D" goto :delete_model_prompt
+goto :manage_models
 
 :select_model
-set /p "model=Enter the model name you want to use (e.g., llama3:70b) or 'B' to go back: "
-if /i "!model!"=="B" goto manage_models
+set /p "model=Enter the model name (e.g., llama3:70b) or 'B' to go back: "
+if /i "%model%"=="B" goto :manage_models
 set "model_selection_name=%model%"
-echo You selected the model: %model%
+call :update_persistence
+echo Model selected: %model%
 pause
-goto manage_models
+goto :manage_models
 
 :delete_model_prompt
-set /p "model_to_delete=Enter the model name you want to delete or 'B' to go back: "
-if /i "!model_to_delete!"=="B" goto manage_models
-echo You are about to delete the model: %model_to_delete%
-set /p "confirm=Are you sure you want to delete this model? (Y/N): "
-if /i "!confirm!"=="Y" (
-    echo Deleting model %model_to_delete%...
-    ollama rm %model_to_delete%
-    echo Model deleted.
-    if "%model_to_delete%"=="%model_selection_name%" set "model_selection_name=(Select A Model)"
-) else (
-    echo Deletion cancelled.
+set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
+if /i "%model_to_delete%"=="B" goto :manage_models
+set /p "confirm=Are you sure you want to delete %model_to_delete%? (Y/N): "
+if /i "%confirm%"=="Y" (
+    ollama rm %model_to_delete% || echo Error: Failed to delete model.
+    if "%model_to_delete%"=="%model_selection_name%" (
+        set "model_selection_name=(Select A Model)"
+        call :update_persistence
+    )
 )
 pause
-goto manage_models
+goto :manage_models
 
 :run_aider
 if "%model_selection_name%"=="(Select A Model)" (
     echo No model selected. Please select a model first.
-    timeout /t 2 >nul
-    goto menu
+    pause
+    goto :menu
 )
 echo Running Aider with Ollama model (%model_selection_name%)...
-timeout /t 2 >nul
 "%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name%
-goto end_of_file
+goto :end_of_file
 
 :run_with_file
 if "%model_selection_name%"=="(Select A Model)" (
     echo No model selected. Please select a model first.
-    timeout /t 2 >nul
-    goto menu
+    pause
+    goto :menu
 )
-set /p "filename=Enter the Python file to run with Aider and Ollama: "
+set /p "filename=Enter the Python file to run with Aider: "
+if not exist "%filename%" (
+    echo Error: File not found.
+    pause
+    goto :menu
+)
 echo Running Aider with %filename% using Ollama model (%model_selection_name%)...
-timeout /t 2 >nul
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name% %filename%
-goto end_of_file
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name% "%filename%"
+goto :end_of_file
 
-:: Save current settings back to persistance.txt
+:update_persistence
 (
+    echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
     echo model_selection_name=%model_selection_name%
 ) > ".\data\persistance.txt"
+exit /b
 
 :end_of_file
 echo All Processes Finished.
