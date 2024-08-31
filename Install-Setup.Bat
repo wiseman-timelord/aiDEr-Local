@@ -1,4 +1,3 @@
-:: Script: `.\Install-Setup.Bat` 
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -19,20 +18,27 @@ if not exist ".\data\" (
     echo Created .\data folder.
 )
 
-:: Check for persistance.txt and create it if it doesn't exist
-if not exist ".\data\persistance.txt" (
-    echo # This file stores configuration settings.> ".\data\persistance.txt"
-    echo Created persistance.txt.
+:: Check for persistence.txt and create it if it doesn't exist
+if not exist ".\data\persistence.txt" (
+    (
+        echo # This file stores configuration settings.
+        echo PYTHON_VERSION_NODECIMAL=0
+        echo PIP_EXE_TO_USE=
+        echo PYTHON_EXE_TO_USE=
+        echo PYTHON_FOLDER_TO_USE=
+        echo MODEL_SELECTION=No_Model_Selected
+    ) > ".\data\persistence.txt"
+    echo Created persistence.txt with default values.
 )
 
-:: Load settings from persistance.txt
-for /f "tokens=1,2 delims==" %%A in (.\\data\\persistance.txt) do (
-    if "%%A"=="PYTHON_VERSION_NODECIMAL" set "PYTHON_VERSION_NODECIMAL=%%B"
+:: Load settings from persistence.txt
+for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /v "^#"') do (
+    set "%%A=%%B"
 )
 
 :: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
 if "%PYTHON_VERSION_NODECIMAL%"=="0" (
-    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (no decimal), Eg 312, 39: "
+    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (2-3 digits, e.g., 311 or 39): "
 )
 
 :: Check for administrative privileges
@@ -97,10 +103,15 @@ if errorlevel 1 (
 echo Requirements installed successfully.
 echo.
 
-:: Save current settings back to persistance.txt
+:: Save current settings back to persistence.txt
 (
+    echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
-) > ".\data\persistance.txt"
+    echo PIP_EXE_TO_USE=%PIP_EXE_TO_USE%
+    echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
+    echo PYTHON_FOLDER_TO_USE=%PYTHON_FOLDER_TO_USE%
+    echo MODEL_SELECTION=No_Model_Selected
+) > ".\data\persistence.txt"
 
 :end_of_file
 echo All processes finished.

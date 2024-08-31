@@ -1,9 +1,13 @@
-:: Script: `.\aiDEr-Local.Bat` 
 @echo off
 setlocal enabledelayedexpansion
 
+:: Global Variables
 set "OLLAMA_API_BASE=http://127.0.0.1:11434"
-set "model_selection_name=(Select A Model)"
+set "PYTHON_VERSION_NODECIMAL=0"
+set "PIP_EXE_TO_USE="
+set "PYTHON_EXE_TO_USE="
+set "PYTHON_FOLDER_TO_USE="
+set "MODEL_SELECTION=No_Model_Selected"
 
 :: Change to the script's directory
 set "Script_Directory=%~dp0"
@@ -13,22 +17,21 @@ pushd "%Script_Directory%"
 :: Ensure the .\data\ folder exists
 if not exist ".\data\" mkdir ".\data" 2>nul || (echo Error: Unable to create .\data folder. & goto :end_of_file)
 
-:: Check for persistance.txt and create it if it doesn't exist
-if not exist ".\data\persistance.txt" (
-    (echo # This file stores configuration settings.
-    echo PYTHON_VERSION_NODECIMAL=0
-    echo model_selection_name=(Select A Model)) > ".\data\persistance.txt" || (echo Error: Unable to create persistance.txt. & goto :end_of_file)
+:: Check for persistence.txt and create it if it doesn't exist
+if not exist ".\data\persistence.txt" (
+    (
+        echo # This file stores configuration settings.
+        echo PYTHON_VERSION_NODECIMAL=0
+        echo PIP_EXE_TO_USE=
+        echo PYTHON_EXE_TO_USE=
+        echo PYTHON_FOLDER_TO_USE=
+        echo MODEL_SELECTION=No_Model_Selected
+    ) > ".\data\persistence.txt" || (echo Error: Unable to create persistence.txt. & goto :end_of_file)
 )
 
-:: Load settings from persistance.txt
-for /f "tokens=1,* delims==" %%A in ('type ".\data\persistance.txt" ^| findstr /v "^#"') do (
+:: Load settings from persistence.txt
+for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /v "^#"') do (
     set "%%A=%%B"
-)
-
-:: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
-if "%PYTHON_VERSION_NODECIMAL%"=="0" (
-    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (no decimal), Eg 312, 39: "
-    call :update_persistence
 )
 
 :: Check for administrative privileges
@@ -43,20 +46,23 @@ echo Admin Status: Administrator
 echo Working Folder: %Script_Directory%
 
 :: Find Python installation
-for %%I in (
-    "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-    "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-    "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-) do (
-    if exist "%%~I" (
-        set "PYTHON_EXE_TO_USE=%%~I"
-        set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
-        goto :found_python
+if "%PYTHON_EXE_TO_USE%"=="" (
+    for %%I in (
+        "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
+        "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
+        "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
+    ) do (
+        if exist "%%~I" (
+            set "PYTHON_EXE_TO_USE=%%~I"
+            set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
+            set "PYTHON_FOLDER_TO_USE=%%~dpI"
+            goto :found_python
+        )
     )
-)
 
-echo Error: Python %PYTHON_VERSION_NODECIMAL% not found. Please install it or check your PYTHON_VERSION_NODECIMAL setting.
-goto :end_of_file
+    echo Error: Python %PYTHON_VERSION_NODECIMAL% not found. Please run Install-Setup.Bat first.
+    goto :end_of_file
+)
 
 :found_python
 echo Python %PYTHON_VERSION_NODECIMAL% found at: %PYTHON_EXE_TO_USE%
@@ -70,7 +76,7 @@ echo                                                       Aider Local Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo 1. Start Ollama Server Normally
-echo 2. Ollama Models Management (%model_selection_name%)
+echo 2. Ollama Models Management (%MODEL_SELECTION%)
 echo 3. Run Aider with Selected Model
 echo 4. Run Aider with File and Model
 echo.
@@ -109,9 +115,9 @@ goto :manage_models
 :select_model
 set /p "model=Enter the model name (e.g., llama3:70b) or 'B' to go back: "
 if /i "%model%"=="B" goto :manage_models
-set "model_selection_name=%model%"
+set "MODEL_SELECTION=%model%"
 call :update_persistence
-echo Model selected: %model%
+echo Model selected: %MODEL_SELECTION%
 pause
 goto :manage_models
 
@@ -121,8 +127,8 @@ if /i "%model_to_delete%"=="B" goto :manage_models
 set /p "confirm=Are you sure you want to delete %model_to_delete%? (Y/N): "
 if /i "%confirm%"=="Y" (
     ollama rm %model_to_delete% || echo Error: Failed to delete model.
-    if "%model_to_delete%"=="%model_selection_name%" (
-        set "model_selection_name=(Select A Model)"
+    if "%model_to_delete%"=="%MODEL_SELECTION%" (
+        set "MODEL_SELECTION=No_Model_Selected"
         call :update_persistence
     )
 )
@@ -130,17 +136,17 @@ pause
 goto :manage_models
 
 :run_aider
-if "%model_selection_name%"=="(Select A Model)" (
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
     echo No model selected. Please select a model first.
     pause
     goto :menu
 )
-echo Running Aider with Ollama model (%model_selection_name%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name%
+echo Running Aider with Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION%
 goto :end_of_file
 
 :run_with_file
-if "%model_selection_name%"=="(Select A Model)" (
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
     echo No model selected. Please select a model first.
     pause
     goto :menu
@@ -151,16 +157,19 @@ if not exist "%filename%" (
     pause
     goto :menu
 )
-echo Running Aider with %filename% using Ollama model (%model_selection_name%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name% "%filename%"
+echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION% "%filename%"
 goto :end_of_file
 
 :update_persistence
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
-    echo model_selection_name=%model_selection_name%
-) > ".\data\persistance.txt"
+    echo PIP_EXE_TO_USE=%PIP_EXE_TO_USE%
+    echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
+    echo PYTHON_FOLDER_TO_USE=%PYTHON_FOLDER_TO_USE%
+    echo MODEL_SELECTION=%MODEL_SELECTION%
+) > ".\data\persistence.txt"
 exit /b
 
 :end_of_file
