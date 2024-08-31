@@ -6,6 +6,7 @@ set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
 set "OLLAMA_API_BASE=http://127.0.0.1:11434"
+set "model_selection_name=Select A Model"
 
 :: Change to the script's directory
 set "Script_Directory=%~dp0"
@@ -62,11 +63,26 @@ echo ===========================================================================
 echo                                                       Aider Offline Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo 1. Start Ollama Server Normally
-echo 2. Manage Ollama Models
-echo 3. Run Aider with Ollama model
-echo 4. Run Aider with Python file and Ollama model
 echo.
+echo.
+echo.
+echo.
+echo                                                 1. Start Ollama Server Normally
+echo.
+echo.
+echo                                                 2. Ollama Models Management
+echo                                                         (%model_selection_name%)
+echo.
+echo                                                 3. Run Aider with Selected Model
+echo.
+echo.
+echo                                                 4. Run Aider with File and Model
+echo.
+echo.
+echo.
+echo.
+echo.
+echo ========================================================================================================================
 set /p choice="Selection; Program Options = 1-4, Exit Program = X: "
 
 if /i "!choice!"=="X" goto end_of_file
@@ -89,9 +105,19 @@ echo ===========================================================================
 echo                                                 Ollama Model Management
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo Listing available Ollama models...
+echo.
+echo.
+echo.
+echo.
+echo                                                Available Ollama models:
+echo.
 ollama list
 echo.
+echo.
+echo.
+echo.
+echo.
+echo ========================================================================================================================
 set /p "model_choice=Selection, Select Model = S, Delete Model = D, Back To Menu = B: "
 if /i "!model_choice!"=="B" goto menu
 if /i "!model_choice!"=="S" goto select_model
@@ -101,6 +127,7 @@ goto manage_models
 :select_model
 set /p "model=Enter the model name you want to use (e.g., llama3:70b) or 'B' to go back: "
 if /i "!model!"=="B" goto manage_models
+set "model_selection_name=%model%"
 echo You selected the model: %model%
 pause
 goto manage_models
@@ -114,6 +141,7 @@ if /i "!confirm!"=="Y" (
     echo Deleting model %model_to_delete%...
     ollama rm %model_to_delete%
     echo Model deleted.
+    if "%model_to_delete%"=="%model_selection_name%" set "model_selection_name=(Select A Model)"
 ) else (
     echo Deletion cancelled.
 )
@@ -121,26 +149,26 @@ pause
 goto manage_models
 
 :run_aider
-if not defined model (
+if "%model_selection_name%"=="(Select A Model)" (
     echo No model selected. Please select a model first.
     timeout /t 2 >nul
     goto menu
 )
-echo Running Aider with Ollama model (%model%)...
+echo Running Aider with Ollama model (%model_selection_name%)...
 timeout /t 2 >nul
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model%
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name%
 goto end_of_file
 
 :run_with_file
-if not defined model (
+if "%model_selection_name%"=="(Select A Model)" (
     echo No model selected. Please select a model first.
     timeout /t 2 >nul
     goto menu
 )
 set /p "filename=Enter the Python file to run with Aider and Ollama: "
-echo Running Aider with %filename% using Ollama model (%model%)...
+echo Running Aider with %filename% using Ollama model (%model_selection_name%)...
 timeout /t 2 >nul
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model% %filename%
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name% %filename%
 goto end_of_file
 
 :end_of_file
