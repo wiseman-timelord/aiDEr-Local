@@ -21,13 +21,27 @@
                                                       Aider Offline Launcher
 ------------------------------------------------------------------------------------------------------------------------
 
-1. Start Ollama Server Normally
-2. Manage Ollama Models
-3. Run Aider with Ollama model
-4. Run Aider with Python file and Ollama model
 
+
+
+
+                                                1. Start Ollama Server Normally
+
+
+                                                2. Ollama Models Management
+                                                         (Select A Model)
+
+                                                3. Run Aider with Selected Model
+
+
+                                                4. Run Aider with File and Model
+
+
+
+
+
+========================================================================================================================
 Selection; Program Options = 1-4, Exit Program = X:
-
 ```
 - Ollama Management...
 ```
@@ -35,11 +49,20 @@ Selection; Program Options = 1-4, Exit Program = X:
                                                 Ollama Model Management
 ------------------------------------------------------------------------------------------------------------------------
 
+
+
+
+
 Listing available Ollama models...
 NAME                                    ID              SIZE    MODIFIED
 L3-8B-Stheno-v3.2-IQ3_M-imat:latest     2c65ca6f7072    3.8 GB  3 weeks ago
 qwen2_57b:latest                        9dbf41c98d9e    47 GB   2 months ago
 
+
+
+
+
+========================================================================================================================
 Selection, Select Model = S, Delete Model = D, Back To Menu = B:
 ```
 
