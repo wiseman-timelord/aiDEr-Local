@@ -1,7 +1,9 @@
+:: Script: `.\aiDEr-Online.Bat` 
 @echo off
 setlocal EnableDelayedExpansion
 
 :: Global Variables
+set "PYTHON_VERSION_NODECIMAL=312"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
@@ -10,6 +12,23 @@ set "PYTHON_FOLDER_TO_USE="
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
+
+:: Ensure the .\data\ folder exists
+if not exist ".\data\" (
+    mkdir ".\data"
+    echo Created .\data folder.
+)
+
+:: Check for persistance.txt and create it if it doesn't exist
+if not exist ".\data\persistance.txt" (
+    echo # This file stores configuration settings.> ".\data\persistance.txt"
+    echo Created persistance.txt.
+)
+
+:: Load settings from persistance.txt
+for /f "tokens=1,2 delims==" %%A in (.\\data\\persistance.txt) do (
+    if "%%A"=="PYTHON_VERSION_NODECIMAL" set "PYTHON_VERSION_NODECIMAL=%%B"
+)
 
 :: Check for administrative privileges
 net session >nul 2>&1
@@ -31,49 +50,33 @@ echo ===========================================================================
 echo                                                        Aider Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-
-:: Find Python 3.12 and pip based on config folder location
-for %%I in (
-    "C:\Python312\python.exe"
-    "C:\Program Files\Python312\"
-    "%LocalAppData%\Programs\Python\Python312\"
-) do (
-    if exist "%%~I" (
-        set "PYTHON_FOLDER_TO_USE=%%~I"
-        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
-        set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
-        goto :found_python312
-    )
-)
-
-:: Python Not Found
-echo Error: Install Python 3.12.
-goto :end_of_file
-
-:found_python312
-echo Python 3.12 found at: %PYTHON_EXE_TO_USE%
-echo Using pip from: %PIP_EXE_TO_USE%
 echo.
-
-:menu
-cls
+echo.
+echo.
+echo.
+echo                                                 1. Run Aider Normally
+echo.
+echo.
+echo                                                 2. Run Aider with GPT-4o Model
+echo.
+echo.
+echo                                                 3. Run Aider with Claude 3.5 Sonnet Model
+echo.
+echo.
+echo                                                 4. Run Aider with Specific Python File
+echo.
+echo.
+echo.
+echo.
+echo.
 echo ========================================================================================================================
-echo                                                        Aider Launcher
-echo ------------------------------------------------------------------------------------------------------------------------
-echo.
-echo 1. Run Aider normally
-echo 2. Run Aider with GPT-4o Model
-echo 3. Run Aider with Claude 3.5 Sonnet Model
-echo 4. Run Aider with specific Python file
-echo 5. Exit
-echo.
-set /p choice="Select an option (1-5): "
+set /p choice="Selection; Program Options = 1-4, Exit Program = X: "
 
+if /i "!choice!"=="X" goto end_of_file
 if "!choice!"=="1" goto run_aider
 if "!choice!"=="2" goto run_gpt4o
 if "!choice!"=="3" goto run_claude
 if "!choice!"=="4" goto run_with_file
-if "!choice!"=="5" goto end_of_file
 
 goto menu
 
@@ -103,6 +106,11 @@ echo Running Aider with %filename%...
 timeout /t 2 >nul
 "%PYTHON_EXE_TO_USE%" -m aider %filename%
 goto end_of_file
+
+:: Save current settings back to persistance.txt
+(
+    echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
+) > ".\data\persistance.txt"
 
 :end_of_file
 echo All Processes Finished.

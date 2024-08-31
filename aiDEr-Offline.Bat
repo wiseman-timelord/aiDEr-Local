@@ -1,17 +1,37 @@
+:: Script: `.\aiDEr-Offline.Bat` 
 @echo off
 setlocal EnableDelayedExpansion
 
 :: Global Variables
+set "PYTHON_VERSION_NODECIMAL=312"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
 set "OLLAMA_API_BASE=http://127.0.0.1:11434"
-set "model_selection_name=Select A Model"
+set "model_selection_name=(Select A Model)"
 
 :: Change to the script's directory
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
+
+:: Ensure the .\data\ folder exists
+if not exist ".\data\" (
+    mkdir ".\data"
+    echo Created .\data folder.
+)
+
+:: Check for persistance.txt and create it if it doesn't exist
+if not exist ".\data\persistance.txt" (
+    echo # This file stores configuration settings.> ".\data\persistance.txt"
+    echo Created persistance.txt.
+)
+
+:: Load settings from persistance.txt
+for /f "tokens=1,2 delims==" %%A in (.\\data\\persistance.txt) do (
+    if "%%A"=="PYTHON_VERSION_NODECIMAL" set "PYTHON_VERSION_NODECIMAL=%%B"
+    if "%%A"=="model_selection_name" set "model_selection_name=%%B"
+)
 
 :: Check for administrative privileges
 net session >nul 2>&1
@@ -34,26 +54,26 @@ echo                                                       Aider Offline Launche
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 
-:: Find Python 3.12 and pip based on config folder location
+:: Find Python %PYTHON_VERSION_NODECIMAL% and pip based on config folder location
 for %%I in (
-    "C:\Python312\python.exe"
-    "C:\Program Files\Python312\"
-    "%LocalAppData%\Programs\Python\Python312\"
+    "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
+    "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\"
+    "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\"
 ) do (
     if exist "%%~I" (
         set "PYTHON_FOLDER_TO_USE=%%~I"
         set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
         set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
-        goto :found_python312
+        goto :found_python
     )
 )
 
 :: Python Not Found
-echo Error: Install Python 3.12.
+echo Error: Install Python %PYTHON_VERSION_NODECIMAL%.
 goto :end_of_file
 
-:found_python312
-echo Python 3.12 found at: %PYTHON_EXE_TO_USE%
+:found_python
+echo Python %PYTHON_VERSION_NODECIMAL% found at: %PYTHON_EXE_TO_USE%
 echo Using pip from: %PIP_EXE_TO_USE%
 echo.
 
@@ -170,6 +190,12 @@ echo Running Aider with %filename% using Ollama model (%model_selection_name%)..
 timeout /t 2 >nul
 "%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model_selection_name% %filename%
 goto end_of_file
+
+:: Save current settings back to persistance.txt
+(
+    echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
+    echo model_selection_name=%model_selection_name%
+) > ".\data\persistance.txt"
 
 :end_of_file
 echo All Processes Finished.
