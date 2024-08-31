@@ -5,6 +5,7 @@
 1. COmplete download of requried models. Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) is the best one for 64GB System Ram. IF not, then the Hermes one.
 2. Testing Ollama is working correctly with the batches.
 3. Testing Running aider - Is the install complete? Are there any further issues.
+-  There is also the deepseek v2 Lite gguf, in, base and instruct; somehow I am guessing an intelligent application of, the two models or the instruct model and some other chat model, and streamlining of code could be an option, but mainly somehow utilize the unlimited context on these deepseek models too?
 
 ### DESCRIPTION:
 - This fork, will have drop-in files, to enhance, useability and/or performance, for non-wsl windows 10 users, working off loal models (though it may work on similar editions of windows just fine).
