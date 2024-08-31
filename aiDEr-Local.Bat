@@ -75,13 +75,13 @@ echo ===========================================================================
 echo                                                       Aider Local Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo 1. Start Ollama Server Normally
-echo 2. Ollama Models Management (%MODEL_SELECTION%)
-echo 3. Run Aider with Selected Model
-echo 4. Run Aider with File and Model
+echo     1. Start Ollama Server Normally
+echo     2. Ollama Models Management (%MODEL_SELECTION%)
+echo     3. Run Aider with Selected Model
+echo     4. Run Aider with File and Model
 echo.
 echo ========================================================================================================================
-set /p choice="Selection (1-4, or X to exit): "
+set /p choice="Selection; Menu Options = 1-4, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file
 if "%choice%"=="1" goto :start_server
@@ -102,11 +102,11 @@ echo ===========================================================================
 echo                                                 Ollama Model Management
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo Available Ollama models:
+echo     Available Ollama models:
 ollama list
 echo.
 echo ========================================================================================================================
-set /p "model_choice=Selection (S=Select Model, D=Delete Model, B=Back to Menu): "
+set /p "model_choice=Selection (Select Model = S, Delete Model = D, Back to Menu = M): "
 if /i "%model_choice%"=="B" goto :menu
 if /i "%model_choice%"=="S" goto :select_model
 if /i "%model_choice%"=="D" goto :delete_model_prompt
