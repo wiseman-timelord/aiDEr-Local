@@ -3,7 +3,8 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. COmplete download of requried models. Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. IF not, then the Hermes one. The meta ones improve performance by a significant amount, and I am sure the hermes one does that, but add to that the fact the meta one is un-censored, hence, if there is no uncensored hermes on, then forget hermes.
+1. COmplete download of requried models. Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. IF not, then the Hermes one. The meta ones improve performance by a significant amount, and I am sure the hermes one does that, but add to that the fact the meta one is un-censored, hence, if there is no uncensored hermes on, then forget hermes. 
+2. I would prefer if I could use the vram and system ram, and be able to run the Q6 model, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
 2. Testing Ollama is working correctly with the batches. 
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
