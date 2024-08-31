@@ -14,7 +14,37 @@
 - The batch `aiDEr-Offline.Bat` is for launching aider with local models on Ollama, and also includes light management of Ollama.
 - The batch `aiDEr-Online.Bat` is for launching aider with online services, but is redundant/untested/archived; it may be useful to others.
 
-### USAGE:
+### PREVIEW:
+- The Launcher Main Menu...
+```
+========================================================================================================================
+                                                      Aider Offline Launcher
+------------------------------------------------------------------------------------------------------------------------
+
+1. Start Ollama Server Normally
+2. Manage Ollama Models
+3. Run Aider with Ollama model
+4. Run Aider with Python file and Ollama model
+
+Selection; Program Options = 1-4, Exit Program = X:
+
+```
+- Ollama Management...
+```
+========================================================================================================================
+                                                Ollama Model Management
+------------------------------------------------------------------------------------------------------------------------
+
+Listing available Ollama models...
+NAME                                    ID              SIZE    MODIFIED
+L3-8B-Stheno-v3.2-IQ3_M-imat:latest     2c65ca6f7072    3.8 GB  3 weeks ago
+qwen2_57b:latest                        9dbf41c98d9e    47 GB   2 months ago
+
+Selection, Select Model = S, Delete Model = D, Back To Menu = B:
+```
+
+
+## USAGE:
 1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
 2. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
 3. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
