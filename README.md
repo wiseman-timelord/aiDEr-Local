@@ -5,9 +5,6 @@
 ### DEVELOPMENT:
 1. Python version compatibility, through, as required, then during setup-install, if not exist then creation of `.\data` folder, then when the launcher works in either, setup, online offline, and it has not got a `.\data\persistance.txt`, then it should create one, and read it for appropriate settings for the script, in all 3 script, setup-install and in either of the batches, it should be for the version of python, but for  launcher-offline.bat then also the other relevant value for selected model, there also needs to be globals for all these, set near the top of the script including python ones, it will need to update and load to and save from, for all the important variables. Example...
 ```
-------------
-echo.
-
 :: Find Python 3.12 and pip based on config folder location
 for %%I in (
     "C:\Python312\python.exe"
@@ -19,9 +16,7 @@ for %%I in (
         set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
 ```
 - should be like 
-------------
-echo.
-
+```
 :: Find Python %Python_Version_Decimal% and pip based on config folder location
 for %%I in (
     "C:\Python312\python.exe"
