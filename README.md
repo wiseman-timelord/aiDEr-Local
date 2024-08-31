@@ -32,7 +32,7 @@
     4. Run Aider with File and Model
 
 ========================================================================================================================
-Selection (1-4, or X to exit):
+Selection; Menu Options = 1-4, Exit Batch = X:
 
 ```
 - Ollama Management...
@@ -45,7 +45,7 @@ Selection (1-4, or X to exit):
 NAME    ID      SIZE    MODIFIED
 
 ========================================================================================================================
-Selection (S=Select Model, D=Delete Model, B=Back to Menu):
+Selection; Select Model = S, Delete Model = D, Back to Menu = M:
 ```
 
 ## REQUIREMENTS:
