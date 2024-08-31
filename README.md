@@ -1,4 +1,5 @@
 # aiDEr-Local
+- Its a fork, the main is [here](https://aider.chat/).
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
