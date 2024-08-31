@@ -1,0 +1,149 @@
+@echo off
+setlocal EnableDelayedExpansion
+
+:: Global Variables
+set "PIP_EXE_TO_USE="
+set "PYTHON_EXE_TO_USE="
+set "PYTHON_FOLDER_TO_USE="
+set "OLLAMA_API_BASE=http://127.0.0.1:11434"
+
+:: Change to the script's directory
+set "Script_Directory=%~dp0"
+set "Script_Directory=%Script_Directory:~0,-1%"
+pushd "%Script_Directory%"
+
+:: Check for administrative privileges
+net session >nul 2>&1
+if %errorLevel% NEQ 0 (
+    echo Error: Admin Required!
+    echo Right Click, then Run As Administrator.
+    timeout /t 3 >nul
+    goto :end_of_file
+)
+echo Admin Status: Administrator 
+
+:: Check Folder
+echo Working Folder: %Script_Directory%
+timeout /t 1 >nul
+
+:: Display Is Reset
+cls
+echo ========================================================================================================================
+echo                                                       Aider Offline Launcher
+echo ------------------------------------------------------------------------------------------------------------------------
+echo.
+
+:: Find Python 3.12 and pip based on config folder location
+for %%I in (
+    "C:\Python312\python.exe"
+    "C:\Program Files\Python312\"
+    "%LocalAppData%\Programs\Python\Python312\"
+) do (
+    if exist "%%~I" (
+        set "PYTHON_FOLDER_TO_USE=%%~I"
+        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
+        set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
+        goto :found_python312
+    )
+)
+
+:: Python Not Found
+echo Error: Install Python 3.12.
+goto :end_of_file
+
+:found_python312
+echo Python 3.12 found at: %PYTHON_EXE_TO_USE%
+echo Using pip from: %PIP_EXE_TO_USE%
+echo.
+
+:menu
+cls
+echo ========================================================================================================================
+echo                                                       Aider Offline Launcher
+echo ------------------------------------------------------------------------------------------------------------------------
+echo.
+echo 1. Start Ollama Server Normally
+echo 2. Manage Ollama Models
+echo 3. Run Aider with Ollama model
+echo 4. Run Aider with Python file and Ollama model
+echo.
+set /p choice="Selection; Program Options = 1-4, Exit Program = X: "
+
+if /i "!choice!"=="X" goto end_of_file
+if "!choice!"=="1" goto start_server
+if "!choice!"=="2" goto manage_models
+if "!choice!"=="3" goto run_aider
+if "!choice!"=="4" goto run_with_file
+
+goto menu
+
+:start_server
+echo Starting Ollama server...
+timeout /t 2 >nul
+start ollama serve
+goto menu
+
+:manage_models
+cls
+echo ========================================================================================================================
+echo                                                 Ollama Model Management
+echo ------------------------------------------------------------------------------------------------------------------------
+echo.
+echo Listing available Ollama models...
+ollama list
+echo.
+set /p "model_choice=Selection, Select Model = S, Delete Model = D, Back To Menu = B: "
+if /i "!model_choice!"=="B" goto menu
+if /i "!model_choice!"=="S" goto select_model
+if /i "!model_choice!"=="D" goto delete_model_prompt
+goto manage_models
+
+:select_model
+set /p "model=Enter the model name you want to use (e.g., llama3:70b) or 'B' to go back: "
+if /i "!model!"=="B" goto manage_models
+echo You selected the model: %model%
+pause
+goto manage_models
+
+:delete_model_prompt
+set /p "model_to_delete=Enter the model name you want to delete or 'B' to go back: "
+if /i "!model_to_delete!"=="B" goto manage_models
+echo You are about to delete the model: %model_to_delete%
+set /p "confirm=Are you sure you want to delete this model? (Y/N): "
+if /i "!confirm!"=="Y" (
+    echo Deleting model %model_to_delete%...
+    ollama rm %model_to_delete%
+    echo Model deleted.
+) else (
+    echo Deletion cancelled.
+)
+pause
+goto manage_models
+
+:run_aider
+if not defined model (
+    echo No model selected. Please select a model first.
+    timeout /t 2 >nul
+    goto menu
+)
+echo Running Aider with Ollama model (%model%)...
+timeout /t 2 >nul
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model%
+goto end_of_file
+
+:run_with_file
+if not defined model (
+    echo No model selected. Please select a model first.
+    timeout /t 2 >nul
+    goto menu
+)
+set /p "filename=Enter the Python file to run with Aider and Ollama: "
+echo Running Aider with %filename% using Ollama model (%model%)...
+timeout /t 2 >nul
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%model% %filename%
+goto end_of_file
+
+:end_of_file
+echo All Processes Finished.
+pause
+exit /b
