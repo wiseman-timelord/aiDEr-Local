@@ -2,7 +2,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. COmplete download of requried models. 
+1. COmplete download of requried models. Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) is the best one for 64GB System Ram. IF not, then the Hermes one.
 2. Testing Ollama is working correctly with the batches.
 3. Testing Running aider - Is the install complete? Are there any further issues.
 
