@@ -3,6 +3,36 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
+1. Python version compatibility, through, as required, then during setup-install, if not exist then creation of `.\data` folder, then when the launcher works in either, setup, online offline, and it has not got a `.\data\persistance.txt`, then it should create one, and read it for appropriate settings for the script, in all 3 script, setup-install and in either of the batches, it should be for the version of python, but for  launcher-offline.bat then also the other relevant value for selected model, there also needs to be globals for all these, set near the top of the script including python ones, it will need to update and load to and save from, for all the important variables. Example...
+```
+------------
+echo.
+
+:: Find Python 3.12 and pip based on config folder location
+for %%I in (
+    "C:\Python312\python.exe"
+    "C:\Program Files\Python312\"
+    "%LocalAppData%\Programs\Python\Python312\"
+) do (
+    if exist "%%~I" (
+        set "PYTHON_FOLDER_TO_USE=%%~I"
+        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
+```
+- should be like 
+------------
+echo.
+
+:: Find Python %Python_Version_Decimal% and pip based on config folder location
+for %%I in (
+    "C:\Python312\python.exe"
+    "C:\Program Files\Python%Python_Version%\"
+    "%LocalAppData%\Programs\Python\%Python_Version%\"
+) do (
+    if exist "%%~I" (
+        set "PYTHON_FOLDER_TO_USE=%%~I"
+        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
+```
+
 1. COmplete download of requried models. Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. IF not, then the Hermes one. The meta ones improve performance by a significant amount, and I am sure the hermes one does that, but add to that the fact the meta one is un-censored, hence, if there is no uncensored hermes on, then forget hermes. 
 2. I would prefer if I could use the vram and system ram, and be able to run the Q6 model, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
 2. Testing Ollama is working correctly with the batches. 
@@ -71,8 +101,12 @@ qwen2_57b:latest                        9dbf41c98d9e    47 GB   2 months ago
 Selection, Select Model = S, Delete Model = D, Back To Menu = B:
 ```
 
+## REQUIREMENTS:
+- Windows, version 10 is the, programming and testing, platform, non WSL.
+- Python v3.12, this is the default verison, that is working, but I am working on this.
+ 
 
-## USAGE:
+### USAGE:
 1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
 2. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
 3. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
