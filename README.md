@@ -6,3 +6,11 @@
 
 ### FEATURES:
 - First come some batch files....
+
+### USAGE:
+1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
+2. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
+3. With the files from the fork in place... 
+- The batch `Install-Setup.Bat` is for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
+- The batch `aiDEr-Offline.Bat` is for launching with local models on Ollama, and also includes light management of models in Ollama.
+- The batch `aiDEr-Online.Bat` is for launching with online services, but is redundant/untested/archived; it may be useful to others.
