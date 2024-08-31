@@ -1,4 +1,4 @@
-# Aider-Local
+# aiDEr-Local
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
