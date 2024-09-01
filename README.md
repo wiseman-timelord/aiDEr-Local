@@ -3,7 +3,43 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. if the user deletes the model file that is currently selected, then it needs to, save the model to the global immediately and save the global to the `.\data\persistence.txt` upon going back to the main menu.
+1. Specify how many threads to use with ollama, 0 should just result in no inclusion of the argument and value, in the command to run ollama, so as for ollama to use default. the line `5. Ollama Models Management (deepseek-coder-v2-lite-instruct)` should be `5. Manage Ollama Settings`, then we would have the `Ollama Settings Management` menu...
+```
+========================================================================================================================
+                                                Ollama Settings Management
+------------------------------------------------------------------------------------------------------------------------
+
+    1. Select Model Choice (eg. DeepSeek-Coder-V2-Lite-Instruct) :
+NAME    ID      SIZE    MODIFIED
+**example model 1 details**
+**example model 2 details**
+
+    2. Number of Threads (eg. 20, or 0 for default):
+threads_for_ollama = 20
+
+========================================================================================================================
+Selection; Select Model = S, Delete Model = D, Back to Menu = B:
+```
+...the value of threads_for_ollama, needs to be loaded, when running the launcher to globals and saved along with other globals when returning to the main menu, from/to the `.\data\persistence.txt`. Additionall main menu needs correction too...
+```
+========================================================================================================================
+                                                      Aider Local Launcher
+------------------------------------------------------------------------------------------------------------------------
+
+    1. Run Aider with LM Studio
+    2. Run Aider with, LM Studio and Files
+    3. Run Ollama with Selected Model (deepseek-coder-v2-lite-instruct)
+    4. Run Ollama with, Selected Model and Files (deepseek-coder-v2-lite-instruct)
+    5. Ollama Models Management (deepseek-coder-v2-lite-instruct)
+
+========================================================================================================================
+Selection; Menu Options = 1-5, Exit Batch = X:
+
+```
+...also ensure that the setup-install.bat will be able to handle the global when run, so as to also set that to the default of 0 (no argument).
+- Here is the code for ollama `/set parameter num_thread ##`
+
+
 1. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
@@ -28,7 +64,7 @@
     1. Run Aider with LM Studio
     2. Run Aider with, LM Studio and Files
     3. Run Ollama with Selected Model
-    4. Run Ollama with, LM Studio and Files
+    4. Run Ollama with, Selected Model and Files
     5. Ollama Models Management (deepseek-coder-v2-lite-instruct)
 
 ========================================================================================================================
