@@ -57,7 +57,8 @@ Selection; Select Model = S, Delete Model = D, Back to Menu = M:
 1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
 2. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
 3. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
-4. Run The batch `aiDEr-Offline.Bat`, to launch aider with local models on Ollama, and also includes light management/configuration of Ollama.
+4. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
+4. Run The batch `aiDEr-Offline.Bat`, to launch aider with local models on, LM Studio or Ollama, with options to, include files or manageme Ollama models.
 
 ## NOTATION:
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
