@@ -25,26 +25,43 @@
                                                      Aider Local Launcher
 ------------------------------------------------------------------------------------------------------------------------
 
+
     1. Run Aider with LM Studio
+
     2. Run Aider with, LM Studio and Files
+
     3. Run Ollama with Selected Model
+
     4. Run Ollama with, Selected Model and Files
+
     5. Manage Ollama Settings - (Model DeepSeek-Coder-V2-Lite-Instruct) (Threads 20)
+
 
 ========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
 ```
-- Ollama Management...
+- Essential Management of Ollama (for CPU users; but you can ko-fi me for a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get it working for GPU threads)...
 ```
 ========================================================================================================================
-                                                Ollama Model Management
-------------------------------------------------------------------------------------------------------------------------
+                                               Ollama Settings Management
+========================================================================================================================
 
     Available Ollama models:
-NAME    ID      SIZE    MODIFIED
+NAME                                    ID              SIZE    MODIFIED
+DeepSeek-Coder-V2-Lite-Instruct:latest  a5112c0daff8    17 GB   2 hours ago
+
+    Current Model Used:
+DeepSeek-Coder-V2-Lite-Instruct
+
+    CPU Threads Available:
+NumberOfLogicalProcessors
+24
+
+    Current Threads Used:
+21
 
 ========================================================================================================================
-Selection; Select Model = S, Delete Model = D, Back to Menu = B:
+Selection (Select Model = S, Set Threads = T, Back to Menu = B):
 ```
 
 ## REQUIREMENTS:
