@@ -3,7 +3,31 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. (testing) Specify how many threads to use with ollama - Here is the code for ollama `/set parameter num_thread ##`.
+1. (testing) Specify how many threads to use with ollama - Here is the code for ollama `/set parameter num_thread ##`. Test 0 (default) and set numbers.
+2. LM Studio is not working...
+```
+Running Aider with LM Studio model (DeepSeek-Coder-V2-Lite-Instruct)...
+No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
+Model DeepSeek-Coder-V2-Lite-Instruct: Unknown which environment variables are required.
+Model DeepSeek-Coder-V2-Lite-Instruct: Unknown context window size and costs, using sane defaults.
+Did you mean one of these?
+- ollama/deepseek-coder-v2-lite-instruct
+For more info, see: https://aider.chat/docs/llms/warnings.html
+
+
+Aider v0.54.0
+Model: DeepSeek-Coder-V2-Lite-Instruct with diff edit format
+Git repo: none
+Repo-map: disabled
+Use /help <question> for help, run "aider --help" to see cmd line args
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+diff> make me a pacman game with a batch to run it, put the files in .\working
+
+BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call.
+You passed model=DeepSeek-Coder-V2-Lite-Instruct
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn
+more: https://docs.litellm.ai/docs/providers
+```
 1. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
