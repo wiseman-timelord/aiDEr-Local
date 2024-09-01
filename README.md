@@ -106,8 +106,8 @@ Selection (Select Model = S, Set Threads = T, Back to Menu = B):
 - As you can tell from the threads settings, its currently for CPU users but on ollama, so you may want to set it to `0` (auto/default), or you will have to use LM Studio for GPU accelleration.
 
 ## NOTATION:
-- I did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio, so, these are the settings for Ollama, for now in the relating modelfile installer.
-- A lot of my programs are designed towards CPU in relevance to Ollama, I am sure they will sort this out at some point and use vulkan, but in the mean time Why not, ko-fi for or send me, a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get gpu threads working for all the llm apps I work on.
+- Did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio, so, these are the settings for Ollama, for now in the relating modelfile installer.
+- A lot of my programs are designed towards CPU in relevance to Ollama, they may use vulkan at some point, though its limited to CPU threads in LM Studio anyhow; Why not, ko-fi for or send me, a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get gpu threads working for all the llm apps.
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
 ```
                     Code Generation
