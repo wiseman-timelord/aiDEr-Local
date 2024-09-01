@@ -91,6 +91,38 @@ NumberOfLogicalProcessors
 ========================================================================================================================
 Selection (Select Model = S, Set Threads = T, Back to Menu = B):
 ```
+- 
+```
+========================================================================================================================
+                                                     Setup-Installer
+========================================================================================================================
+
+Python 312 found at: C:\Program Files\Python312\python.exe
+Using pip from: C:\Program Files\Python312\\Scripts\pip.exe
+
+Ensuring setuptools and wheel are properly installed...
+Collecting setuptools
+  Using cached setuptools-74.0.0-py3-none-any.whl.metadata (6.7 kB)
+...
+Successfully installed setuptools-74.0.0 wheel-0.44.0
+Setuptools and wheel are installed.
+
+Installing Requirements...
+Requirement already satisfied: aiohappyeyeballs==2.4.0 in c:\program files\python312\lib\site-packages (from -r requirements.txt (line 7)) (2.4.0)
+...
+Requirement already satisfied: colorama in c:\users\mastar\appdata\roaming\python\python312\site-packages (from click==8.1.7->-r requirements.txt (line 39)) (0.4.6)
+Requirements installed successfully.
+
+Verifying installation...
+aider-chat 0.54.10 has requirement httpx==0.27.2, but you have httpx 0.27.0.
+...
+aider-chat 0.54.10 has requirement zipp==3.20.1, but you have zipp 3.20.0.
+Warning: Some conflicts may still exist. Please review the output above.
+
+========================================================================================================================
+All processes finished.
+Press any key to continue . . .
+```
 
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
