@@ -18,7 +18,6 @@ set "OLLAMA_API_BASE=http://127.0.0.1:11434"
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
-set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
 
@@ -179,15 +178,16 @@ timeout /t 2 >nul
 goto :manage_models
 
 :update_persistence
+echo Saving Persistance File...
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
     echo PIP_EXE_TO_USE=!PIP_EXE_TO_USE!
     echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
-    echo PYTHON_FOLDER_TO_USE=!PYTHON_FOLDER_TO_USE!
     echo MODEL_SELECTION=!MODEL_SELECTION!
     echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
 ) > ".\data\persistence.txt"
+echo Saved: .\data\persistance.txt
 goto :eof
 
 :save_and_exit

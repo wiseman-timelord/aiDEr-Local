@@ -17,37 +17,10 @@ pushd "%Script_Directory%"
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
-set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
 
-:: Check for, .\data and .\data\persistence.txt and create as required.
-if not exist "%DATA_DIR%" (
-    mkdir "%DATA_DIR%" && echo Created %DATA_DIR% folder.
-)
-if not exist ".\data\persistence.txt" (
-    (
-        echo # This file stores configuration settings.
-        echo PYTHON_VERSION_NODECIMAL=0
-        echo PIP_EXE_TO_USE=
-        echo PYTHON_EXE_TO_USE=
-        echo PYTHON_FOLDER_TO_USE=
-        echo MODEL_SELECTION=No_Model_Selected
-        echo THREADS_FOR_OLLAMA=0
-    ) > "%PERSISTENCE_FILE%"
-    echo Created %PERSISTENCE_FILE% with default values.
-) else (
-    for /f "usebackq tokens=1,* delims==" %%A in ("%PERSISTENCE_FILE%") do (
-        if not "%%A" == "" if not "%%A:~0,1%" == "#" (
-            set "%%A=%%B"
-        )
-    )
-)
 
-:: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
-if "%PYTHON_VERSION_NODECIMAL%"=="0" (
-    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (2-3 digits, e.g., 311 or 39): "
-)
 
 cls
 echo ========================================================================================================================
@@ -58,6 +31,35 @@ echo Admin Status: Administrator
 echo Working Folder: %Script_Directory%
 timeout /t 1 >nul
 
+:: Check for, .\data and .\data\persistence.txt and create as required.
+echo Checking Persistance File...
+if not exist ".\data" (
+    mkdir ".\data" && echo Created .\data folder.
+)
+if not exist ".\data\persistence.txt" (
+    (
+        echo # This file stores configuration settings.
+        echo PYTHON_VERSION_NODECIMAL=0
+        echo PIP_EXE_TO_USE=
+        echo PYTHON_EXE_TO_USE=
+        echo MODEL_SELECTION=No_Model_Selected
+        echo THREADS_FOR_OLLAMA=0
+    ) > ".\data\persistence.txt"
+    echo Created .\data\persistence.txt with default values.
+) else (
+    for /f "usebackq tokens=1,* delims==" %%A in (".\data\persistence.txt") do (
+        if not "%%A" == "" if not "%%A:~0,1%" == "#" (
+            set "%%A=%%B"
+        )
+    )
+	echo Loaded: .\data\persistance.txt
+)
+
+:: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
+if "%PYTHON_VERSION_NODECIMAL%"=="0" (
+    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (2-3 digits, e.g., 311 or 39): "
+)
+
 :: Find Python and pip based on config folder location
 for %%I in (
     "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
@@ -65,8 +67,7 @@ for %%I in (
     "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
 ) do (
     if exist "%%~I" (
-        set "PIP_EXE_TO_USE=%%~dpI\python.exe"
-        set "PYTHON_FOLDER_TO_USE=%%~dpI"
+        set "PYTHON_EXE_TO_USE=%%~dpI\python.exe"
         set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
         goto :found_python
     )
@@ -93,17 +94,18 @@ echo.
 
 :: Install requirements with --upgrade flag and handle conflicts
 echo Installing Requirements...
-"%PIP_EXE_TO_USE%" install --upgrade -r requirements.txt
-if errorlevel 1 (
-    echo Warning: Some conflicts occurred during installation.
-    echo Attempting to resolve conflicts...
-    "%PIP_EXE_TO_USE%" install --upgrade --force-reinstall -r requirements.txt
-    if errorlevel 1 (
-        echo Error: Failed to resolve conflicts. Please check your requirements.txt file.
-        goto :end_of_file
-    )
-)
-echo Requirements installed successfully.
+"%PIP_EXE_TO_USE%" install -r requirements.txt
+echo Processed: `requirements.txt`
+echo.
+echo Installing troublesome libraries...
+"%PIP_EXE_TO_USE%" install litellm
+"%PIP_EXE_TO_USE%" install openai	
+"%PIP_EXE_TO_USE%" install idna==3.8
+"%PIP_EXE_TO_USE%" install importlib-resources==6.4.4
+"%PIP_EXE_TO_USE%" install rich==13.8.0	
+"%PIP_EXE_TO_USE%" install zipp==3.20.1
+echo.	
+echo Requirements install Finished.
 echo.
 
 :: Verify installation and check for any remaining conflicts
@@ -117,15 +119,16 @@ if errorlevel 1 (
 echo.
 
 :: Save current  settings back to persistence.txt
+echo Saving Persistance File...
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
     echo PIP_EXE_TO_USE=%PIP_EXE_TO_USE%
     echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
-    echo PYTHON_FOLDER_TO_USE=%PYTHON_FOLDER_TO_USE%
-    echo MODEL_SELECTION=No_Model_Selected
-    echo threads_for_ollama=0
+    echo MODEL_SELECTION=%MODEL_SELECTION%
+    echo THREADS_FOR_OLLAMA=%THREADS_FOR_OLLAMA%
 ) > ".\data\persistence.txt"
+echo Saved: .\data\persistance.txt
 
 :end_of_file
 echo ========================================================================================================================
