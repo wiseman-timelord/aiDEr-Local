@@ -37,7 +37,7 @@ echo.
 echo All Processes Finished.
 echo  Exiting in 5 Seconds...
 timeout /t 3 /nobreak >nul
-exit /b
+pause
 
 :exit_bad
 echo Files were Missing...
