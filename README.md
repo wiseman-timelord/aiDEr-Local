@@ -46,6 +46,7 @@ Selection; Menu Options = 1-5, Exit Batch = X:
                                                Ollama Settings Management
 ========================================================================================================================
 
+
     Available Ollama models:
 NAME                                    ID              SIZE    MODIFIED
 DeepSeek-Coder-V2-Lite-Instruct:latest  a5112c0daff8    17 GB   2 hours ago
@@ -59,6 +60,7 @@ NumberOfLogicalProcessors
 
     Current Threads Used:
 21
+
 
 ========================================================================================================================
 Selection (Select Model = S, Set Threads = T, Back to Menu = B):
