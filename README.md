@@ -3,7 +3,15 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Complete download of model - Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta ones improve performance by rounding off its abilities, and uncensored supposedly more intelligent. In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF.
+1. Complete download of model - Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta ones improve performance by rounding off its abilities, and uncensored supposedly more intelligent. In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. I found out it must have the correctly named file...
+```
+Model ollama/deepseek-v2-lite-instruct: Unknown context window size and costs, using sane defaults.
+Did you mean one of these?
+- ollama/deepseek-coder-v2-instruct
+- ollama/deepseek-coder-v2-lite-instruct
+For more info, see: https://aider.chat/docs/llms/warnings.html
+```
+...which means more downloading, and I still cant test properly, unless I incorrectly name the file while downloading the other one..?
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
 - I would prefer if I could use the vram and system ram, and be able to run slightly better models, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
