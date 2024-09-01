@@ -49,9 +49,8 @@ Selection; Select Model = S, Delete Model = D, Back to Menu = B:
 ```
 
 ## REQUIREMENTS:
-- Windows, version 10 is the, programming and testing, platform, non WSL.
-- Python v3.12, this is the default verison, that is working, but I am working on this.
- 
+- Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
+- Python v3.9-3.12 - Now working with whatever version of Python is specified by the user during setup.
 
 ### USAGE:
 1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
