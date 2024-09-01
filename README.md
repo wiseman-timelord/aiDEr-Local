@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aida cant identify the model.
+1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aiDEr cant identify the model.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
 ```
