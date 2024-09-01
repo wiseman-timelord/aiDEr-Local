@@ -22,53 +22,14 @@ set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "threads_for_ollama=0"
 
-:: Ensure the .\data\ folder exists
-if not exist ".\data\" mkdir ".\data" 2>nul || (echo Error: Unable to create .\data folder. & goto :end_of_file)
-
-:: Check for persistence.txt and create it if it doesn't exist
+:: Load Globals from `.\data\persistence.txt` section
 if not exist ".\data\persistence.txt" (
-    (
-        echo # This file stores configuration settings.
-        echo PYTHON_VERSION_NODECIMAL=0
-        echo PIP_EXE_TO_USE=
-        echo PYTHON_EXE_TO_USE=
-        echo PYTHON_FOLDER_TO_USE=
-        echo MODEL_SELECTION=No_Model_Selected
-    ) > ".\data\persistence.txt" || (echo Error: Unable to create persistence.txt. & goto :end_of_file)
+    echo Ensure to run `Setup-install` first, then you can run `aiDEr-Local.Bat`.
+    goto :end_of_file
 )
-
-:: Load settings from persistence.txt
 for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /v "^#"') do (
     set "%%A=%%B"
 )
-
-
-:: Check Folder
-echo Working Folder: %Script_Directory%
-
-:: Find Python installation
-if "%PYTHON_EXE_TO_USE%"=="" (
-    for %%I in (
-        "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-        "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-        "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
-    ) do (
-        if exist "%%~I" (
-            set "PYTHON_EXE_TO_USE=%%~I"
-            set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
-            set "PYTHON_FOLDER_TO_USE=%%~dpI"
-            goto :found_python
-        )
-    )
-
-    echo Error: Python %PYTHON_VERSION_NODECIMAL% not found. Please run Install-Setup.Bat first.
-    goto :end_of_file
-)
-
-:found_python
-echo Python %PYTHON_VERSION_NODECIMAL% found at: %PYTHON_EXE_TO_USE%
-echo Using pip from: %PIP_EXE_TO_USE%
-echo.
 
 :menu
 cls
