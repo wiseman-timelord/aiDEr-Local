@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Testing and finding out if aiDEr is ok after 0.54.10 upgrade, so far its spanners in works, as it changed a lot of dependency versions, and for all the effort, and then I see there is many more newer versions on their website, that I just found, these are presumably betas or something.
+1. Testing and finding out if aiDEr is ok after 0.54.10 upgrade, so far its spanners in works, as it changed a lot of dependency versions, and for all the effort, and then I see there is many more newer versions on their website, that I just found, these are presumably betas or something, hmm..
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
 ```
