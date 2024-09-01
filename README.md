@@ -3,6 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
+1. if the user deletes the model file that is currently selected, then it needs to, save the model to the global immediately and save the global to the `.\data\persistence.txt` upon going back to the main menu.
 1. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
@@ -18,19 +19,20 @@
 - The batch `aiDEr-Online.Bat` is for launching aider with online services, but is redundant/untested/archived; it may be useful to others.
 
 ### PREVIEW:
-- The Launcher Main Menu...
+- The Launcher Main Menu (testing LM Studio)...
 ```
 ========================================================================================================================
                                                       Aider Local Launcher
 ------------------------------------------------------------------------------------------------------------------------
 
-    1. Start Ollama Server Normally
-    2. Ollama Models Management (No_Model_Selected)
-    3. Run Aider with Selected Model
-    4. Run Aider with File and Model
+    1. Run Aider with LM Studio
+    2. Run Aider with, LM Studio and Files
+    3. Run Ollama with Selected Model
+    4. Run Ollama with, LM Studio and Files
+    5. Ollama Models Management (deepseek-coder-v2-lite-instruct)
 
 ========================================================================================================================
-Selection; Menu Options = 1-4, Exit Batch = X:
+Selection; Menu Options = 1-5, Exit Batch = X:
 
 ```
 - Ollama Management...
