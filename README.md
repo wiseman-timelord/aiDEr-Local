@@ -70,9 +70,9 @@ Selection; Select Model = S, Delete Model = D, Back to Menu = M:
                     Code Generation
           #TP 	#AP 	HumanEval 	MBPP+ 	LiveCodeBench 	USACO			
 Open-Source Models 						
-CodeStral            22B 	22B 	78.1 	68.2 	31.0 	4.6
+CodeStral              22B 	22B 	78.1 	68.2 	31.0 	4.6
 DeepSeek-Coder-Instruct      33B 	33B 	79.3 	70.1 	22.5 	4.2
-Llama3-Instruct          70B 	70B 	81.1 	68.8 	28.7 	3.3
+Llama3-Instruct            70B 	70B 	81.1 	68.8 	28.7 	3.3
 DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
 DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
 ```
