@@ -154,7 +154,7 @@ echo     Available Ollama models:
 ollama list
 echo.
 echo ========================================================================================================================
-set /p "model_choice=Selection (Select Model = S, Delete Model = D, Back to Menu = M): "
+set /p "model_choice=Selection (Select Model = S, Delete Model = D, Back to Menu = B): "
 if /i "%model_choice%"=="B" goto :menu
 if /i "%model_choice%"=="S" goto :select_model
 if /i "%model_choice%"=="D" goto :delete_model_prompt
