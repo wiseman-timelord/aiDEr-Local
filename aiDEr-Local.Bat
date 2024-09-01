@@ -75,26 +75,74 @@ echo ===========================================================================
 echo                                                       Aider Local Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo     1. Start Ollama Server Normally
-echo     2. Ollama Models Management (%MODEL_SELECTION%)
-echo     3. Run Aider with Selected Model
-echo     4. Run Aider with File and Model
+echo     1. Run Aider with LM Studio
+echo     2. Run Aider with, LM Studio and Files
+echo     3. Run Ollama with Selected Model
+echo     4. Run Ollama with, LM Studio and Files
+echo     5. Ollama Models Management (%MODEL_SELECTION%)
 echo.
 echo ========================================================================================================================
-set /p choice="Selection; Menu Options = 1-4, Exit Batch = X: "
+set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file
-if "%choice%"=="1" goto :start_server
-if "%choice%"=="2" goto :manage_models
-if "%choice%"=="3" goto :run_aider
-if "%choice%"=="4" goto :run_with_file
+if "%choice%"=="1" goto :run_aider_lmstudio
+if "%choice%"=="2" goto :run_aider_lmstudio_file
+if "%choice%"=="3" goto :run_aider_ollama
+if "%choice%"=="4" goto :run_with_file_ollama
+if "%choice%"=="5" goto :manage_models
 goto :menu
 
-:start_server
-echo Starting Ollama server...
-start "" ollama serve
-timeout /t 2 >nul
-goto :menu
+:run_aider_lmstudio
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with LM Studio model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "http://localhost:1234/v1" --model "%MODEL_SELECTION%" --edit-format diff
+goto :end_of_file
+
+:run_aider_lmstudio_file
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+set /p "filename=Enter the Python file to run with Aider: "
+if not exist "%filename%" (
+    echo Error: File not found.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with %filename% using LM Studio model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "http://localhost:1234/v1" --model "%MODEL_SELECTION%" --edit-format diff "%filename%"
+goto :end_of_file
+
+:run_aider_ollama
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION%
+goto :end_of_file
+
+:run_with_file_ollama
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+set /p "filename=Enter the Python file to run with Aider: "
+if not exist "%filename%" (
+    echo Error: File not found.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION% "%filename%"
+goto :end_of_file
 
 :manage_models
 cls
@@ -135,32 +183,6 @@ if /i "%confirm%"=="Y" (
 )
 timeout /t 2 >nul
 goto :manage_models
-
-:run_aider
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION%
-goto :end_of_file
-
-:run_with_file
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-set /p "filename=Enter the Python file to run with Aider: "
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION% "%filename%"
-goto :end_of_file
 
 :update_persistence
 (
