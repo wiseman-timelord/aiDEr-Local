@@ -3,8 +3,8 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
+0. burr, stuff broke, and its end of session for now.
 1. (testing) Specify how many threads to use with ollama - Here is the code for ollama `/set parameter num_thread ##`. Test 0 (default) and set numbers.
- 
 2. Modelfile installer not workig.
 2. LM Studio is not working...
 ```
