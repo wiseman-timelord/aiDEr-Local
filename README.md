@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-0. burr, stuff broke, and its end of session for now. Latest pre-release and repository may be somewhat broken for now.
+0. Updating aiDEr to 0.54.10, libraries are having issues with updating libraries, need some tool for this.
 1. (testing) Specify how many threads to use with ollama - Here is the code for ollama `/set parameter num_thread ##`. Test 0 (default) and set numbers.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
