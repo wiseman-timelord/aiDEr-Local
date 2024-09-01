@@ -1,3 +1,4 @@
+:: SCRIPT: aiDEr-Local.Bat
 @echo off
 setlocal enabledelayedexpansion
 
@@ -8,6 +9,7 @@ set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
+set "threads_for_ollama=0"
 
 :: Change to the script's directory
 set "Script_Directory=%~dp0"
@@ -72,14 +74,14 @@ echo.
 :menu
 cls
 echo ========================================================================================================================
-echo                                                       Aider Local Launcher
+echo                                                      Aider Local Launcher
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo     1. Run Aider with LM Studio
 echo     2. Run Aider with, LM Studio and Files
-echo     3. Run Ollama with Selected Model
-echo     4. Run Ollama with, LM Studio and Files
-echo     5. Ollama Models Management (%MODEL_SELECTION%)
+echo     3. Run Ollama with Selected Model 
+echo     4. Run Ollama with, Selected Model and Files 
+echo     5. Manage Ollama Settings - (Model %MODEL_SELECTION%) (Threads %threads_for_ollama%)
 echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
@@ -91,6 +93,34 @@ if "%choice%"=="3" goto :run_aider_ollama
 if "%choice%"=="4" goto :run_with_file_ollama
 if "%choice%"=="5" goto :manage_models
 goto :menu
+
+:manage_models
+cls
+echo ========================================================================================================================
+echo                                                Ollama Settings Management
+echo ------------------------------------------------------------------------------------------------------------------------
+echo.
+echo     1. Select Model Choice (e.g. DeepSeek-Coder-V2-Lite-Instruct)
+echo     Available Ollama models:
+ollama list
+echo.
+echo     2. Number of Threads (e.g. 20, or 0 for default)
+echo     Current Threads Used: %threads_for_ollama%
+echo.
+echo ========================================================================================================================
+set /p "model_choice=Selection (Select Model = S, Set Threads = T, Back to Menu = B): "
+
+if /i "%model_choice%"=="B" goto :save_and_exit
+if /i "%model_choice%"=="S" goto :select_model
+if /i "%model_choice%"=="T" goto :set_threads
+goto :manage_models
+
+:set_threads
+set /p "threads_for_ollama=Enter the number of threads for Ollama (0 for default): "
+echo threads_for_ollama=!threads_for_ollama!>> ".\data\persistence.txt"
+echo Number of threads set to: !threads_for_ollama!
+timeout /t 2 >nul
+goto :manage_models
 
 :run_aider_lmstudio
 if "%MODEL_SELECTION%"=="No_Model_Selected" (
@@ -124,8 +154,13 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
+set "OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
+
+if not "%threads_for_ollama%"=="0" (
+    set "OLLAMA_CMD=%OLLAMA_CMD% /set parameter num_thread %threads_for_ollama%"
+)
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION%
+%OLLAMA_CMD%
 goto :end_of_file
 
 :run_with_file_ollama
@@ -144,22 +179,6 @@ echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
 "%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION% "%filename%"
 goto :end_of_file
 
-:manage_models
-cls
-echo ========================================================================================================================
-echo                                                 Ollama Model Management
-echo ------------------------------------------------------------------------------------------------------------------------
-echo.
-echo     Available Ollama models:
-ollama list
-echo.
-echo ========================================================================================================================
-set /p "model_choice=Selection (Select Model = S, Delete Model = D, Back to Menu = B): "
-if /i "%model_choice%"=="B" goto :menu
-if /i "%model_choice%"=="S" goto :select_model
-if /i "%model_choice%"=="D" goto :delete_model_prompt
-goto :manage_models
-
 :select_model
 set /p "model=Enter the model name (e.g., llama3:70b) or 'B' to go back: "
 if /i "%model%"=="B" goto :manage_models
@@ -167,8 +186,7 @@ set "MODEL_SELECTION=%model%"
 call :update_persistence
 echo Model selected: %MODEL_SELECTION%
 timeout /t 2 >nul
-goto :menu
-goto :manage_models
+goto :found_python
 
 :delete_model_prompt
 set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
@@ -179,6 +197,7 @@ if /i "%confirm%"=="Y" (
     if "%model_to_delete%"=="%MODEL_SELECTION%" (
         set "MODEL_SELECTION=No_Model_Selected"
         call :update_persistence
+        echo Model %model_to_delete% deleted. Model selection cleared.
     )
 )
 timeout /t 2 >nul
@@ -187,13 +206,18 @@ goto :manage_models
 :update_persistence
 (
     echo # This file stores configuration settings.
-    echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
-    echo PIP_EXE_TO_USE=%PIP_EXE_TO_USE%
-    echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
-    echo PYTHON_FOLDER_TO_USE=%PYTHON_FOLDER_TO_USE%
-    echo MODEL_SELECTION=%MODEL_SELECTION%
+    echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
+    echo PIP_EXE_TO_USE=!PIP_EXE_TO_USE!
+    echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
+    echo PYTHON_FOLDER_TO_USE=!PYTHON_FOLDER_TO_USE!
+    echo MODEL_SELECTION=!MODEL_SELECTION!
+    echo threads_for_ollama=!threads_for_ollama!
 ) > ".\data\persistence.txt"
-exit /b
+goto :eof
+
+:save_and_exit
+call :update_persistence
+goto :menu
 
 :end_of_file
 echo All Processes Finished.
