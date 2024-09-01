@@ -2,6 +2,17 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: DO NOT, MODIFY OR MOVE, START...
+net session >nul 2>&1 || (
+    echo Error: Admin privileges required. Right-click and select "Run as administrator".
+    timeout /t 3 >nul
+    exit /b 1
+)
+set "Script_Directory=%~dp0"
+set "Script_Directory=%Script_Directory:~0,-1%"
+pushd "%Script_Directory%"
+:: ...DO NOT, MODIFY OR MOVE, END.
+
 :: Global Variables
 set "OLLAMA_API_BASE=http://127.0.0.1:11434"
 set "PYTHON_VERSION_NODECIMAL=0"
@@ -10,11 +21,6 @@ set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "threads_for_ollama=0"
-
-:: Change to the script's directory
-set "Script_Directory=%~dp0"
-set "Script_Directory=%Script_Directory:~0,-1%"
-pushd "%Script_Directory%"
 
 :: Ensure the .\data\ folder exists
 if not exist ".\data\" mkdir ".\data" 2>nul || (echo Error: Unable to create .\data folder. & goto :end_of_file)
@@ -36,13 +42,6 @@ for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /
     set "%%A=%%B"
 )
 
-:: Check for administrative privileges
-net session >nul 2>&1 || (
-    echo Error: Admin privileges required. Right-click and select "Run as administrator".
-    timeout /t 3 >nul
-    exit /b 1
-)
-echo Admin Status: Administrator
 
 :: Check Folder
 echo Working Folder: %Script_Directory%
@@ -86,7 +85,7 @@ echo     3. Run Ollama with Selected Model
 echo.
 echo     4. Run Ollama with, Selected Model and Files 
 echo.
-echo     5. Manage Ollama Settings - (Model %MODEL_SELECTION%) (Threads %threads_for_ollama%)
+echo     5. Manage Ollama Settings - (M: %MODEL_SELECTION%) (T: %threads_for_ollama%)
 echo.
 echo.
 echo ========================================================================================================================
@@ -189,7 +188,7 @@ if not exist "%filename%" (
     goto :menu
 )
 echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model ollama/%MODEL_SELECTION% "%filename%"
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
 goto :end_of_file
 
 :select_model
