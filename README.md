@@ -68,17 +68,11 @@ Selection; Select Model = S, Delete Model = D, Back to Menu = M:
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs...
 ```
                     Code Generation
-          #TP 	#AP 	HumanEval 	MBPP+ 	LiveCodeBench 	USACO
-Closed-Source Models 						
-Gemini-1.5-Pro       	- 	- 	83.5 	74.6 	34.1 	4.9
-Claude-3-Opus 	       - 	- 	84.2 	72.0 	34.6 	7.8
-GPT-4-Turbo-1106 	     - 	- 	87.8 	69.3 	37.1 	11.1
-GPT-4-Turbo-0409      - 	- 	88.2 	72.2 	45.7 	12.3
-GPT-4o-0513 	         - 	- 	91.0 	73.5 	43.4 	18.8
+          #TP 	#AP 	HumanEval 	MBPP+ 	LiveCodeBench 	USACO			
 Open-Source Models 						
-CodeStral 	22B 	22B 	78.1 	68.2 	31.0 	4.6
-DeepSeek-Coder-Instruct 	33B 	33B 	79.3 	70.1 	22.5 	4.2
-Llama3-Instruct 	70B 	70B 	81.1 	68.8 	28.7 	3.3
-DeepSeek-Coder-V2-Lite-Instruct 	16B 	2.4B 	81.1 	68.8 	24.3 	6.5
-DeepSeek-Coder-V2-Instruct 	236B 	21B 	90.2 	76.2 	43.4 	12.1
+CodeStral    22B 	22B 	78.1 	68.2 	31.0 	4.6
+DeepSeek-Coder-Instruct    33B 	33B 	79.3 	70.1 	22.5 	4.2
+Llama3-Instruct    70B 	70B 	81.1 	68.8 	28.7 	3.3
+DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
+DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
 ```
