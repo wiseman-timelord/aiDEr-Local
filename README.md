@@ -45,7 +45,7 @@ Selection; Menu Options = 1-5, Exit Batch = X:
 NAME    ID      SIZE    MODIFIED
 
 ========================================================================================================================
-Selection; Select Model = S, Delete Model = D, Back to Menu = M:
+Selection; Select Model = S, Delete Model = D, Back to Menu = B:
 ```
 
 ## REQUIREMENTS:
