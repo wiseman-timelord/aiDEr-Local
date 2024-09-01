@@ -40,7 +40,7 @@
 ========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
 ```
-- Essential Management of Ollama (for CPU users; but you can ko-fi me for a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get it working for GPU threads)...
+- Essential Management of Ollama...
 ```
 ========================================================================================================================
                                                Ollama Settings Management
@@ -77,8 +77,10 @@ Selection (Select Model = S, Set Threads = T, Back to Menu = B):
 4. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
 5. Run The batch `aiDEr-Offline.Bat`, to launch aider with local models on, LM Studio or Ollama, with options to, include files or manageme Ollama models.
 - When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct` not `DeepSeek-Coder-V2-Lite-Instruct:latest`. I think.
+- As you can tell from the threads settings, its currently for CPU users but on ollama, so you may want to set it to `0` (auto/default), or you will have to use LM Studio for GPU accelleration.
 
 ## NOTATION:
+- A lot of my programs are designed towards CPU in relevance to Ollama, I am sure they will sort this out at some point and use vulkan, but in the mean time Why not, ko-fi for or send me, a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get gpu threads working for all the llm apps I work on.
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
 ```
                     Code Generation
