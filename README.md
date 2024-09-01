@@ -4,6 +4,7 @@
 
 ### DEVELOPMENT:
 1. `Setup-Install.Bat` fixed soes saving the `persistence.txt` correctly. The `aiDer-Local.Bat` now needs to be tested again. 1. persistence.txt, 2. Options, 3. Launch.
+2. Currently its version specific to `v0.54.0`, as I added some files to the setup-install, that were seemingly not covered by the installer, to ensure they actually install, however, this is only a quick-fix, and I should move the additional install to its own "version patcher", possibly batches kept in `.\patches` to ensure that the libraries install correctly for each version of aider I use, or the likes. Dont want to mess with the `requirements.txt` anyhow, its way confusing.
 1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aiDEr cant identify the model.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
@@ -38,7 +39,7 @@ more: https://docs.litellm.ai/docs/providers
 -  There is also the deepseek v2 Lite gguf, in, base and instruct; somehow I am guessing an intelligent application of, the two models or the instruct model and some other chat model, and streamlining of code could be an option, but mainly somehow utilize the unlimited context on these deepseek models too?
 
 ### DESCRIPTION:
-- This fork, will have drop-in files, to enhance, useability and/or performance, for non-wsl windows 10 users, working off local models (though it may work on similar editions of windows just fine).
+- This fork, will have drop-in files for aider, to enhance, useability and/or performance, for non-wsl windows 10 users, working off local models (though it may work on similar editions of windows just fine). 
 
 ### FEATURES:
 - The batch `Install-Setup.Bat` - for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
