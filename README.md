@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. setup-install is not saving the persistence.txt correctly, and the aiDer-Local, has new system of using persistence.txt instead of detecting, hence, until the setup-install can be fixed, then there is a major issue from start.
+1. `Setup-Install.Bat` fixed soes saving the `persistence.txt` correctly. The `aiDer-Local.Bat` now needs to be tested again. 1. persistence.txt, 2. Options, 3. Launch.
 1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aiDEr cant identify the model.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
