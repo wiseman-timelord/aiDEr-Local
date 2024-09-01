@@ -2,16 +2,22 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+:: DO NOT, MODIFY OR MOVE, START...
+net session >nul 2>&1 || (
+    echo Error: Admin privileges required. Right-click and select "Run as administrator".
+    timeout /t 3 >nul
+    exit /b 1
+)
+set "Script_Directory=%~dp0"
+set "Script_Directory=%Script_Directory:~0,-1%"
+pushd "%Script_Directory%"
+:: ...DO NOT, MODIFY OR MOVE, END.
+
 :: Global Variables
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
-
-:: Change to the script's directory
-set "Script_Directory=%~dp0"
-set "Script_Directory=%Script_Directory:~0,-1%"
-pushd "%Script_Directory%"
 
 :: Ensure the .\data\ folder exists
 if not exist ".\data\" (
@@ -43,24 +49,14 @@ if "%PYTHON_VERSION_NODECIMAL%"=="0" (
     set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (2-3 digits, e.g., 311 or 39): "
 )
 
-:: Check for administrative privileges
-net session >nul 2>&1
-if %errorLevel% NEQ 0 (
-    echo Error: Admin privileges required!
-    echo Please right-click and select "Run as administrator".
-    pause
-    exit /b 1
-)
-
-echo Admin Status: Administrator 
-echo Working Folder: %Script_Directory%
-timeout /t 1 >nul
-
 cls
 echo ========================================================================================================================
 echo                                                      Setup-Installer
 echo ========================================================================================================================
 echo.
+echo Admin Status: Administrator 
+echo Working Folder: %Script_Directory%
+timeout /t 1 >nul
 
 :: Find Python and pip based on config folder location
 for %%I in (
