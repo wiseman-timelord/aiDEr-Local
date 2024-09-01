@@ -22,18 +22,17 @@
 - The Launcher Main Menu (testing LM Studio)...
 ```
 ========================================================================================================================
-                                                      Aider Local Launcher
+                                                     Aider Local Launcher
 ------------------------------------------------------------------------------------------------------------------------
 
     1. Run Aider with LM Studio
     2. Run Aider with, LM Studio and Files
     3. Run Ollama with Selected Model
     4. Run Ollama with, Selected Model and Files
-    5. Ollama Models Management (deepseek-coder-v2-lite-instruct)
+    5. Manage Ollama Settings - (Model DeepSeek-Coder-V2-Lite-Instruct) (Threads 20)
 
 ========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
-
 ```
 - Ollama Management...
 ```
