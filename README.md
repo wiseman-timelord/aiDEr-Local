@@ -3,42 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. setup-install seems ok, however, aiDEr-Local has issue with run-commands in this section...
-```
-:run_aider_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-set OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%"
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_CMD=%OLLAMA_CMD% --ollama-extra-flags "OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%"
-)
-echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-%OLLAMA_CMD%
-goto :end_of_file
-
-:run_with_file_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-set /p "filename=Enter the Python file to run with Aider: "
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :menu
-)
-set OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_CMD=%OLLAMA_CMD% --ollama-extra-flags "OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%"
-)
-echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-%OLLAMA_CMD%
-goto :end_of_file
-```
+1. setup-install seems ok, however, aiDEr-Local has issue with run-commands (testing).
 1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aiDEr cant identify the model.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 2. LM Studio is not working...
