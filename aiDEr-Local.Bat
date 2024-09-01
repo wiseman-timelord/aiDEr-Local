@@ -37,7 +37,7 @@ for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /
 :: Check for administrative privileges
 net session >nul 2>&1 || (
     echo Error: Admin privileges required. Right-click and select "Run as administrator".
-    pause
+    timeout /t 3 >nul
     exit /b 1
 )
 echo Admin Status: Administrator
@@ -118,7 +118,8 @@ if /i "%model%"=="B" goto :manage_models
 set "MODEL_SELECTION=%model%"
 call :update_persistence
 echo Model selected: %MODEL_SELECTION%
-pause
+timeout /t 2 >nul
+goto :menu
 goto :manage_models
 
 :delete_model_prompt
@@ -132,13 +133,13 @@ if /i "%confirm%"=="Y" (
         call :update_persistence
     )
 )
-pause
+timeout /t 2 >nul
 goto :manage_models
 
 :run_aider
 if "%MODEL_SELECTION%"=="No_Model_Selected" (
     echo No model selected. Please select a model first.
-    pause
+    timeout /t 3 >nul
     goto :menu
 )
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
@@ -148,13 +149,13 @@ goto :end_of_file
 :run_with_file
 if "%MODEL_SELECTION%"=="No_Model_Selected" (
     echo No model selected. Please select a model first.
-    pause
+    timeout /t 3 >nul
     goto :menu
 )
 set /p "filename=Enter the Python file to run with Aider: "
 if not exist "%filename%" (
     echo Error: File not found.
-    pause
+    timeout /t 3 >nul
     goto :menu
 )
 echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
