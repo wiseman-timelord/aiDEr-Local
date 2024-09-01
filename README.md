@@ -4,6 +4,8 @@
 
 ### DEVELOPMENT:
 1. (testing) Specify how many threads to use with ollama - Here is the code for ollama `/set parameter num_thread ##`. Test 0 (default) and set numbers.
+ 
+2. Modelfile installer not workig.
 2. LM Studio is not working...
 ```
 Running Aider with LM Studio model (DeepSeek-Coder-V2-Lite-Instruct)...
