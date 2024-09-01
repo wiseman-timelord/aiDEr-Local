@@ -104,6 +104,7 @@ Selection (Select Model = S, Set Threads = T, Back to Menu = B):
 5. Run The batch `aiDEr-Offline.Bat`, to launch aider with local models on, LM Studio or Ollama, with options to, include files or manageme Ollama models.
 - When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct` not `DeepSeek-Coder-V2-Lite-Instruct:latest`. I think.
 - As you can tell from the threads settings, its currently for CPU users but on ollama, so you may want to set it to `0` (auto/default), or you will have to use LM Studio for GPU accelleration.
+- I did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio, so, these are the settings for Ollama, for now.
 
 ## NOTATION:
 - A lot of my programs are designed towards CPU in relevance to Ollama, I am sure they will sort this out at some point and use vulkan, but in the mean time Why not, ko-fi for or send me, a, AMD RX 7600 or GeForce RTX 4060, GPU, and it would be a top priority to get gpu threads working for all the llm apps I work on.
