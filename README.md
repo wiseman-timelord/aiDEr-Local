@@ -60,7 +60,7 @@ more: https://docs.litellm.ai/docs/providers
 
     4. Run Ollama with, Selected Model and Files
 
-    5. Manage Ollama Settings - M: DeepSeek-Coder-V2-Lite-Instruct, T: 20)
+    5. Manage Ollama Settings - M: DeepSeek-Coder-V2-Lite-Instruct, T: 20
 
 
 ========================================================================================================================
