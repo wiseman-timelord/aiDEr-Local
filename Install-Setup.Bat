@@ -17,18 +17,15 @@ pushd "%Script_Directory%"
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
-set "PYTHON_FOLDER_TO_USE="'
+set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
-
-:: Ensure the .\data\ folder exists
-
 
 :: Check for, .\data and .\data\persistence.txt and create as required.
 if not exist "%DATA_DIR%" (
     mkdir "%DATA_DIR%" && echo Created %DATA_DIR% folder.
 )
-if not exist "%PERSISTENCE_FILE%" (
+if not exist ".\data\persistence.txt" (
     (
         echo # This file stores configuration settings.
         echo PYTHON_VERSION_NODECIMAL=0
@@ -46,7 +43,6 @@ if not exist "%PERSISTENCE_FILE%" (
         )
     )
 )
-
 
 :: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
 if "%PYTHON_VERSION_NODECIMAL%"=="0" (
@@ -120,7 +116,7 @@ if errorlevel 1 (
 )
 echo.
 
-:: Save current settings back to persistence.txt
+:: Save current  settings back to persistence.txt
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%

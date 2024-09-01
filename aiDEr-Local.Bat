@@ -131,7 +131,8 @@ if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%"
+"%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
+
 goto :end_of_file
 
 :run_with_file_ollama
@@ -150,7 +151,7 @@ if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
 goto :end_of_file
 
 :select_model
