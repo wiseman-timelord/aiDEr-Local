@@ -20,7 +20,7 @@ set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "PYTHON_FOLDER_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
-set "threads_for_ollama=0"
+set "THREADS_FOR_OLLAMA=0"
 
 :: Load Globals from `.\data\persistence.txt` section
 if not exist ".\data\persistence.txt" (
@@ -46,7 +46,7 @@ echo     3. Run Ollama with Selected Model
 echo.
 echo     4. Run Ollama with, Selected Model and Files 
 echo.
-echo     5. Manage Ollama Settings - M: %MODEL_SELECTION%, T: %threads_for_ollama%
+echo     5. Manage Ollama Settings - M: %MODEL_SELECTION%, T: %THREADS_FOR_OLLAMA%
 echo.
 echo.
 echo ========================================================================================================================
@@ -76,7 +76,7 @@ echo.
 echo     CPU Threads Available:
 wmic cpu get NumberOfLogicalProcessors
 echo     Current Threads Used:
-echo %threads_for_ollama%
+echo %THREADS_FOR_OLLAMA%
 echo.
 echo.
 echo ========================================================================================================================
@@ -89,9 +89,9 @@ if /i "%model_choice%"=="T" goto :set_threads
 goto :manage_models
 
 :set_threads
-set /p "threads_for_ollama=Enter the number of threads for Ollama (0 for default): "
-echo threads_for_ollama=!threads_for_ollama!>> ".\data\persistence.txt"
-echo Number of threads set to: !threads_for_ollama!
+set /p "THREADS_FOR_OLLAMA=Enter the number of threads for Ollama (0 for default): "
+echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!>> ".\data\persistence.txt"
+echo Number of threads set to: !THREADS_FOR_OLLAMA!
 timeout /t 2 >nul
 goto :manage_models
 
@@ -129,8 +129,8 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
 )
 set "OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
 
-if not "%threads_for_ollama%"=="0" (
-    set "OLLAMA_CMD=%OLLAMA_CMD% /set parameter num_thread %threads_for_ollama%"
+if not "%THREADS_FOR_OLLAMA%"=="0" (
+    set "OLLAMA_CMD=%OLLAMA_CMD% /set parameter num_thread %THREADS_FOR_OLLAMA%"
 )
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
 %OLLAMA_CMD%
@@ -184,7 +184,7 @@ goto :manage_models
     echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
     echo PYTHON_FOLDER_TO_USE=!PYTHON_FOLDER_TO_USE!
     echo MODEL_SELECTION=!MODEL_SELECTION!
-    echo threads_for_ollama=!threads_for_ollama!
+    echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
 ) > ".\data\persistence.txt"
 goto :eof
 

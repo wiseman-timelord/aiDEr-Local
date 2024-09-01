@@ -17,16 +17,18 @@ pushd "%Script_Directory%"
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
-set "PYTHON_FOLDER_TO_USE="
+set "PYTHON_FOLDER_TO_USE="'
+set "MODEL_SELECTION=No_Model_Selected"
+set "THREADS_FOR_OLLAMA=0"
 
 :: Ensure the .\data\ folder exists
-if not exist ".\data\" (
-    mkdir ".\data"
-    echo Created .\data folder.
-)
 
-:: Check for persistence.txt and create it if it doesn't exist
-if not exist ".\data\persistence.txt" (
+
+:: Check for, .\data and .\data\persistence.txt and create as required.
+if not exist "%DATA_DIR%" (
+    mkdir "%DATA_DIR%" && echo Created %DATA_DIR% folder.
+)
+if not exist "%PERSISTENCE_FILE%" (
     (
         echo # This file stores configuration settings.
         echo PYTHON_VERSION_NODECIMAL=0
@@ -34,15 +36,17 @@ if not exist ".\data\persistence.txt" (
         echo PYTHON_EXE_TO_USE=
         echo PYTHON_FOLDER_TO_USE=
         echo MODEL_SELECTION=No_Model_Selected
-        echo threads_for_ollama=0
-    ) > ".\data\persistence.txt"
-    echo Created persistence.txt with default values.
+        echo THREADS_FOR_OLLAMA=0
+    ) > "%PERSISTENCE_FILE%"
+    echo Created %PERSISTENCE_FILE% with default values.
+) else (
+    for /f "usebackq tokens=1,* delims==" %%A in ("%PERSISTENCE_FILE%") do (
+        if not "%%A" == "" if not "%%A:~0,1%" == "#" (
+            set "%%A=%%B"
+        )
+    )
 )
 
-:: Load settings from persistence.txt
-for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /v "^#"') do (
-    set "%%A=%%B"
-)
 
 :: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
 if "%PYTHON_VERSION_NODECIMAL%"=="0" (
@@ -65,7 +69,7 @@ for %%I in (
     "%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
 ) do (
     if exist "%%~I" (
-        set "PYTHON_EXE_TO_USE=%%~I"
+        set "PIP_EXE_TO_USE=%%~dpI\python.exe"
         set "PYTHON_FOLDER_TO_USE=%%~dpI"
         set "PIP_EXE_TO_USE=%%~dpI\Scripts\pip.exe"
         goto :found_python
