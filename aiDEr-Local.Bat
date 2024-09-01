@@ -127,12 +127,11 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
-set OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%"
 if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-%OLLAMA_CMD%
+%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%"
 goto :end_of_file
 
 :run_with_file_ollama
@@ -147,12 +146,11 @@ if not exist "%filename%" (
     timeout /t 3 >nul
     goto :menu
 )
-set OLLAMA_CMD=%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
 if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-%OLLAMA_CMD%
+%PYTHON_EXE_TO_USE% -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
 goto :end_of_file
 
 :select_model
