@@ -20,7 +20,7 @@ timeout /t 2 /nobreak >nul
 
 :: Install Model
 echo Installing Model to Ollama...
-ollama create DeepSeek-Coder-V2-Lite-Instruct -f "%modelfile_to_use%"
+ollama create deepseek-coder-v2-lite-instruct -f "%modelfile_to_use%"
 echo...Install Process Complete.
 goto :exit_normal
 
