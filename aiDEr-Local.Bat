@@ -120,10 +120,11 @@ echo %threads_for_ollama%
 echo.
 echo.
 echo ========================================================================================================================
-set /p "model_choice=Selection (Select Model = S, Set Threads = T, Back to Menu = B): "
+set /p "model_choice=Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B: "
 
 if /i "%model_choice%"=="B" goto :save_and_exit
 if /i "%model_choice%"=="S" goto :select_model
+if /i "%model_choice%"=="D" goto :delete_model_prompt
 if /i "%model_choice%"=="T" goto :set_threads
 goto :manage_models
 
