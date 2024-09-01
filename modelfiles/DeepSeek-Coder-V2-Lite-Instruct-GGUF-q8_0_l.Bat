@@ -30,6 +30,10 @@ goto :exit_normal
 
 :: Exit Procedures
 :exit_normal
+echo.
+echo Available Ollama models:
+ollama list
+echo.
 echo All Processes Finished.
 echo  Exiting in 5 Seconds...
 timeout /t 3 /nobreak >nul
