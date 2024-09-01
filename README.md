@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Complete download of model - Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta ones improve performance by rounding off its abilities, and uncensored supposedly more intelligent. In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. I found out it must have the correctly named file, which means more downloading, and I still cant test properly, unless I incorrectly name the file while downloading one of the the other ones....
+1. Complete download of model - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. I found out it must have the correctly named file, which means more downloading, and I still cant test properly, unless I incorrectly name the file while downloading one of the the other ones....
 ```
 Model ollama/deepseek-v2-lite-instruct: Unknown context window size and costs, using sane defaults.
 Did you mean one of these?
@@ -65,7 +65,7 @@ Selection; Select Model = S, Delete Model = D, Back to Menu = M:
 4. Run The batch `aiDEr-Offline.Bat`, to launch aider with local models on Ollama, and also includes light management/configuration of Ollama.
 
 ## NOTATION:
-- Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs...
+- Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta ones improve performance by rounding off its abilities, and uncensored supposedly more intelligent)... 
 ```
                     Code Generation
           #TP 	#AP 	HumanEval 	MBPP+ 	LiveCodeBench 	USACO							
