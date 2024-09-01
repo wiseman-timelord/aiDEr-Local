@@ -75,13 +75,19 @@ echo.
 cls
 echo ========================================================================================================================
 echo                                                      Aider Local Launcher
-echo ------------------------------------------------------------------------------------------------------------------------
+echo ========================================================================================================================
+echo.
 echo.
 echo     1. Run Aider with LM Studio
+echo.
 echo     2. Run Aider with, LM Studio and Files
+echo.
 echo     3. Run Ollama with Selected Model 
+echo.
 echo     4. Run Ollama with, Selected Model and Files 
+echo.
 echo     5. Manage Ollama Settings - (Model %MODEL_SELECTION%) (Threads %threads_for_ollama%)
+echo.
 echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
@@ -98,14 +104,20 @@ goto :menu
 cls
 echo ========================================================================================================================
 echo                                                Ollama Settings Management
-echo ------------------------------------------------------------------------------------------------------------------------
+echo ========================================================================================================================
 echo.
-echo     1. Select Model Choice (e.g. DeepSeek-Coder-V2-Lite-Instruct)
-echo Available Ollama models:
+echo.
+echo     Available Ollama models:
 ollama list
 echo.
-echo     2. Number of Threads (e.g. 20, or 0 for default)
-echo Current Threads Used: %threads_for_ollama%
+echo     Current Model Used:
+echo %MODEL_SELECTION%
+echo.
+echo     CPU Threads Available:
+wmic cpu get NumberOfLogicalProcessors
+echo     Current Threads Used:
+echo %threads_for_ollama%
+echo.
 echo.
 echo ========================================================================================================================
 set /p "model_choice=Selection (Select Model = S, Set Threads = T, Back to Menu = B): "
