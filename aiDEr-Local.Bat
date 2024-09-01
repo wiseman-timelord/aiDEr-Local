@@ -85,7 +85,7 @@ echo     3. Run Ollama with Selected Model
 echo.
 echo     4. Run Ollama with, Selected Model and Files 
 echo.
-echo     5. Manage Ollama Settings - (M: %MODEL_SELECTION%) (T: %threads_for_ollama%)
+echo     5. Manage Ollama Settings - M: %MODEL_SELECTION%, T: %threads_for_ollama%
 echo.
 echo.
 echo ========================================================================================================================
