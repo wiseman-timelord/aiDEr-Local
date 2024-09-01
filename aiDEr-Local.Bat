@@ -101,11 +101,11 @@ echo                                                Ollama Settings Management
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo     1. Select Model Choice (e.g. DeepSeek-Coder-V2-Lite-Instruct)
-echo     Available Ollama models:
+echo Available Ollama models:
 ollama list
 echo.
 echo     2. Number of Threads (e.g. 20, or 0 for default)
-echo     Current Threads Used: %threads_for_ollama%
+echo Current Threads Used: %threads_for_ollama%
 echo.
 echo ========================================================================================================================
 set /p "model_choice=Selection (Select Model = S, Set Threads = T, Back to Menu = B): "
@@ -186,7 +186,7 @@ set "MODEL_SELECTION=%model%"
 call :update_persistence
 echo Model selected: %MODEL_SELECTION%
 timeout /t 2 >nul
-goto :found_python
+goto :manage_models
 
 :delete_model_prompt
 set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
