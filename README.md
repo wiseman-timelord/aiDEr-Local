@@ -3,18 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Complete download of model - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. I found out it must have the correctly named file, which means more downloading, and I still cant test properly, unless I incorrectly name the file while downloading one of the the other ones....
-```
-Model ollama/deepseek-v2-lite-instruct: Unknown context window size and costs, using sane defaults.
-Did you mean one of these?
-- ollama/deepseek-coder-v2-instruct
-- ollama/deepseek-coder-v2-lite-instruct
-For more info, see: https://aider.chat/docs/llms/warnings.html
-```
-...solution, ensure model is installed with correct reference...
-```
-ollama create DeepSeek-Coder-V2-Lite-Instruct -f Modelfile
-```
+1. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 3. Testing Running aider - Is the install complete? Are there any further issues.
 4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
 - I would prefer if I could use the vram and system ram, and be able to run slightly better models, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
@@ -78,4 +67,15 @@ DeepSeek-Coder-Instruct      33B 	33B 	79.3 	70.1 	22.5 	4.2
 Llama3-Instruct                70B 	70B 	81.1 	68.8 	28.7 	3.3
 DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
 DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
+```
+- issues with incorrectly recognized model file in ollama...
+```
+Model ollama/deepseek-v2-lite-instruct: Unknown context window size and costs, using sane defaults.
+Did you mean one of these?
+- ollama/deepseek-coder-v2-instruct
+- ollama/deepseek-coder-v2-lite-instruct
+```
+...solution, ensure model is installed with correct reference...
+```
+ollama create deepSeek-coder-v2-lite-instruct -f Modelfile
 ```
