@@ -1,3 +1,4 @@
+:: SCRIPT: Install-Setup.Bat
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -27,6 +28,7 @@ if not exist ".\data\persistence.txt" (
         echo PYTHON_EXE_TO_USE=
         echo PYTHON_FOLDER_TO_USE=
         echo MODEL_SELECTION=No_Model_Selected
+        echo threads_for_ollama=0
     ) > ".\data\persistence.txt"
     echo Created persistence.txt with default values.
 )
@@ -93,14 +95,29 @@ if errorlevel 1 (
 echo Setuptools and wheel are installed.
 echo.
 
-:: Install requirements
+:: Install requirements with --upgrade flag and handle conflicts
 echo Installing Requirements...
-"%PIP_EXE_TO_USE%" install -r requirements.txt
+"%PIP_EXE_TO_USE%" install --upgrade -r requirements.txt
 if errorlevel 1 (
-    echo Failed to install requirements. Please check your Python and pip installation.
-    goto :end_of_file
+    echo Warning: Some conflicts occurred during installation.
+    echo Attempting to resolve conflicts...
+    "%PIP_EXE_TO_USE%" install --upgrade --force-reinstall -r requirements.txt
+    if errorlevel 1 (
+        echo Error: Failed to resolve conflicts. Please check your requirements.txt file.
+        goto :end_of_file
+    )
 )
 echo Requirements installed successfully.
+echo.
+
+:: Verify installation and check for any remaining conflicts
+echo Verifying installation...
+"%PIP_EXE_TO_USE%" check
+if errorlevel 1 (
+    echo Warning: Some conflicts may still exist. Please review the output above.
+) else (
+    echo All packages are installed correctly with no conflicts.
+)
 echo.
 
 :: Save current settings back to persistence.txt
@@ -111,6 +128,7 @@ echo.
     echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
     echo PYTHON_FOLDER_TO_USE=%PYTHON_FOLDER_TO_USE%
     echo MODEL_SELECTION=No_Model_Selected
+    echo threads_for_ollama=0
 ) > ".\data\persistence.txt"
 
 :end_of_file
