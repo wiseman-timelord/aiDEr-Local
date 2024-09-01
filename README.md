@@ -14,9 +14,9 @@
 - This fork, will have drop-in files, to enhance, useability and/or performance, for non-wsl windows 10 users, working off local models (though it may work on similar editions of windows just fine).
 
 ### FEATURES:
-- The batch `Install-Setup.Bat` is for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
-- The batch `aiDEr-Offline.Bat` is for launching aider with local models on Ollama, and also includes light management of Ollama.
-- The batch `aiDEr-Online.Bat` is for launching aider with online services, but is redundant/untested/archived; it may be useful to others.
+- The batch `Install-Setup.Bat` - for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
+- The batch `aiDEr-local.Bat` - for launching aider with local models on, Ollama and LM Stuio, and also includes some management of Ollama.
+- The folder `modelfiles` - contains batches and modelfiles, to simplify/foolproof the processes of installing those specific models to ollama. 
 
 ### PREVIEW:
 - The Launcher Main Menu (testing LM Studio)...
