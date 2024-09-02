@@ -42,6 +42,25 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 - Verifies and installs essential Python packages, such as setuptools and wheel, to ensure a stable environment.
 
 ### PREVIEW:
+- It works with Ollama, automating configuration and launch of ollama through the launcher...
+```
+========================================================================================================================
+                                                 aiDEr-Local Launcher
+========================================================================================================================
+
+Starting Ollama server...
+Setting API Base...
+Running Aider with Ollama model...
+No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
+
+Aider v0.54.0
+Model: ollama/deepseek-coder-v2-lite-instruct with whole edit format
+Git repo: none
+Repo-map: disabled
+Use /help <question> for help, run "aider --help" to see cmd line args
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+>
+```
 - The Launcher Main Menu...
 ```
 ========================================================================================================================
