@@ -137,8 +137,7 @@ Press any key to continue . . .
 
 ## NOTATION:
 - When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
-- As you can tell from the threads settings for ollama, its currently designed for CPU users, but if you are on GPU, then you will want to set it to `0` for `auto`, where for Ollama to manager it for you, or set it to how many shader threads you have. At least I think thats how it works (see Kofi appeal below).
-- `Claude_Sonnet: there isn't any specific sanitization or validation for the number of threads entered`, hence for GPUs you are able able to specify more threads, which should relate to how many shaders there are, but what would I know I have a AMD RX 470, but if you can donate on kofi, maybe I will have that, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
+- As you can tell from the threads settings for ollama, its currently designed for CPU users, but if you are on GPU, then you will want to set it to `0` for `auto`, where for Ollama to manager it for you, or set it to how many shader threads you have. At least I think thats how it works. I have a AMD RX 470, but if you can donate on kofi, maybe I will have a, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
 - Did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio, so, these are the settings for Ollama, for now in the relating modelfile installer.
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
 ```
