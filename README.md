@@ -108,7 +108,6 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 ========================================================================================================================
 
 
-
     1. Re-Install Setup Tools
 
     2. Install `.\Requirements.Txt`
@@ -116,22 +115,21 @@ Use /help <question> for help, run "aider --help" to see cmd line args
     3. ModelFile Management
 
 
-
 ------------------------------------------------------------------------------------------------------------------------
 
-
-
-    Admin Status:
-Administrator
 
     Working Folder:
 D:\ProgsOthers\aiDEr-Local\aider-0.54.0
 
+    Python Location:
+C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\python.exe
+
+    Python Location:
+C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\Scripts\pip.exe
 
 
 ========================================================================================================================
 Selection; Menu Options = 1-3, Exit Batch = X:
-
 
 ```
 - The `Setup-Install.Bat` Model Management for Ollama...
