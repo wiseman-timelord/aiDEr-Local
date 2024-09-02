@@ -7,34 +7,13 @@
 2. Issues with running on LM STUDIO, needs further testing and fixing. LM Studio was not working when tested.
 3. aiDEr cannot idenfy the model, hence, this looks like a good place to start editing the core files, soes for models to be correctly recognized.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
-2. LM Studio is not working...
-```
-Running Aider with LM Studio model (DeepSeek-Coder-V2-Lite-Instruct)...
-No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
-Model DeepSeek-Coder-V2-Lite-Instruct: Unknown which environment variables are required.
-Model DeepSeek-Coder-V2-Lite-Instruct: Unknown context window size and costs, using sane defaults.
-Did you mean one of these?
-- ollama/deepseek-coder-v2-lite-instruct
-For more info, see: https://aider.chat/docs/llms/warnings.html
-
-
-Aider v0.54.0
-Model: DeepSeek-Coder-V2-Lite-Instruct with diff edit format
-Git repo: none
-Repo-map: disabled
-Use /help <question> for help, run "aider --help" to see cmd line args
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-diff> make me a pacman game with a batch to run it, put the files in .\working
-
-BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call.
-You passed model=DeepSeek-Coder-V2-Lite-Instruct
- Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn
-more: https://docs.litellm.ai/docs/providers
-```
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. running with file(s) needs investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
-4. Implement code, to enable configuration and use of Huggingface Larger models, under the circumstances of repeating errors. This could auto-detect the larger versions with the nearest relating name, and just automatically use that, until the error has been solverd, or otherwise, it would have to be hardcoded to what I determine to be the best performing ~400b model at the time.
+4. Edit main branch files, for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, and under the circumstances of repeating errors. Currently there are 3 allowed errors in a row, however, instead of breaking after 3, there will be a use of the API to the HuggingFace model. This will enhance the AI significantly for the home user that is restricted to 70B on a 64GB system. 
+
+
+ model, and will try up to 3 times in total, until the issue has been solved, additionally potentially the first response, could be done through these 405B models.
 - Would prefer if I could use the vram and system ram, and be able to run slightly better models, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
 -  There is also the deepseek v2 Lite gguf, in, base and instruct; somehow I am guessing an intelligent application of, the two models or the instruct model and some other chat model, and streamlining of code could be an option, but mainly somehow utilize the unlimited context on these deepseek models too?
 
