@@ -26,21 +26,31 @@
 ```
 ========================================================================================================================
                                                      Aider Local Launcher
-------------------------------------------------------------------------------------------------------------------------
+========================================================================================================================
+
+
 
 
     1. Run Aider with LM Studio
 
+
     2. Run Aider with, LM Studio and Files
+
 
     3. Run Aider with, Ollama and Selected Model
 
+
     4. Run Aider with, Ollama and Selected Model and Files
 
-    5. Manage Ollama Settings - M: DeepSeek-Coder-V2-Lite-Instruct, T: 20
+
+    5. Manage Ollama Settings
+M: deepseek-coder-v2-lite-instruct, T: 0
 
 
-========================================================================================================================
+
+
+
+------------------------------------------------------------------------------------------------------------------------
 Selection; Menu Options = 1-5, Exit Batch = X:
 ```
 - Essential Management of Ollama...
@@ -50,23 +60,30 @@ Selection; Menu Options = 1-5, Exit Batch = X:
 ========================================================================================================================
 
 
+
     Available Ollama models:
 NAME                                    ID              SIZE    MODIFIED
-DeepSeek-Coder-V2-Lite-Instruct:latest  a5112c0daff8    17 GB   2 hours ago
+deepseek-coder-v2-lite-instruct:latest  dd11d2c6fbe2    17 GB   22 hours ago
+
 
     Current Model Used:
-DeepSeek-Coder-V2-Lite-Instruct
+deepseek-coder-v2-lite-instruct
+
 
     CPU Threads Available:
 NumberOfLogicalProcessors
 24
 
+
     Current Threads Used:
-21
+0
 
 
-========================================================================================================================
-Selection (Select Model = S, Set Threads = T, Back to Menu = B):
+
+
+------------------------------------------------------------------------------------------------------------------------
+Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B:
+
 ```
 - The `Setup-Install.Bat` Output...
 ```
