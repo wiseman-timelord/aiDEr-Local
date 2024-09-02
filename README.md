@@ -3,9 +3,8 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Testing aider 0.54.00 after issues with python, and revision to 0.54.10, and reinstall of python 3.12.4, due to iissues with httpx. so far 0.54.10 is spanners in works, as it changed a lot of dependency version.
-2. Issues with running on LM STUDIO, needs further testing and fixing. LM Studio was not working when tested.
-3. aiDEr cannot idenfy the model, hence, this looks like a good place to start editing the core files, soes for models to be correctly recognized.
+1. Issues with running on LM STUDIO, needs further testing and fixing. LM Studio was not working when tested.
+2. aiDEr cannot idenfy the model, hence, this looks like a good place to start editing the core files, soes for models to be correctly recognized.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. running with file(s) needs investigating.
