@@ -42,12 +42,11 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 - Verifies and installs essential Python packages, such as setuptools and wheel, to ensure a stable environment.
 
 ### PREVIEW:
-- The Launcher Main Menu...
+- The `aiDEr-Local.Bat` Main Menu...
 ```
 ========================================================================================================================
                                                    AiDEr-Local Launcher
 ========================================================================================================================
-
 
 
     1. Run Aider with LM Studio (Not Working)
@@ -61,20 +60,21 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
     5. Manage Ollama Settings
 
 
-
 ------------------------------------------------------------------------------------------------------------------------
 
 
-Model Selected: DeepSeek-Coder-V2-Lite-Instruct
-Threads Used: 21
+    Model Selected:
+DeepSeek-Coder-V2-Lite-Instruct
+
+    Threads Used:
+21
 
 
 ========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
 
-
 ```
-- Essential Management of Ollama...
+- The `aiDEr-Local.Bat` Management of Ollama...
 ```
 ========================================================================================================================
                                              Ollama-Aider Settings Management
