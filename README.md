@@ -124,37 +124,66 @@ NumberOfLogicalProcessors
 Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B:
 
 ```
-- The `Setup-Install.Bat` Output...
+- The `Setup-Install.Bat` Main Menu...
 ```
 ========================================================================================================================
-                                                     Setup-Installer
+                                             Ollama Model Management
 ========================================================================================================================
 
-Python 312 found at: C:\Program Files\Python312\python.exe
-Using pip from: C:\Program Files\Python312\\Scripts\pip.exe
 
-Ensuring setuptools and wheel are properly installed...
-Collecting setuptools
-  Using cached setuptools-74.0.0-py3-none-any.whl.metadata (6.7 kB)
-...
-Successfully installed setuptools-74.0.0 wheel-0.44.0
-Setuptools and wheel are installed.
 
-Installing Requirements...
-Requirement already satisfied: aiohappyeyeballs==2.4.0 in c:\program files\python312\lib\site-packages (from -r requirements.txt (line 7)) (2.4.0)
-...
-Requirement already satisfied: colorama in c:\users\mastar\appdata\roaming\python\python312\site-packages (from click==8.1.7->-r requirements.txt (line 39)) (0.4.6)
-Requirements installed successfully.
 
-Verifying installation...
-aider-chat 0.54.10 has requirement httpx==0.27.2, but you have httpx 0.27.0.
-...
-aider-chat 0.54.10 has requirement zipp==3.20.1, but you have zipp 3.20.0.
-Warning: Some conflicts may still exist. Please review the output above.
+
+
+    Available Ollama models:
+NAME    ID      SIZE    MODIFIED
+
+
+
+
+
+
+
+========================================================================================================================
+Selection; Install ModelCard = I, Remove Modelcard = D, Back to Menu = B: i
+Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-Q8_0_L.gguf
+Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
+
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------------
-All processes finished.
-Press any key to continue . . .
+```
+- The `Setup-Install.Bat` Model Management for Ollama...
+```
+========================================================================================================================
+                                             Ollama Model Management
+========================================================================================================================
+
+
+
+
+
+
+    Available Ollama models:
+NAME    ID      SIZE    MODIFIED
+
+
+
+
+
+
+
+========================================================================================================================
+Selection; Install ModelCard = I, Remove Modelcard = D, Back to Menu = B: i
+Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-Q8_0_L.gguf
+Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
+Enter a name for the new model: DeepSeek-Coder-V2-Lite-Instruct
+Installing Model to Ollama...
+transferring model data 6% ⠼
+
+
 ```
 
 
