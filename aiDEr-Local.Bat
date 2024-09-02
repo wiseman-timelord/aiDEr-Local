@@ -15,8 +15,9 @@ set "file_list="
 set "file_count=1"
 set "OLLAMA_API_BASE=http://localhost:11434"
 set "LMS_API_TO_USE=http://localhost:1234/v1"
+set "BATCH_PATH_CHOICE="
 
-:: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START
+:: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START...
 net session >nul 2>&1 || (
     echo Error: Admin privileges required. Right-click and select "Run as administrator".
     timeout /t 3 >nul
@@ -25,9 +26,9 @@ net session >nul 2>&1 || (
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
-:: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END
+:: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END.
 
-:: Load Globals from `.\data\persistence.txt` section
+:: PERSISTENCE BLOCK, DO NOT MODIFY: START...
 if not exist ".\data\persistence.txt" (
     echo Ensure to run `Setup-install` first, then you can run `aiDEr-Local.Bat`.
     goto :end_of_file
@@ -35,11 +36,12 @@ if not exist ".\data\persistence.txt" (
 for /f "tokens=1,* delims==" %%A in ('type ".\data\persistence.txt" ^| findstr /v "^#"') do (
     set "%%A=%%B"
 )
+:: ...PERSISTENCE BLOCK, DO NOT MODIFY: END.
 
 :menu
 cls
 echo ========================================================================================================================
-echo                                                      Aider Local Launcher
+echo                                                    AiDEr-Local Launcher
 echo ========================================================================================================================
 echo.
 echo.
@@ -68,17 +70,86 @@ echo ---------------------------------------------------------------------------
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file
-if "%choice%"=="1" goto :run_aider_lmstudio
-if "%choice%"=="2" goto :run_aider_lmstudio_file
-if "%choice%"=="3" goto :run_aider_ollama
-if "%choice%"=="4" goto :run_with_file_ollama
+if "%choice%" geq "1" if "%choice%" leq "4" (
+    set "BATCH_PATH_CHOICE=%choice%"
+    goto :run_aider
+)
 if "%choice%"=="5" goto :manage_models
 goto :menu
+
+:run_aider
+cls
+echo ========================================================================================================================
+echo                                                  aiDEr-Local Launcher
+echo ========================================================================================================================
+echo.
+
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+
+if %BATCH_PATH_CHOICE% leq 2 (
+    set "API_BASE=%LMS_API_TO_USE%"
+    set "MODEL_TYPE=LM Studio"
+) else (
+    set "API_BASE=%OLLAMA_API_BASE%"
+    set "MODEL_TYPE=Ollama"
+    echo Starting Ollama server...
+    start "Ollama Serve" cmd /c "ollama serve"
+    timeout /t 3 >nul
+    echo Setting API Base...
+    start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
+    timeout /t 3 >nul
+    if not "%THREADS_FOR_OLLAMA%"=="0" (
+        set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
+    )
+    for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
+)
+
+if %BATCH_PATH_CHOICE% equ 2 goto :collect_files
+if %BATCH_PATH_CHOICE% equ 4 goto :collect_files
+
+echo Running Aider with %MODEL_TYPE% model...
+if %BATCH_PATH_CHOICE% leq 2 (
+    "%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%API_BASE%"
+) else (
+    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
+)
+goto :end_of_file
+
+:collect_files
+:collect_files_loop
+set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
+if "%filename%"=="" goto :run_with_files
+if not exist "%filename%" (
+    echo Error: File not found.
+    timeout /t 3 >nul
+    goto :collect_files_loop
+)
+set "file_list=!file_list! "%filename%""
+set /a file_count+=1
+goto :collect_files_loop
+
+:run_with_files
+if "%file_list%"=="" (
+    echo No files were entered. Returning to menu.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with Files using %MODEL_TYPE% model...
+if %BATCH_PATH_CHOICE% leq 2 (
+    "%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%API_BASE%" %file_list%
+) else (
+    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" %file_list%
+)
+goto :end_of_file
 
 :manage_models
 cls
 echo ========================================================================================================================
-echo                                                Ollama Settings Management
+echo                                              Ollama-Aider Settings Management
 echo ========================================================================================================================
 echo.
 echo.
@@ -141,7 +212,7 @@ timeout /t 2 >nul
 goto :manage_models
 
 :update_persistence
-echo Saving Persistance File...
+echo Saving Persistence File...
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
@@ -150,109 +221,8 @@ echo Saving Persistance File...
     echo MODEL_SELECTION=!MODEL_SELECTION!
     echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
 ) > ".\data\persistence.txt"
-echo Saved: .\data\persistance.txt
+echo Saved: .\data\persistence.txt
 goto :eof
-
-:: Run LM Studio
-:run_aider_lmstudio
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with LM Studio (%LMS_API_TO_USE%)...
-"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%"
-goto :end_of_file
-
-:: Run LM Studio with Files inc selection
-:run_aider_lmstudio_file
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-:collect_files_lmstudio
-set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
-if "%filename%"=="" goto :run_aider_lmstudio_file_execute
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :collect_files_lmstudio
-)
-set "file_list=!file_list! "%filename%""
-set /a file_count+=1
-goto :collect_files_lmstudio
-:run_aider_lmstudio_file_execute
-if "%file_list%"=="" (
-    echo No files were entered. Returning to menu.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with Files using LM Studio model (%LMS_API_TO_USE%)...
-"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%" "%file_list%"
-goto :end_of_file
-
-:: Run Ollama
-:run_aider_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Starting Ollama server...
-start "Ollama Serve" cmd /c "ollama serve"
-timeout /t 3 >nul
-echo Setting API Base...
-start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
-timeout /t 3 >nul
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
-)
-
-for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
-echo Running Aider with Ollama model (%MODEL_NAME_FOR_AIDER%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
-goto :end_of_file
-
-:: Run Ollama with Files inc selection
-:run_with_file_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Starting Ollama server...
-start "Ollama Serve" cmd /c "ollama serve"
-timeout /t 3 >nul
-echo Setting API Base...
-start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
-timeout /t 3 >nul
-:collect_files_ollama
-set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
-if "%filename%"=="" goto :run_with_file_ollama_execute
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :collect_files_ollama
-)
-set "file_list=!file_list! "%filename%""
-set /a file_count+=1
-goto :collect_files_ollama
-:run_with_file_ollama_execute
-if "%file_list%"=="" (
-    echo No files were entered. Returning to menu.
-    timeout /t 3 >nul
-    goto :menu
-)
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
-)
-
-for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
-echo Running Aider with Files using Ollama model (%MODEL_NAME_FOR_AIDER%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" %file_list%
-goto :end_of_file
-goto :end_of_file
 
 :save_and_exit
 call :update_persistence
