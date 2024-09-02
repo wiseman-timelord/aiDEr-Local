@@ -74,36 +74,31 @@ DeepSeek-Coder-V2-Lite-Instruct
 Selection; Menu Options = 1-5, Exit Batch = X:
 
 ```
-- The `aiDEr-Local.Bat` Management of Ollama...
+- The `aiDEr-Local.Bat` Running with Ollama...
 ```
 ========================================================================================================================
-                                             Ollama-Aider Settings Management
+                                                     aiDEr-Local
 ========================================================================================================================
 
+Starting Ollama server...
+Setting API Base...
+Running Aider with Ollama model...
+No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
+Model ollama/DeepSeek-Coder-V2-Lite-Instruct: Unknown context window size and costs, using sane defaults.
+Did you mean one of these?
+- ollama/deepseek-coder-v2-lite-instruct
+For more info, see: https://aider.chat/docs/llms/warnings.html
 
 
-    Available Ollama models:
-NAME                                    ID              SIZE    MODIFIED
-DeepSeek-Coder-V2-Lite-Instruct:latest  34ddb66744d3    17 GB   7 minutes ago
+Aider v0.54.0
+Model: ollama/DeepSeek-Coder-V2-Lite-Instruct with whole edit format
+Git repo: none
+Repo-map: disabled
+Use /help <question> for help, run "aider --help" to see cmd line args
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> make me a maze game.
 
 
-    Current Model Used:
-DeepSeek-Coder-V2-Lite-Instruct
-
-
-    CPU Threads Available:
-NumberOfLogicalProcessors
-24
-
-
-    Current Threads Used:
-21
-
-
-
-
-========================================================================================================================
-Selection; Select Model = S, Set Threads = T, Back to Menu = B:
 
 ```
 - The `Setup-Install.Bat` Main Menu...
