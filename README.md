@@ -142,6 +142,14 @@ Warning: Some conflicts may still exist. Please review the output above.
 All processes finished.
 Press any key to continue . . .
 ```
+- Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the model card or aider or ollama, im lost..
+```
+The LLM did not conform to the edit format.
+https://aider.chat/docs/troubleshooting/edit-errors.html
+
+No filename provided before ``` in file listing
+Only 3 reflections allowed, stopping.
+```
 
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
