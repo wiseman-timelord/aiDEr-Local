@@ -2,7 +2,14 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: DO NOT, MODIFY OR MOVE, START...
+:: Global Variables
+set "PYTHON_VERSION_NODECIMAL=0"
+set "PIP_EXE_TO_USE="
+set "PYTHON_EXE_TO_USE="
+set "MODEL_SELECTION=No_Model_Selected"
+set "THREADS_FOR_OLLAMA=0"
+
+:: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START
 net session >nul 2>&1 || (
     echo Error: Admin privileges required. Right-click and select "Run as administrator".
     timeout /t 3 >nul
@@ -11,16 +18,7 @@ net session >nul 2>&1 || (
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
-:: ...DO NOT, MODIFY OR MOVE, END.
-
-:: Global Variables
-set "PYTHON_VERSION_NODECIMAL=0"
-set "PIP_EXE_TO_USE="
-set "PYTHON_EXE_TO_USE="
-set "MODEL_SELECTION=No_Model_Selected"
-set "THREADS_FOR_OLLAMA=0"
-
-
+:: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END
 
 cls
 echo ========================================================================================================================
@@ -41,11 +39,11 @@ if not exist ".\data\persistence.txt" (
         echo # This file stores configuration settings.
         echo PYTHON_VERSION_NODECIMAL=0
         echo PIP_EXE_TO_USE=
-        echo PYTHON_EXE_TO_USE=
+        echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
         echo MODEL_SELECTION=No_Model_Selected
         echo THREADS_FOR_OLLAMA=0
     ) > ".\data\persistence.txt"
-    echo Created .\data\persistence.txt with default values.
+    echo Created .\data\persistence.txt.
 ) else (
     for /f "usebackq tokens=1,* delims==" %%A in (".\data\persistence.txt") do (
         if not "%%A" == "" if not "%%A:~0,1%" == "#" (
@@ -55,12 +53,10 @@ if not exist ".\data\persistence.txt" (
 	echo Loaded: .\data\persistance.txt
 )
 
-:: If PYTHON_VERSION_NODECIMAL is 0 or not set, prompt the user
+:: FIND PYTHON BLOCK, DO NOT MODIFY: START
 if "%PYTHON_VERSION_NODECIMAL%"=="0" (
-    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (2-3 digits, e.g., 311 or 39): "
+    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (eg. 311 or 39): "
 )
-
-:: Find Python and pip based on config folder location
 for %%I in (
     "C:\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
     "C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
@@ -72,15 +68,14 @@ for %%I in (
         goto :found_python
     )
 )
-
-:: Python Not Found
 echo Error: Python %PYTHON_VERSION_NODECIMAL% not found. Please install Python %PYTHON_VERSION_NODECIMAL%.
 goto :end_of_file
-
 :found_python
-echo Python %PYTHON_VERSION_NODECIMAL% found at: %PYTHON_EXE_TO_USE%
-echo Using pip from: %PIP_EXE_TO_USE%
+echo Python %PYTHON_VERSION_NODECIMAL% found.
+echo Using `python.exe` from: %PYTHON_EXE_TO_USE%
+echo Using `pip.exe` from: %PIP_EXE_TO_USE%
 echo.
+:: FIND PYTHON BLOCK, DO NOT MODIFY: END
 
 :: Ensure setuptools and wheel are correctly installed
 echo Ensuring setuptools and wheel are properly installed...
@@ -92,23 +87,11 @@ if errorlevel 1 (
 echo Setuptools and wheel are installed.
 echo.
 
-:: Install requirements with --upgrade flag and handle conflicts
+:: Install requirements and verify Install.
 echo Installing Requirements...
 "%PIP_EXE_TO_USE%" install -r requirements.txt
 echo Processed: `requirements.txt`
 echo.
-echo Installing troublesome libraries...
-"%PIP_EXE_TO_USE%" install litellm
-"%PIP_EXE_TO_USE%" install openai	
-"%PIP_EXE_TO_USE%" install idna==3.8
-"%PIP_EXE_TO_USE%" install importlib-resources==6.4.4
-"%PIP_EXE_TO_USE%" install rich==13.8.0	
-"%PIP_EXE_TO_USE%" install zipp==3.20.1
-echo.	
-echo Requirements install Finished.
-echo.
-
-:: Verify installation and check for any remaining conflicts
 echo Verifying installation...
 "%PIP_EXE_TO_USE%" check
 if errorlevel 1 (
