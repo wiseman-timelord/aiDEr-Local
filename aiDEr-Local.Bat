@@ -45,28 +45,28 @@ echo                                                    AiDEr-Local Launcher
 echo ========================================================================================================================
 echo.
 echo.
-echo.
-echo.
 echo     1. Run Aider with LM Studio (Not Working)
-echo.
 echo.
 echo     2. Run Aider with, LM Studio and Files (Not Working)
 echo.
-echo.
 echo     3. Run Aider with, Ollama and Selected Model
-echo.
 echo.
 echo     4. Run Aider with, Ollama and Selected Model and Files
 echo.
-echo.
 echo     5. Manage Ollama Settings
-echo M: %MODEL_SELECTION%, T: %THREADS_FOR_OLLAMA%
-echo.
-echo.
-echo.
 echo.
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
+echo.
+echo.
+echo     Model Selected: 
+echo %MODEL_SELECTION%
+echo.
+echo     Threads Used:
+echo %THREADS_FOR_OLLAMA%
+echo.
+echo.
+echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file

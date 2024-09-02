@@ -81,9 +81,7 @@ echo.
 echo.
 echo     1. Re-Install Setup Tools
 echo.
-echo.
 echo     2. Install `.\Requirements.Txt`
-echo.
 echo.
 echo     3. ModelFile Management
 echo.
@@ -93,8 +91,11 @@ echo ---------------------------------------------------------------------------
 echo.
 echo.
 echo.
-echo Admin Status: Administrator 
-echo Working Folder: %Script_Directory%
+echo     Admin Status:
+echo Administrator 
+echo.
+echo     Working Folder:
+echo %Script_Directory%
 echo.
 echo.
 echo.
@@ -152,17 +153,17 @@ echo.
 echo.
 echo.
 echo  ========================================================================================================================
-set /p "model_choice=Selection; Install ModelCard = I, Delete Modelcard = D, Back to Menu = B: "
+set /p "model_choice=Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: "
 
-if /i "%model_choice%"=="I" goto install_model
-if /i "%model_choice%"=="D" goto delete_model_prompt
+if /i "%model_choice%"=="I" goto install_model_prompt
+if /i "%model_choice%"=="R" goto remove_model_prompt
 if /i "%model_choice%"=="B" goto main_menu
 
 echo Invalid choice. Please try again.
 timeout /t 2 >nul
 goto manage_models
 
-:install_model
+:install_model_prompt
 set /p "model_path=Enter the full path to the model including filename: "
 set /p "modelfile_path=Enter the full path to the ModelFile: "
 set /p "model_name=Enter a name for the new model: "
@@ -178,7 +179,7 @@ if errorlevel 1 (
 timeout /t 2 >nul
 goto manage_models
 
-:delete_model_prompt
+:remove_model_prompt
 set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
 if /i "%model_to_delete%"=="B" goto manage_models
 set /p "confirm=Are you sure you want to delete %model_to_delete%? (Y/N): "
