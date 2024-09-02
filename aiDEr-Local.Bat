@@ -8,10 +8,12 @@ set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
+set "MODEL_NAME_FOR_AIDER="
 
 :: Script Variables
 set "file_list="
 set "file_count=1"
+set "OLLAMA_API_BASE=http://localhost:11434"
 set "LMS_API_TO_USE=http://localhost:1234/v1"
 
 :: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START
@@ -138,6 +140,19 @@ if /i "%confirm%"=="Y" (
 timeout /t 2 >nul
 goto :manage_models
 
+:update_persistence
+echo Saving Persistance File...
+(
+    echo # This file stores configuration settings.
+    echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
+    echo PIP_EXE_TO_USE=!PIP_EXE_TO_USE!
+    echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
+    echo MODEL_SELECTION=!MODEL_SELECTION!
+    echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
+) > ".\data\persistence.txt"
+echo Saved: .\data\persistance.txt
+goto :eof
+
 :: Run LM Studio
 :run_aider_lmstudio
 if "%MODEL_SELECTION%"=="No_Model_Selected" (
@@ -184,11 +199,19 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
+echo Starting Ollama server...
+start "Ollama Serve" cmd /c "ollama serve"
+timeout /t 3 >nul
+echo Setting API Base...
+start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
+timeout /t 3 >nul
 if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
-echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%"
+
+for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
+echo Running Aider with Ollama model (%MODEL_NAME_FOR_AIDER%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
 goto :end_of_file
 
 :: Run Ollama with Files inc selection
@@ -198,6 +221,12 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
+echo Starting Ollama server...
+start "Ollama Serve" cmd /c "ollama serve"
+timeout /t 3 >nul
+echo Setting API Base...
+start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
+timeout /t 3 >nul
 :collect_files_ollama
 set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
 if "%filename%"=="" goto :run_with_file_ollama_execute
@@ -218,22 +247,12 @@ if "%file_list%"=="" (
 if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
-echo Running Aider with Files using Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" "%file_list%"
-goto :end_of_file
 
-:update_persistence
-echo Saving Persistance File...
-(
-    echo # This file stores configuration settings.
-    echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
-    echo PIP_EXE_TO_USE=!PIP_EXE_TO_USE!
-    echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
-    echo MODEL_SELECTION=!MODEL_SELECTION!
-    echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
-) > ".\data\persistence.txt"
-echo Saved: .\data\persistance.txt
-goto :eof
+for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
+echo Running Aider with Files using Ollama model (%MODEL_NAME_FOR_AIDER%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" %file_list%
+goto :end_of_file
+goto :end_of_file
 
 :save_and_exit
 call :update_persistence
