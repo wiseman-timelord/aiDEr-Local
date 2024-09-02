@@ -4,6 +4,7 @@
 
 ### DEVELOPMENT:
 1. `Setup-Install.Bat` fixed soes saving the `persistence.txt` correctly. The `aiDer-Local.Bat` now needs to be tested again. 1. persistence.txt, 2. Options, 3. Launch.
+2. Since upgrading to 0.54.1, have had issues with httpx, this has slowed things dramatically, issue with httpx must be investigated again.
 2. Currently its version specific to `v0.54.0`, as I added some files to the setup-install, that were seemingly not covered by the installer, to ensure they actually install, however, this is only a quick-fix, and I should move the additional install to its own "version patcher", possibly batches kept in `.\patches` to ensure that the libraries install correctly for each version of aider I use, or the likes. Dont want to mess with the `requirements.txt` anyhow, its way confusing.
 1. Testing aider 0.54.10 after upgrade, so far its spanners in works, as it changed a lot of dependency versions. So still having the issue of accessing the models, LM Studio was not working when tested, and in ollama aiDEr cant identify the model.
 2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
