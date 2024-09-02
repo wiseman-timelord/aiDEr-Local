@@ -124,7 +124,7 @@ D:\ProgsOthers\aiDEr-Local\aider-0.54.0
     Python Location:
 C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\python.exe
 
-    Python Location:
+    Pip Location:
 C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\Scripts\pip.exe
 
 
