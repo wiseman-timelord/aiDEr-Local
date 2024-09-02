@@ -3,11 +3,9 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Issues with running on LM STUDIO, needs further testing and fixing. LM Studio was not working when tested.
-2. aiDEr cannot idenfy the model, hence, this looks like a good place to start editing the core files, soes for models to be correctly recognized.
-2. Modelfile installer not workig. Its not identifying the model correctly through ollama.
+1. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments.
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
-4. running with file(s) needs investigating.
+4. running with file(s) needs testing/investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
 4. Edit main branch files, after batches are finished...
 - Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
