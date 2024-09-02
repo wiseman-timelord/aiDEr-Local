@@ -10,7 +10,9 @@
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. running with file(s) needs investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
-4. Edit main branch files, for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, and under the circumstances of repeating errors. Currently there are 3 allowed errors in a row, however, instead of breaking after 3, there will be a use of the API to the HuggingFace model. This will enhance the AI significantly for the home user that is restricted to 70B on a 64GB system. 
+4. Edit main branch files...
+- for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, where it will be planning more. 2. under the circumstances of repeating errors. 
+- Currently there are 3 allowed errors in a row, however, instead of breaking after 3, there will be a use of the API to the HuggingFace model `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct`. This will enhance the AI significantly for the home user that is restricted to 70B on a 64GB system, or the . 
 
 
  model, and will try up to 3 times in total, until the issue has been solved, additionally potentially the first response, could be done through these 405B models.
@@ -115,11 +117,11 @@ Press any key to continue . . .
 3. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
 4. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
 5. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
+
+## NOTATION:
 - When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct` not `DeepSeek-Coder-V2-Lite-Instruct:latest`. I think.
 - As you can tell from the threads settings, its currently for CPU users but on ollama, so you may want to set it to `0` (auto/default), or you will have to use LM Studio for GPU accelleration.
 - You can always put threads on "Auto" by selecting `0`, where Ollama is managing the threads.
-
-## NOTATION:
 - `Claude_Sonnet: there isn't any specific sanitization or validation for the number of threads entered`, hence for GPUs you are able able to specify more threads, which should relate to how many shaders there are, but what would I know I have a AMD RX 470, but if you can donate on kofi, maybe I will have that, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
 - Did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio, so, these are the settings for Ollama, for now in the relating modelfile installer.
 - Whats the best model for aider?? Apparently Deepseek Coder Light Instruct in 16b is as good as llama 3 instruct 70b, but they are the top dogs (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
