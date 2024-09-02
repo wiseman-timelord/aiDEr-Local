@@ -3,7 +3,14 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion.
+1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
+```
+Model gpt-4o-2024-08-06: Environment variables status:
+- OPENAI_API_KEY: ✗ Not set
+If you just set these environment variables using `setx` you may need to restart your terminal or command prompt for the
+changes to take effect.
+For more info, see: https://aider.chat/docs/llms/warnings.html
+```
 3. When LM Studio is fixed, elevate status to beta.
 4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 5. running with file(s) needs testing/investigating.
