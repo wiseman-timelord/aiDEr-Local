@@ -11,7 +11,7 @@
 4. Testing Running aider - Is the install complete? Are there any further issues.
 4. Edit main branch files, after batches are finished...
 - Streamlining of identifiaction to, local models only, with exception of, huggingface and and adapt openai to LM Studio.
-- Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include, llama v3.1 and deep-seek v2, in gguf.
+- Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include, llama v3.1 unfiltered and deep-seek v2 lite, in gguf.
 - for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, after 3 errors in a row, as large model will likely sort it out. Raises question of should restrict forked main branch files to only the currently `best performing models`, with their respectively `larger` versions, as enhancements. There would be no issue with people using the wrong versions, thereabouts the compatibility with the previous `best performing` models, would be kept. People are only going to want to use the best performing models for this, as cut-down language models are experimental.
 
 ### DESCRIPTION:
