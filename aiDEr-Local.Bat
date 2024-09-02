@@ -49,10 +49,10 @@ echo.
 echo     2. Run Aider with, LM Studio and Files
 echo.
 echo.
-echo     3. Run Ollama with Selected Model 
+echo     3. Run Aider with, Ollama and Selected Model
 echo.
 echo.
-echo     4. Run Ollama with, Selected Model and Files 
+echo     4. Run Aider with, Ollama and Selected Model and Files
 echo.
 echo.
 echo     5. Manage Ollama Settings
