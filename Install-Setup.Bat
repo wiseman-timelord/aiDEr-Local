@@ -2,7 +2,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: Global Variables
+:: Persistence Variables
 set "PYTHON_VERSION_NODECIMAL=0"
 set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
@@ -81,10 +81,9 @@ echo.
 echo Ensuring setuptools and wheel are properly installed...
 "%PIP_EXE_TO_USE%" install --upgrade --force-reinstall setuptools wheel
 if errorlevel 1 (
-    echo Failed to reinstall setuptools and wheel. Exiting...
-    goto :end_of_file
+    echo Failed to reinstall setuptools and wheel. Carrying On...
 )
-echo Setuptools and wheel are installed.
+echo Setuptools and Wheel, Processes Finished.
 echo.
 
 :: Install requirements and verify Install.

@@ -2,7 +2,19 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: DO NOT, MODIFY OR MOVE, START...
+:: Persistence Variables
+set "PYTHON_VERSION_NODECIMAL=0"
+set "PIP_EXE_TO_USE="
+set "PYTHON_EXE_TO_USE="
+set "MODEL_SELECTION=No_Model_Selected"
+set "THREADS_FOR_OLLAMA=0"
+
+:: Script Variables
+set "file_list="
+set "file_count=1"
+set "LMS_API_TO_USE=http://localhost:1234/v1"
+
+:: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START
 net session >nul 2>&1 || (
     echo Error: Admin privileges required. Right-click and select "Run as administrator".
     timeout /t 3 >nul
@@ -11,15 +23,7 @@ net session >nul 2>&1 || (
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
 pushd "%Script_Directory%"
-:: ...DO NOT, MODIFY OR MOVE, END.
-
-:: Global Variables
-set "OLLAMA_API_BASE=http://127.0.0.1:11434"
-set "PYTHON_VERSION_NODECIMAL=0"
-set "PIP_EXE_TO_USE="
-set "PYTHON_EXE_TO_USE="
-set "MODEL_SELECTION=No_Model_Selected"
-set "THREADS_FOR_OLLAMA=0"
+:: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END
 
 :: Load Globals from `.\data\persistence.txt` section
 if not exist ".\data\persistence.txt" (
@@ -37,18 +41,28 @@ echo                                                      Aider Local Launcher
 echo ========================================================================================================================
 echo.
 echo.
+echo.
+echo.
 echo     1. Run Aider with LM Studio
+echo.
 echo.
 echo     2. Run Aider with, LM Studio and Files
 echo.
+echo.
 echo     3. Run Ollama with Selected Model 
+echo.
 echo.
 echo     4. Run Ollama with, Selected Model and Files 
 echo.
-echo     5. Manage Ollama Settings - M: %MODEL_SELECTION%, T: %THREADS_FOR_OLLAMA%
+echo.
+echo     5. Manage Ollama Settings
+echo M: %MODEL_SELECTION%, T: %THREADS_FOR_OLLAMA%
 echo.
 echo.
-echo ========================================================================================================================
+echo.
+echo.
+echo.
+echo ------------------------------------------------------------------------------------------------------------------------
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file
@@ -66,19 +80,25 @@ echo                                                Ollama Settings Management
 echo ========================================================================================================================
 echo.
 echo.
+echo.
 echo     Available Ollama models:
 ollama list
+echo.
 echo.
 echo     Current Model Used:
 echo %MODEL_SELECTION%
 echo.
+echo.
 echo     CPU Threads Available:
 wmic cpu get NumberOfLogicalProcessors
+echo.
 echo     Current Threads Used:
 echo %THREADS_FOR_OLLAMA%
 echo.
 echo.
-echo ========================================================================================================================
+echo.
+echo.
+echo ------------------------------------------------------------------------------------------------------------------------
 set /p "model_choice=Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B: "
 
 if /i "%model_choice%"=="B" goto :save_and_exit
@@ -93,65 +113,6 @@ echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!>> ".\data\persistence.txt"
 echo Number of threads set to: !THREADS_FOR_OLLAMA!
 timeout /t 2 >nul
 goto :manage_models
-
-:run_aider_lmstudio
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with LM Studio model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "http://localhost:1234/v1" --model "%MODEL_SELECTION%" --edit-format diff
-goto :end_of_file
-
-:run_aider_lmstudio_file
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-set /p "filename=Enter the Python file to run with Aider: "
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :menu
-)
-echo Running Aider with %filename% using LM Studio model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "http://localhost:1234/v1" --model "%MODEL_SELECTION%" --edit-format diff "%filename%"
-goto :end_of_file
-
-:run_aider_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
-)
-echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
-
-goto :end_of_file
-
-:run_with_file_ollama
-if "%MODEL_SELECTION%"=="No_Model_Selected" (
-    echo No model selected. Please select a model first.
-    timeout /t 3 >nul
-    goto :menu
-)
-set /p "filename=Enter the Python file to run with Aider: "
-if not exist "%filename%" (
-    echo Error: File not found.
-    timeout /t 3 >nul
-    goto :menu
-)
-if not "%THREADS_FOR_OLLAMA%"=="0" (
-    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
-)
-echo Running Aider with %filename% using Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" "%filename%"
-goto :end_of_file
 
 :select_model
 set /p "model=Enter the model name (e.g., llama3:70b) or 'B' to go back: "
@@ -176,6 +137,90 @@ if /i "%confirm%"=="Y" (
 )
 timeout /t 2 >nul
 goto :manage_models
+
+:: Run LM Studio
+:run_aider_lmstudio
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with LM Studio (%LMS_API_TO_USE%)...
+"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%"
+goto :end_of_file
+
+:: Run LM Studio with Files inc selection
+:run_aider_lmstudio_file
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+:collect_files_lmstudio
+set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
+if "%filename%"=="" goto :run_aider_lmstudio_file_execute
+if not exist "%filename%" (
+    echo Error: File not found.
+    timeout /t 3 >nul
+    goto :collect_files_lmstudio
+)
+set "file_list=!file_list! "%filename%""
+set /a file_count+=1
+goto :collect_files_lmstudio
+:run_aider_lmstudio_file_execute
+if "%file_list%"=="" (
+    echo No files were entered. Returning to menu.
+    timeout /t 3 >nul
+    goto :menu
+)
+echo Running Aider with Files using LM Studio model (%LMS_API_TO_USE%)...
+"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%" %file_list%
+goto :end_of_file
+
+:: Run Ollama
+:run_aider_ollama
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+if not "%THREADS_FOR_OLLAMA%"=="0" (
+    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
+)
+echo Running Aider with Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
+goto :end_of_file
+
+:: Run Ollama with Files inc selection
+:run_with_file_ollama
+if "%MODEL_SELECTION%"=="No_Model_Selected" (
+    echo No model selected. Please select a model first.
+    timeout /t 3 >nul
+    goto :menu
+)
+:collect_files_ollama
+set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
+if "%filename%"=="" goto :run_with_file_ollama_execute
+if not exist "%filename%" (
+    echo Error: File not found.
+    timeout /t 3 >nul
+    goto :collect_files_ollama
+)
+set "file_list=!file_list! "%filename%""
+set /a file_count+=1
+goto :collect_files_ollama
+:run_with_file_ollama_execute
+if "%file_list%"=="" (
+    echo No files were entered. Returning to menu.
+    timeout /t 3 >nul
+    goto :menu
+)
+if not "%THREADS_FOR_OLLAMA%"=="0" (
+    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
+)
+echo Running Aider with Files using Ollama model (%MODEL_SELECTION%)...
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" %file_list%
+goto :end_of_file
 
 :update_persistence
 echo Saving Persistance File...
