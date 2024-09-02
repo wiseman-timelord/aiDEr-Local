@@ -149,14 +149,7 @@ Llama3-Instruct                70B 	70B 	81.1 	68.8 	28.7 	3.3
 DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
 DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
 ```
-- issues with incorrectly recognized model file in ollama, when running aider...
-```
-Model ollama/deepseek-v2-lite-instruct: Unknown context window size and costs, using sane defaults.
-Did you mean one of these?
-- ollama/deepseek-coder-v2-instruct
-- ollama/deepseek-coder-v2-lite-instruct
-```
-...solution, ensure model is installed with correct reference...
+- For Ollama, ensure model is installed with correct reference...
 ```
 ollama create deepSeek-coder-v2-lite-instruct -f Modelfile
 ```
