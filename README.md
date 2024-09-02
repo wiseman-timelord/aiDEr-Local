@@ -33,9 +33,9 @@
 
     2. Run Aider with, LM Studio and Files
 
-    3. Run Ollama with Selected Model
+    3. Run Aider with, Ollama and Selected Model
 
-    4. Run Ollama with, Selected Model and Files
+    4. Run Aider with, Ollama and Selected Model and Files
 
     5. Manage Ollama Settings - M: DeepSeek-Coder-V2-Lite-Instruct, T: 20
 
