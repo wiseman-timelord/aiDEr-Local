@@ -3,8 +3,7 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Currently a Milestone, after getting Ollama Working autonomously from menu config, with relating identification by aider. It works again, time for a break.
-2. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments. 
+1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion.
 3. When LM Studio is fixed, elevate status to beta.
 4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 5. running with file(s) needs testing/investigating.
