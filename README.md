@@ -12,6 +12,7 @@
 4. Edit main branch files, after batches are finished...
 - Streamlining of identifiaction to, local models already detailed and adapt openai to become LM Studio. Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include, llama v3.1 and deep-seek v2, in gguf.
 - for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, models, for first response, where it will be planning more, and for after 3 errors in a row, these are the =>~400B versions of models.
+- Streamlining of online service code to only being hugging face. the thinking is, you are likely downloading your models from there, and would, if your system were mighty enough, then be running those models anyway...right.
 
 ### DESCRIPTION:
 - This fork, will have drop-in files for aider, to enhance, useability and/or performance, for non-wsl windows 10 users, working off local models (though it may work on similar editions of windows just fine). 
