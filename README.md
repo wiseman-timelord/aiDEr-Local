@@ -49,13 +49,13 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 ========================================================================================================================
 
 
-    1. Run Aider with LM Studio (Not Working)
+    1. Run Aider with, Ollama and Selected Model
 
-    2. Run Aider with, LM Studio and Files (Not Working)
+    2. Run Aider with, Ollama and Selected Model and Files
 
-    3. Run Aider with, Ollama and Selected Model
+    3. Run Aider with LM Studio (Not Working)
 
-    4. Run Aider with, Ollama and Selected Model and Files
+    4. Run Aider with, LM Studio and Files (Not Working)
 
     5. Manage Ollama Settings
 
@@ -72,6 +72,7 @@ DeepSeek-Coder-V2-Lite-Instruct
 
 ========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
+
 
 ```
 - The `aiDEr-Local.Bat` Management of Ollama...
