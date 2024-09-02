@@ -3,7 +3,11 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-- Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the, model or model card or aider or ollama, im lost. I get the feeling DeepSeek v2 should be larger though, cant rule it out being a 16B model. Ensure modelcard is correct from some official source, and reinstall model to ollama, and test....
+1. As it turns out, aider wont run correctly if python is installed for `all users`, as it cant handle the space in `Program Files`. Hence, this needs to be alerted in Setup-Install, and refuse to work if python is not installed to the default folder for current user, only. Setup-Install should check both the default (C:\Users\*Username*) and all-users default (program files), and...
+- if the specified version of python is located in program files then state "Error: Python *version* not in default location!", then "aider requires Python installed to default folder.", then pause before exit.
+- if the selected version of python is located in the relevant location in the user folder, then it should use that.
+- if it is not in either location, then it should report what it currently does, something like "Error: Python *version* not found!", then "Install Python *version* to default location.".
+2 Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the, model or model card or aider or ollama, im lost. I get the feeling DeepSeek v2 should be larger though, cant rule it out being a 16B model. Ensure modelcard is correct from some official source, and reinstall model to ollama, and test....
 ```
 The LLM did not conform to the edit format.
 https://aider.chat/docs/troubleshooting/edit-errors.html
