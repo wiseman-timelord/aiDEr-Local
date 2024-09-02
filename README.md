@@ -1,6 +1,6 @@
 # aiDEr-Local for [aider v0.54.0](https://github.com/paul-gauthier/aider/releases/tag/v0.54.0)
 - Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
-- Status: Alpha - Under Development.
+- Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
 1. Currently a Milestone, after getting Ollama Working autonomously from menu config, with relating identification by aider. It works again, time for a break.
@@ -19,6 +19,7 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 >
 ```
 1. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments. 
+2. When LM Studio is fixed, elevate status to beta.
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. running with file(s) needs testing/investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
