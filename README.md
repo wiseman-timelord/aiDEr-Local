@@ -22,7 +22,7 @@
 - The folder `modelfiles` - contains batches and modelfiles, to simplify/foolproof the processes of installing those specific models to ollama. 
 
 ### PREVIEW:
-- The Launcher Main Menu (testing LM Studio)...
+- The Launcher Main Menu...
 ```
 ========================================================================================================================
                                                      Aider Local Launcher
