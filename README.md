@@ -95,18 +95,18 @@ Selection; Menu Options = 1-5, Exit Batch = X:
 - Essential Management of Ollama...
 ```
 ========================================================================================================================
-                                               Ollama Settings Management
+                                             Ollama-Aider Settings Management
 ========================================================================================================================
 
 
 
     Available Ollama models:
 NAME                                    ID              SIZE    MODIFIED
-deepseek-coder-v2-lite-instruct:latest  dd11d2c6fbe2    17 GB   22 hours ago
+DeepSeek-Coder-V2-Lite-Instruct:latest  34ddb66744d3    17 GB   7 minutes ago
 
 
     Current Model Used:
-deepseek-coder-v2-lite-instruct
+DeepSeek-Coder-V2-Lite-Instruct
 
 
     CPU Threads Available:
@@ -115,13 +115,13 @@ NumberOfLogicalProcessors
 
 
     Current Threads Used:
-0
+21
 
 
 
 
-------------------------------------------------------------------------------------------------------------------------
-Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B:
+========================================================================================================================
+Selection; Select Model = S, Set Threads = T, Back to Menu = B:
 
 ```
 - The `Setup-Install.Bat` Main Menu...
