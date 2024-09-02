@@ -4,20 +4,6 @@
 
 ### DEVELOPMENT:
 1. Currently a Milestone, after getting Ollama Working autonomously from menu config, with relating identification by aider. It works again, time for a break.
-```
-Starting Ollama server...
-Setting API Base...
-Running Aider with Ollama model (deepseek-coder-v2-lite-instruct)...
-No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
-
-Aider v0.54.0
-Model: ollama/deepseek-coder-v2-lite-instruct with whole edit format
-Git repo: none
-Repo-map: disabled
-Use /help <question> for help, run "aider --help" to see cmd line args
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
->
-```
 2. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments. 
 3. When LM Studio is fixed, elevate status to beta.
 4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
@@ -42,10 +28,10 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 - Verifies and installs essential Python packages, such as setuptools and wheel, to ensure a stable environment.
 
 ### PREVIEW:
-- It works with Ollama, automating configuration and launch of ollama through the launcher...
+- It works with Ollama, automating, config and launch, through menu options...
 ```
 ========================================================================================================================
-                                                 aiDEr-Local Launcher
+                                                     aiDEr-Local
 ========================================================================================================================
 
 Starting Ollama server...
