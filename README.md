@@ -11,8 +11,8 @@
 4. running with file(s) needs investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
 4. Edit main branch files...
-- for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, where it will be planning more.
-- Currently there are 3 allowed errors in a row, however, instead of breaking after 3, there will be a use of the API to the HuggingFace model `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct`. This will enhance the AI significantly for the home user that is restricted to 70B on a 64GB system, or the . 
+- Streamlining of identifiaction to, local models already detailed and adapt openai to become LM Studio. Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include, llama v3.1 and deep-seek v2, and also specific identification of 
+- for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct`/`https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, models, for first response, where it will be planning more, and for after 3 errors in a row, these are the =>~400B versions of models.
 
 
  model, and will try up to 3 times in total, until the issue has been solved, additionally potentially the first response, could be done through these 405B models.
