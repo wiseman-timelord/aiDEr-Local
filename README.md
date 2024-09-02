@@ -127,33 +127,33 @@ Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu
 - The `Setup-Install.Bat` Main Menu...
 ```
 ========================================================================================================================
-                                             Ollama Model Management
+                                                     Setup-Installer
 ========================================================================================================================
 
 
 
+    1. Re-Install Setup Tools
 
 
-
-    Available Ollama models:
-NAME    ID      SIZE    MODIFIED
+    2. Install `.\Requirements.Txt`
 
 
-
-
-
-
-
-========================================================================================================================
-Selection; Install ModelCard = I, Remove Modelcard = D, Back to Menu = B: i
-Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-Q8_0_L.gguf
-Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
-
-
+    3. ModelFile Management
 
 
 
 ------------------------------------------------------------------------------------------------------------------------
+
+
+
+Admin Status: Administrator
+Working Folder: D:\ProgsOthers\aiDEr-Local\aider-0.54.0
+
+
+
+========================================================================================================================
+Selection; Menu Options = 1-3, Exit Batch = X:
+
 ```
 - The `Setup-Install.Bat` Model Management for Ollama...
 ```
@@ -163,14 +163,8 @@ Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-I
 
 
 
-
-
-
     Available Ollama models:
 NAME    ID      SIZE    MODIFIED
-
-
-
 
 
 
@@ -181,7 +175,16 @@ Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-
 Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
 Enter a name for the new model: DeepSeek-Coder-V2-Lite-Instruct
 Installing Model to Ollama...
-transferring model data 6% ⠼
+transferring model data 100%
+using existing layer sha256:c41b0dbf1599296ba76343b942c39691a96a20ff382dad8cfc674889360d773e
+creating new layer sha256:04642f460a9d5cd1390c1462de1fb8b757872ba260013ff67f75958aaff28cf9
+creating new layer sha256:2c2625c551b5197ae9cad4fc90ff12a930309db1a0bb6012135b6c8bebdfc714
+creating new layer sha256:a58ff6a2ea83793a6b3f8affbf413906ef2a5bc0aad57f18cc70613c6cd49109
+creating new layer sha256:ac7bddfa75fb8d031628ac8cea54c4d48db692976927fc1b76101a7b83520d1e
+writing manifest
+success
+Model DeepSeek-Coder-V2-Lite-Instruct installed successfully.
+Updated: .\data\persistence.txt
 
 
 ```
