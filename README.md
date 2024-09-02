@@ -63,10 +63,10 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 ------------------------------------------------------------------------------------------------------------------------
 
 
-    Model Selected:
+    * Model Selected:
 DeepSeek-Coder-V2-Lite-Instruct
 
-    Threads Used:
+    * Threads Used:
 21
 
 
@@ -118,13 +118,13 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 ------------------------------------------------------------------------------------------------------------------------
 
 
-    Working Folder:
+    * Working Folder:
 D:\ProgsOthers\aiDEr-Local\aider-0.54.0
 
-    Python Location:
+    * Python Location:
 C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\python.exe
 
-    Pip Location:
+    * Pip Location:
 C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\Scripts\pip.exe
 
 
@@ -140,7 +140,7 @@ Selection; Menu Options = 1-3, Exit Batch = X:
 
 
 
-    Available Ollama models:
+    * Available Ollama models:
 NAME    ID      SIZE    MODIFIED
 
 
