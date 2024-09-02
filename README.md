@@ -1,5 +1,5 @@
-# aiDEr-Local
-- Its a fork, the main is [here](https://aider.chat/).
+# aiDEr-Local for [aider v0.54.0](https://github.com/paul-gauthier/aider/releases/tag/v0.54.0)
+- Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
