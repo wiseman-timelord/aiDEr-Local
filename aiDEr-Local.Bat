@@ -45,10 +45,10 @@ echo.
 echo.
 echo.
 echo.
-echo     1. Run Aider with LM Studio
+echo     1. Run Aider with LM Studio (Not Working)
 echo.
 echo.
-echo     2. Run Aider with, LM Studio and Files
+echo     2. Run Aider with, LM Studio and Files (Not Working)
 echo.
 echo.
 echo     3. Run Aider with, Ollama and Selected Model
