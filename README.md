@@ -51,10 +51,10 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 
 
 
-    1. Run Aider with LM Studio
+    1. Run Aider with LM Studio (not working)
 
 
-    2. Run Aider with, LM Studio and Files
+    2. Run Aider with, LM Studio and Files (not working)
 
 
     3. Run Aider with, Ollama and Selected Model
