@@ -11,7 +11,7 @@
 4. running with file(s) needs investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
 4. Edit main branch files...
-- for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, where it will be planning more. 2. under the circumstances of repeating errors. 
+- for Intelligent use of Huggingface API to the `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, for first response, where it will be planning more.
 - Currently there are 3 allowed errors in a row, however, instead of breaking after 3, there will be a use of the API to the HuggingFace model `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct`. This will enhance the AI significantly for the home user that is restricted to 70B on a 64GB system, or the . 
 
 
