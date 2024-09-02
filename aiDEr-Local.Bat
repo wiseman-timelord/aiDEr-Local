@@ -14,7 +14,7 @@ set "MODEL_NAME_FOR_AIDER="
 set "file_list="
 set "file_count=1"
 set "OLLAMA_API_BASE=http://localhost:11434"
-set "LMS_API_TO_USE=http://localhost:1234/v1"
+set "LMSTUDIO_API_BASE=http://localhost:1234/v1"
 set "BATCH_PATH_CHOICE="
 
 :: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START...
@@ -104,11 +104,10 @@ echo.
 echo.
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
-set /p "model_choice=Selection; Select Model = S, Delete Modelcard = D, Set Threads = T, Back to Menu = B: "
+set /p "model_choice=Selection; Select Model = S, Set Threads = T, Back to Menu = B: "
 
 if /i "%model_choice%"=="B" goto :save_and_exit
 if /i "%model_choice%"=="S" goto :select_model
-if /i "%model_choice%"=="D" goto :delete_model_prompt
 if /i "%model_choice%"=="T" goto :set_threads
 goto :manage_models
 
@@ -128,21 +127,6 @@ echo Model selected: %MODEL_SELECTION%
 timeout /t 2 >nul
 goto :manage_models
 
-:delete_model_prompt
-set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
-if /i "%model_to_delete%"=="B" goto :manage_models
-set /p "confirm=Are you sure you want to delete %model_to_delete%? (Y/N): "
-if /i "%confirm%"=="Y" (
-    ollama rm %model_to_delete% || echo Error: Failed to delete model.
-    if "%model_to_delete%"=="%MODEL_SELECTION%" (
-        set "MODEL_SELECTION=No_Model_Selected"
-        call :update_persistence
-        echo Model %model_to_delete% deleted. Model selection cleared.
-    )
-)
-timeout /t 2 >nul
-goto :manage_models
-
 :run_aider
 cls
 echo ========================================================================================================================
@@ -156,8 +140,8 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     goto :menu
 )
 if %BATCH_PATH_CHOICE% leq 2 (
-    set "API_BASE=%LMS_API_TO_USE%"
     set "MODEL_TYPE=LM Studio"
+	start "LM Studio API Base" setx LMS_API_TO_USE "%LMSTUDIO_API_BASE%"
 ) else (
     set "API_BASE=%OLLAMA_API_BASE%"
     set "MODEL_TYPE=Ollama"
@@ -176,7 +160,7 @@ if %BATCH_PATH_CHOICE% equ 2 goto :collect_files
 if %BATCH_PATH_CHOICE% equ 4 goto :collect_files
 echo Running Aider with %MODEL_TYPE% model...
 if %BATCH_PATH_CHOICE% leq 2 (
-    "%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%API_BASE%"
+    "%PYTHON_EXE_TO_USE%" -m aider
 ) else (
     "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
 )
@@ -203,7 +187,7 @@ if "%file_list%"=="" (
 )
 echo Running Aider with Files using %MODEL_TYPE% model...
 if %BATCH_PATH_CHOICE% leq 2 (
-    "%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%API_BASE%" %file_list%
+    "%PYTHON_EXE_TO_USE%" -m aider %file_list%
 ) else (
     "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" %file_list%
 )
