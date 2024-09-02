@@ -174,11 +174,12 @@ Updated: .\data\persistence.txt
 - Python v3.9-3.12 - Now working with whatever version of Python is specified by the user during setup.
 
 ### USAGE:
-1. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
-2. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
-3. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
-4. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
-5. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
+1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users.
+2. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
+3. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
+4. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
+5. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
+6. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
 ## NOTATION:
 - In `aiDEr-Local.Bat`, When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
