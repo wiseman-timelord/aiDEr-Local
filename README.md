@@ -3,6 +3,14 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
+- Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the, model or model card or aider or ollama, im lost. I get the feeling DeepSeek v2 should be larger though, cant rule it out being a 16B model. Ensure modelcard is correct from some official source, and reinstall model to ollama, and test....
+```
+The LLM did not conform to the edit format.
+https://aider.chat/docs/troubleshooting/edit-errors.html
+
+No filename provided before ``` in file listing
+Only 3 reflections allowed, stopping.
+```
 1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
 ```
 Model gpt-4o-2024-08-06: Environment variables status:
@@ -19,14 +27,6 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 - Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
 - Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
 - for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, after 3 errors in a row, as large model will likely sort it out, then revert back to local model after, and reset counter, however if it does not solve the same issue in one, then ask user if it should, additionally interact with huggingface using the larger model or allow the user to take a look at the files then re-test (requring re-prompt) or whatever would normally happen vanilla after 3 errors if it were not having the code to interact with larger models on huggingface. I also found out that deepseek provide 500,000,000 free tokens, this is clearly an idea.
-- Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the, model or model card or aider or ollama, im lost. I get the feeling DeepSeek v2 should be larger though, cant rule it out being a 16B model...
-```
-The LLM did not conform to the edit format.
-https://aider.chat/docs/troubleshooting/edit-errors.html
-
-No filename provided before ``` in file listing
-Only 3 reflections allowed, stopping.
-```
 
 ### DESCRIPTION:
 - The aiDEr-Local project includes a set of batch scripts designed to facilitate the setup and execution of the aiDEr application in a local environment. The aiDEr-Local.Bat script serves as a user-friendly launcher, providing options to run the application with various configurations, including different models and file inputs. It ensures that settings are preserved across sessions through a persistence mechanism, enabling consistent operation without requiring reconfiguration. The accompanying Install-Setup.Bat script automates the environment setup, detecting the necessary Python installation, installing dependencies, and ensuring that the environment is properly configured. Together, these scripts provide a streamlined and reliable workflow for managing and running the aiDEr application locally.
