@@ -45,13 +45,13 @@ echo                                                    AiDEr-Local Launcher
 echo ========================================================================================================================
 echo.
 echo.
-echo     1. Run Aider with LM Studio (Not Working)
+echo     1. Run Aider with, Ollama and Selected Model
 echo.
-echo     2. Run Aider with, LM Studio and Files (Not Working)
+echo     2. Run Aider with, Ollama and Selected Model and Files
 echo.
-echo     3. Run Aider with, Ollama and Selected Model
+echo     3. Run Aider with LM Studio (Not Working)
 echo.
-echo     4. Run Aider with, Ollama and Selected Model and Files
+echo     4. Run Aider with, LM Studio and Files (Not Working)
 echo.
 echo     5. Manage Ollama Settings
 echo.
@@ -76,7 +76,6 @@ if "%choice%" geq "1" if "%choice%" leq "4" (
 )
 if "%choice%"=="5" goto :manage_models
 goto :menu
-
 
 :manage_models
 cls
@@ -139,9 +138,9 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
-if %BATCH_PATH_CHOICE% leq 2 (
+if %BATCH_PATH_CHOICE% geq 3 (
     set "MODEL_TYPE=LM Studio"
-	start "LM Studio API Base" setx LMS_API_TO_USE "%LMSTUDIO_API_BASE%"
+    start "LM Studio API Base" setx LMS_API_TO_USE "%LMSTUDIO_API_BASE%"
 ) else (
     set "API_BASE=%OLLAMA_API_BASE%"
     set "MODEL_TYPE=Ollama"
@@ -159,7 +158,7 @@ if %BATCH_PATH_CHOICE% leq 2 (
 if %BATCH_PATH_CHOICE% equ 2 goto :collect_files
 if %BATCH_PATH_CHOICE% equ 4 goto :collect_files
 echo Running Aider with %MODEL_TYPE% model...
-if %BATCH_PATH_CHOICE% leq 2 (
+if %BATCH_PATH_CHOICE% geq 3 (
     "%PYTHON_EXE_TO_USE%" -m aider
 ) else (
     "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
