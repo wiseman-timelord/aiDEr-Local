@@ -3,7 +3,22 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments.
+1. Currently a Milestone, after getting Ollama Working autonomously from meny config, with relating identification by aider. It works again, time for a break.
+```
+Starting Ollama server...
+Setting API Base...
+Running Aider with Ollama model (deepseek-coder-v2-lite-instruct)...
+No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
+
+Aider v0.54.0
+Model: ollama/deepseek-coder-v2-lite-instruct with whole edit format
+Git repo: none
+Repo-map: disabled
+Use /help <question> for help, run "aider --help" to see cmd line args
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+>
+```
+1. Setup-Install And Ollama, are now working, time to focus on LM STUDIO. LM Studio was not working when tested last, needs testing again after having implemented recent updates to command line arguments. 
 3. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. running with file(s) needs testing/investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
