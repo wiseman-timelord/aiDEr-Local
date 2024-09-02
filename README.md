@@ -116,9 +116,7 @@ Selection; Select Model = S, Set Threads = T, Back to Menu = B:
 
     1. Re-Install Setup Tools
 
-
     2. Install `.\Requirements.Txt`
-
 
     3. ModelFile Management
 
@@ -128,13 +126,17 @@ Selection; Select Model = S, Set Threads = T, Back to Menu = B:
 
 
 
-Admin Status: Administrator
-Working Folder: D:\ProgsOthers\aiDEr-Local\aider-0.54.0
+    Admin Status:
+Administrator
+
+    Working Folder:
+D:\ProgsOthers\aiDEr-Local\aider-0.54.0
 
 
 
 ========================================================================================================================
 Selection; Menu Options = 1-3, Exit Batch = X:
+
 
 ```
 - The `Setup-Install.Bat` Model Management for Ollama...
@@ -152,7 +154,7 @@ NAME    ID      SIZE    MODIFIED
 
 
 ========================================================================================================================
-Selection; Install ModelCard = I, Remove Modelcard = D, Back to Menu = B: i
+Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: i
 Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-Q8_0_L.gguf
 Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
 Enter a name for the new model: DeepSeek-Coder-V2-Lite-Instruct
