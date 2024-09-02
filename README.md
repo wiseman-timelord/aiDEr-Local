@@ -19,7 +19,7 @@ If you just set these environment variables using `setx` you may need to restart
 changes to take effect.
 For more info, see: https://aider.chat/docs/llms/warnings.html
 ```
-3. When LM Studio is fixed, elevate status to beta.
+3. When LM Studio is fixed, elevate status to beta. It must work on LM Studio, I could just cut out LM Studio, but its a goal, as by putting few layers on my non-ROCM GPU, I can locally host 70B in Q6.
 4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 5. running with file(s) needs testing/investigating.
 4. Testing Running aider - Is the install complete? Are there any further issues.
