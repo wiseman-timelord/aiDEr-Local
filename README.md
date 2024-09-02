@@ -113,7 +113,7 @@ aider-chat 0.54.10 has requirement httpx==0.27.2, but you have httpx 0.27.0.
 aider-chat 0.54.10 has requirement zipp==3.20.1, but you have zipp 3.20.0.
 Warning: Some conflicts may still exist. Please review the output above.
 
-========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
 All processes finished.
 Press any key to continue . . .
 ```
