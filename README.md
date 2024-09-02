@@ -13,11 +13,7 @@
 4. Edit main branch files...
 - Streamlining of identifiaction to, local models already detailed and adapt openai to become LM Studio. Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include, llama v3.1 and deep-seek v2.
 - for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, models, for first response, where it will be planning more, and for after 3 errors in a row, these are the =>~400B versions of models.
-
-
- model, and will try up to 3 times in total, until the issue has been solved, additionally potentially the first response, could be done through these 405B models.
-- Would prefer if I could use the vram and system ram, and be able to run slightly better models, but, ollama cannot do this to my knowledge. Needs investigating again, but possibly build ollama's requirements with opencl/vulkan support with overflow on system ram, or complete my model hosting software. 
--  There is also the deepseek v2 Lite gguf, in, base and instruct; somehow I am guessing an intelligent application of, the two models or the instruct model and some other chat model, and streamlining of code could be an option, but mainly somehow utilize the unlimited context on these deepseek models too?
+- an intelligent application of, the two models, llama v3.1 and deep-seek v2 lite, and llama for planning only, and deepseek v2 lite for programming only.
 
 ### DESCRIPTION:
 - This fork, will have drop-in files for aider, to enhance, useability and/or performance, for non-wsl windows 10 users, working off local models (though it may work on similar editions of windows just fine). 
