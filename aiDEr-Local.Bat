@@ -174,7 +174,7 @@ if "%file_list%"=="" (
     goto :menu
 )
 echo Running Aider with Files using LM Studio model (%LMS_API_TO_USE%)...
-"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%" %file_list%
+"%PYTHON_EXE_TO_USE%" -m aider --openai-api-base "%LMS_API_TO_USE%" "%file_list%"
 goto :end_of_file
 
 :: Run Ollama
@@ -188,7 +188,7 @@ if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE% -m aider --model ollama/%MODEL_SELECTION%"
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%"
 goto :end_of_file
 
 :: Run Ollama with Files inc selection
@@ -219,7 +219,7 @@ if not "%THREADS_FOR_OLLAMA%"=="0" (
     set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
 echo Running Aider with Files using Ollama model (%MODEL_SELECTION%)...
-"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" %file_list%
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_SELECTION%" "%file_list%"
 goto :end_of_file
 
 :update_persistence
