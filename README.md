@@ -174,7 +174,7 @@ Updated: .\data\persistence.txt
 - Python v3.9-3.12 - Now working with whatever version of Python is specified by the user during setup.
 
 ### USAGE:
-1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users.
+1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users or `aider` will have issues.
 2. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
 3. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
 4. Run the batch `Install-Setup.Bat`, it will for setup and install of requirements, this includes, `setup-tools` and `requirements.txt`.
