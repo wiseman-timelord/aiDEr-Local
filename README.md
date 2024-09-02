@@ -136,7 +136,7 @@ Press any key to continue . . .
 5. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
 ## NOTATION:
-- When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct` not `DeepSeek-Coder-V2-Lite-Instruct:latest`. I think.
+- When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
 - As you can tell from the threads settings, its currently for CPU users but on ollama, so you may want to set it to `0` (auto/default), or you will have to use LM Studio for GPU accelleration.
 - You can always put threads on "Auto" by selecting `0`, where Ollama is managing the threads.
 - `Claude_Sonnet: there isn't any specific sanitization or validation for the number of threads entered`, hence for GPUs you are able able to specify more threads, which should relate to how many shaders there are, but what would I know I have a AMD RX 470, but if you can donate on kofi, maybe I will have that, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
