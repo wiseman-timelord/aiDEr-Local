@@ -3,7 +3,7 @@
 - Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Currently a Milestone, after getting Ollama Working autonomously from meny config, with relating identification by aider. It works again, time for a break.
+1. Currently a Milestone, after getting Ollama Working autonomously from menu config, with relating identification by aider. It works again, time for a break.
 ```
 Starting Ollama server...
 Setting API Base...
