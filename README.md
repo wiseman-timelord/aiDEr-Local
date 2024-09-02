@@ -42,55 +42,37 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 - Verifies and installs essential Python packages, such as setuptools and wheel, to ensure a stable environment.
 
 ### PREVIEW:
-- It works with Ollama, automating, config and launch, through menu options...
-```
-========================================================================================================================
-                                                     aiDEr-Local
-========================================================================================================================
-
-Starting Ollama server...
-Setting API Base...
-Running Aider with Ollama model...
-No git repo found, create one to track aider's changes (recommended)? (Y)es/(N)o [Yes]: n
-
-Aider v0.54.0
-Model: ollama/deepseek-coder-v2-lite-instruct with whole edit format
-Git repo: none
-Repo-map: disabled
-Use /help <question> for help, run "aider --help" to see cmd line args
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
->
-```
 - The Launcher Main Menu...
 ```
 ========================================================================================================================
-                                                     Aider Local Launcher
+                                                   AiDEr-Local Launcher
 ========================================================================================================================
 
 
 
+    1. Run Aider with LM Studio (Not Working)
 
-    1. Run Aider with LM Studio (not working)
-
-
-    2. Run Aider with, LM Studio and Files (not working)
-
+    2. Run Aider with, LM Studio and Files (Not Working)
 
     3. Run Aider with, Ollama and Selected Model
 
-
     4. Run Aider with, Ollama and Selected Model and Files
 
-
     5. Manage Ollama Settings
-M: deepseek-coder-v2-lite-instruct, T: 0
-
-
 
 
 
 ------------------------------------------------------------------------------------------------------------------------
+
+
+Model Selected: DeepSeek-Coder-V2-Lite-Instruct
+Threads Used: 21
+
+
+========================================================================================================================
 Selection; Menu Options = 1-5, Exit Batch = X:
+
+
 ```
 - Essential Management of Ollama...
 ```
