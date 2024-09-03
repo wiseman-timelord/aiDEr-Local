@@ -1,20 +1,6 @@
 # aiDEr-Local
 - Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
-- Fork Status: Beta - Releases are, tested and working, but further development planned. Streaming issues has brought the project to a halt, communication between ollama/litellm/aider.
-```
-litellm.APIConnectionError: Ollama Error - {'error': 'error reading llm response: read tcp
-127.0.0.1:50239->127.0.0.1:50234: wsarecv: An existing connection was forcibly closed by the remote host.'}
-Traceback (most recent call last):
-  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9936, in
-chunk_creator
-    response_obj = self.handle_ollama_stream(chunk)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9359, in
-handle_ollama_stream
-    raise e
-  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9334, in
-handle_ollama_stream
-```
+- Fork Status: Beta - Tested and working, further development planned.
 
 ### DESCRIPTION:
 - The aiDEr-Local project includes a set of batch scripts designed to facilitate the setup and execution of the aiDEr application in a local environment. The aiDEr-Local.Bat script serves as a user-friendly launcher, providing options to run the application with various configurations, including different models and file inputs. It ensures that settings are preserved across sessions through a persistence mechanism, enabling consistent operation without requiring reconfiguration. The accompanying Install-Setup.Bat script automates the environment setup, detecting the necessary Python installation, installing dependencies, and ensuring that the environment is properly configured. Together, these scripts provide a streamlined and reliable workflow for managing and running the aiDEr application locally.
@@ -135,7 +121,7 @@ Selection; Menu Options = 1-3, Exit Batch = X:
 6. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
 ### NOTATION:
-- If you have issues with `No filename provided before ``` in file listing`, then ensure to specify the files (albeit blank ones) at launch.
+- If you have issues with `No filename provided before ``` in file listing`, then ensure to specify the files (albeit blank ones) at launch, I also found that when I .
 - The batch located at `.\tools\Extract-Aider.Bat`, will extract aider zips in its own directory to an appropriate folder, using 7z installed in the default location. This is useful if windows is giving issues with, paths or folders, during extraction.
 - In `aiDEr-Local.Bat`, When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
 - As you can tell from the threads settings for ollama, its currently designed for CPU users, but if you are on GPU, then you will want to, specify a number that relates to the number of shaders or set it to `0` for `auto`. At least I think thats how it works. I have a AMD RX 470, but if you can donate on kofi, maybe I will have a, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
