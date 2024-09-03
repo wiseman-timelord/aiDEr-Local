@@ -3,15 +3,8 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. issue when saving files. I told it to use `.\output` and tried the full path. Perplexity agrees with my assumption, that its the model, but, I dont think thats the case either, there is something I did before that enabled saving of files. I have tried 0. Could be the modelfile, but I tried several of those now, maybe need try the older one I have in the `.\modelfiles` folder. There are newer versions of aider to try on the main repo, x.11 and x.12. All work I produce on the scripts is somewhat useless unless its going to save files. So work on the batches is on hold until I can get this fixed...
-```
-The LLM did not conform to the edit format.
-https://aider.chat/docs/troubleshooting/edit-errors.html
-
-No filename provided before ``` in file listing
-Only 3 reflections allowed, stopping.
-```
-2. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
+1. Running with files, is there some method, we could just point to a directory, and then the batch will list all files in the directory, then obtain the full path to each, and then enter those full paths as the individual files? This would mean I just need to point it to my project folder. But we would need to expand the number of files in the list. albeit, lets chop LM Studio for now, and add a 3rd option to the menu.
+1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
 ```
 Model gpt-4o-2024-08-06: Environment variables status:
 - OPENAI_API_KEY: ✗ Not set
@@ -180,6 +173,7 @@ Updated: .\data\persistence.txt
 6. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
 ## NOTATION:
+- If you have issues with `No filename provided before ``` in file listing`, then ensure to specify the files (albeit blank ones) at launch.
 - The batch located at `.\tools\Extract-Aider.Bat`, will extract aider zips in its own directory to an appropriate folder, using 7z installed in the default location. This is useful if windows is giving issues with, paths or folders, during extraction.
 - In `aiDEr-Local.Bat`, When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
 - As you can tell from the threads settings for ollama, its currently designed for CPU users, but if you are on GPU, then you will want to, specify a number that relates to the number of shaders or set it to `0` for `auto`. At least I think thats how it works. I have a AMD RX 470, but if you can donate on kofi, maybe I will have a, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
