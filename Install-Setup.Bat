@@ -237,11 +237,6 @@ timeout /t 1 >nul
 goto :eof
 
 :end_of_file
-cls
-echo ========================================================================================================================
-echo                                                      Setup-Installer
-echo ========================================================================================================================
-echo.
-echo All processes finished.
+echo Exiting Install-Setup...
 timeout /t 5 >nul
 exit /b
