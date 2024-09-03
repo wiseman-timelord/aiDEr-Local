@@ -3,11 +3,7 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Setup-Install done, managed to reduce the keys in persistence.txt by 1 in the process, by using `python.exe -m pip`. As it turns out, aider wont run correctly if python is installed for `all users`, as it cant handle the space in `Program Files`. Hence, this needs to be alerted in Setup-Install, and refuse to work if python is not installed to the default folder for current user, only. Setup-Install should check both the default (C:\Users\*Username*) and all-users default (program files), and...
-- if the specified version of python is located in program files then state "Error: Python *version* not in default location!", then "aider requires Python installed to default folder.", then pause before exit.
-- if the selected version of python is located in the relevant location in the user folder, then it should use that.
-- if it is not in either location, then it should report what it currently does, something like "Error: Python *version* not found!", then "Install Python *version* to default location.".
-2 Here is the typical output from using a `DeepSeek v2 Lite Q8 GGUF` based model, and its coming up with errors, is that the, model or model card or aider or ollama, im lost. I get the feeling DeepSeek v2 should be larger though, cant rule it out being a 16B model. Ensure modelcard is correct from some official source, and reinstall model to ollama, and test....
+1. Setup-Install and aiDEr launcher, have been updated to use the default python path, and not the all users path, this fixes issues with aider trying to run `C:\Program`, however, there is still the issue..
 ```
 The LLM did not conform to the edit format.
 https://aider.chat/docs/troubleshooting/edit-errors.html
@@ -15,7 +11,7 @@ https://aider.chat/docs/troubleshooting/edit-errors.html
 No filename provided before ``` in file listing
 Only 3 reflections allowed, stopping.
 ```
-1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
+2. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
 ```
 Model gpt-4o-2024-08-06: Environment variables status:
 - OPENAI_API_KEY: ✗ Not set
@@ -25,8 +21,7 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 ```
 3. When LM Studio is fixed, elevate status to beta. It must work on LM Studio, I could just cut out LM Studio, but its a goal, as by putting few layers on my non-ROCM GPU, I can locally host Lamma 3.1 70B in Q6.
 4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
-5. running with file(s) needs testing/investigating.
-4. Testing Running aider - Is the install complete? Are there any further issues.
+5. running with file(s) needs testing/investigating/improving.
 4. Edit main branch files, after batches are finished...
 - Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
 - Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
