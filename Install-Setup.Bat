@@ -9,8 +9,8 @@ set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
 
 :: Global Constants
-set "model_path="
-set "modelfile_path="
+set "TARGET_MODEL_PATH="
+set "TARGET_MODELFILE_PATH="
 
 :: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START
 net session >nul 2>&1 || (
@@ -20,9 +20,9 @@ net session >nul 2>&1 || (
 )
 echo Status: Administrator
 timeout /t 1 >nul
-set "Script_Directory=%~dp0"
-set "Script_Directory=%Script_Directory:~0,-1%"
-pushd "%Script_Directory%"
+set "SCRIPT_DIRECTORY_PATH=%~dp0"
+set "SCRIPT_DIRECTORY_PATH=%SCRIPT_DIRECTORY_PATH:~0,-1%"
+pushd "%SCRIPT_DIRECTORY_PATH%"
 echo Path Dp0'd To Script.
 timeout /t 1 >nul
 :: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END
@@ -95,7 +95,7 @@ echo     * Admin Status:
 echo Administrator
 echo.
 echo     * Working Folder:
-echo %Script_Directory%
+echo %SCRIPT_DIRECTORY_PATH%
 echo.
 echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
@@ -155,11 +155,11 @@ echo.
 echo.
 echo.
 echo  ========================================================================================================================
-set /p "model_choice=Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: "
+set /p "MODEL_MANAGE_CHOICE=Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: "
 
-if /i "%model_choice%"=="I" goto install_model_prompt
-if /i "%model_choice%"=="R" goto remove_model_prompt
-if /i "%model_choice%"=="B" goto main_menu
+if /i "%MODEL_MANAGE_CHOICE%"=="I" goto install_model_prompt
+if /i "%MODEL_MANAGE_CHOICE%"=="R" goto remove_model_prompt
+if /i "%MODEL_MANAGE_CHOICE%"=="B" goto main_menu
 
 echo Invalid choice. Please try again.
 timeout /t 2 >nul
@@ -167,43 +167,43 @@ goto manage_models
 
 :: Main script section for installing a model
 :install_model_prompt
-set /p "model_path=Enter the full path to the model including filename: "
-set /p "modelfile_path=Enter the full path to the ModelFile: "
+set /p "TARGET_MODEL_PATH=Enter the full path to the model including filename: "
+set /p "TARGET_MODELFILE_PATH=Enter the full path to the ModelFile: "
 
 :: Extract the last folder name from the model path
-for %%A in ("%model_path%") do (
+for %%A in ("%TARGET_MODEL_PATH%") do (
     for %%B in ("%%~dpA\.") do set "last_folder=%%~nxB"
 )
 
 :: Convert the last folder name to lowercase and sanitize it
-for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%last_folder%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "model_name=%%c"
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%last_folder%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "OLLAMA_MODEL_NAME=%%c"
 
-:confirm_model_name
-echo Model name will be: %model_name%
+:confirm_OLLAMA_MODEL_NAME
+echo Model name will be: %OLLAMA_MODEL_NAME%
 set /p "confirm=Is this model name okay? (Y/N): "
 if /i "%confirm%"=="Y" goto install_model
-for %%C in ("%model_path%") do set "proposed_model_name=%%~nC"
-set "proposed_model_name=%proposed_model_name: =-%"
-for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%proposed_model_name%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "proposed_model_name=%%c"
-echo Do you want to use the model file name instead? "%proposed_model_name%" (Y/N):
+for %%C in ("%TARGET_MODEL_PATH%") do set "proposed_OLLAMA_MODEL_NAME=%%~nC"
+set "proposed_OLLAMA_MODEL_NAME=%proposed_OLLAMA_MODEL_NAME: =-%"
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%proposed_OLLAMA_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "proposed_OLLAMA_MODEL_NAME=%%c"
+echo Do you want to use the model file name instead? "%proposed_OLLAMA_MODEL_NAME%" (Y/N):
 set /p "confirm=Is this model name okay? (Y/N): "
 if /i "%confirm%"=="Y" (
-    set "model_name=%proposed_model_name%"
+    set "OLLAMA_MODEL_NAME=%proposed_OLLAMA_MODEL_NAME%"
     goto install_model
 )
-set /p "model_name=Please enter the desired model name: "
-set "model_name=%model_name: =-%"
-for /f "usebackq tokens=*" %%d in (`powershell -Command "$name = '%model_name%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "model_name=%%d"
-goto confirm_model_name
+set /p "OLLAMA_MODEL_NAME=Please enter the desired model name: "
+set "OLLAMA_MODEL_NAME=%OLLAMA_MODEL_NAME: =-%"
+for /f "usebackq tokens=*" %%d in (`powershell -Command "$name = '%OLLAMA_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "OLLAMA_MODEL_NAME=%%d"
+goto confirm_OLLAMA_MODEL_NAME
 :install_model
 echo Installing Model to Ollama...
-ollama create "%model_name%" -f "%modelfile_path%"
+ollama create "%OLLAMA_MODEL_NAME%" -f "%TARGET_MODELFILE_PATH%"
 if errorlevel 1 (
     echo Error: Failed to install model.
     timeout /t 3 >nul
 ) else (
-    echo Model %model_name% installed successfully.
-    set "MODEL_SELECTION=%model_name%"
+    echo Model %OLLAMA_MODEL_NAME% installed successfully.
+    set "MODEL_SELECTION=%OLLAMA_MODEL_NAME%"
     call :update_persistence
 )
 timeout /t 2 >nul

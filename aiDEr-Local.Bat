@@ -201,9 +201,9 @@ set "MAXIMUM_NUMBER_FILES=20"
 echo Listing files in the folder (max %MAXIMUM_NUMBER_FILES% files):
 for %%F in ("%folder_path%\*.*") do (
     set /a "file_count+=1"
-    if %file_count% leq %MAXIMUM_NUMBER_FILES% (
+    if !file_count! leq %MAXIMUM_NUMBER_FILES% (
         set "FULL_PATH_FILES_LIST=!FULL_PATH_FILES_LIST! "%%~fF""
-        echo %file_count%: %%~nxF
+        echo !file_count!: %%~nxF
     ) else (
         echo Max file limit reached. Some files may be omitted.
         goto :end_FULL_PATH_FILES_LIST
