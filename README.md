@@ -14,7 +14,7 @@
 - Allows for the execution of aiDEr with or without file inputs, adapting to various use cases.
 - Includes error handling and user prompts for guidance during setup and execution.
 - Verifies and installs essential Python packages, such as setuptools and wheel, to ensure a stable environment.
-- If all that hasne made you moist, it also has the ability to select a folder that contains your files.
+- If all that hasne made you moist, it also has the ability to select the folder that contains your files.
 
 ### PREVIEW:
 - The `aiDEr-Local.Bat` Main Menu...
