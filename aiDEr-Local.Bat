@@ -97,7 +97,7 @@ echo.
 echo.
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
-set /p "model_choice=Selection; Select Model = S, Set Threads = T, Back to Menu = B: "
+set /p "model_choice=Selection; Model Used = M, Set Threads = T, Back to Menu = B: "
 
 if /i "%model_choice%"=="B" goto :save_and_exit
 if /i "%model_choice%"=="S" goto :select_model
