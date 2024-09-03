@@ -3,7 +3,7 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. issue when saving files. I told it to use `.\output` and tried the full path. Perplexity agrees with my assumption, that its the model, but, I dont think thats the case either, there is something I did before that enabled saving of files. I have tried 0. Could be the modelfile, but I tried several of those now, maybe need try the older one I have in the `.\modelfiles` folder. All work I produce on the scripts is somewhat useless unless its going to save files. So work on the batches is on hold until I can get this fixed...
+1. issue when saving files. I told it to use `.\output` and tried the full path. Perplexity agrees with my assumption, that its the model, but, I dont think thats the case either, there is something I did before that enabled saving of files. I have tried 0. Could be the modelfile, but I tried several of those now, maybe need try the older one I have in the `.\modelfiles` folder. There are newer versions of aider to try on the main repo, x.11 and x.12. All work I produce on the scripts is somewhat useless unless its going to save files. So work on the batches is on hold until I can get this fixed...
 ```
 The LLM did not conform to the edit format.
 https://aider.chat/docs/troubleshooting/edit-errors.html
