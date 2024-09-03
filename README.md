@@ -3,7 +3,7 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. As it turns out, aider wont run correctly if python is installed for `all users`, as it cant handle the space in `Program Files`. Hence, this needs to be alerted in Setup-Install, and refuse to work if python is not installed to the default folder for current user, only. Setup-Install should check both the default (C:\Users\*Username*) and all-users default (program files), and...
+1. Setup-Install done, managed to reduce the keys in persistence.txt by 1 in the process, by using `python.exe -m pip`. As it turns out, aider wont run correctly if python is installed for `all users`, as it cant handle the space in `Program Files`. Hence, this needs to be alerted in Setup-Install, and refuse to work if python is not installed to the default folder for current user, only. Setup-Install should check both the default (C:\Users\*Username*) and all-users default (program files), and...
 - if the specified version of python is located in program files then state "Error: Python *version* not in default location!", then "aider requires Python installed to default folder.", then pause before exit.
 - if the selected version of python is located in the relevant location in the user folder, then it should use that.
 - if it is not in either location, then it should report what it currently does, something like "Error: Python *version* not found!", then "Install Python *version* to default location.".
