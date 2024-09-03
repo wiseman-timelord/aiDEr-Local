@@ -32,6 +32,7 @@
 
     4. Manage Ollama Settings
 
+
 ------------------------------------------------------------------------------------------------------------------------
 
     * Model Selected:
@@ -42,7 +43,6 @@ DeepSeek-Coder-V2-Lite-Instruct:latest
 
     * Python Location:
 C:\Users\Mastar\AppData\Local\Programs\Python\Python312\python.exe
-
 
 ========================================================================================================================
 Selection; Menu Options = 1-4, Exit Batch = X:
