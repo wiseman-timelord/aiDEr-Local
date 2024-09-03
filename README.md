@@ -120,7 +120,7 @@ Selection; Menu Options = 1-3, Exit Batch = X:
 5. Ensure model is loaded in LM Studio, or otherwise that you have installed the model in Ollama (see folder .\modelfiles). 
 6. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
-## NOTATION:
+### NOTATION:
 - If you have issues with `No filename provided before ``` in file listing`, then ensure to specify the files (albeit blank ones) at launch.
 - The batch located at `.\tools\Extract-Aider.Bat`, will extract aider zips in its own directory to an appropriate folder, using 7z installed in the default location. This is useful if windows is giving issues with, paths or folders, during extraction.
 - In `aiDEr-Local.Bat`, When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
@@ -134,6 +134,12 @@ DeepSeek-Coder-Instruct      33B 	33B 	79.3 	70.1 	22.5 	4.2
 Llama3-Instruct                70B 	70B 	81.1 	68.8 	28.7 	3.3
 DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
 DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
+```
+
+### EXAMPLES:
+- Prompt to make a game...
+```
+the files I have provided are all blank files, they are the files, that you should save to, in order to produce the game. I want you to produce a maze game, that is suitably sized and complicated for the number of files provided, utilize them optimally and logically. Plan it all out, the goal result is the, batch launcher and working game, it doesnt have to be amazing, but it should at least be a functional demonstration of your skills.
 ```
 
 ## DEVELOPMENT:
