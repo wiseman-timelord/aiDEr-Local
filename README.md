@@ -1,9 +1,9 @@
-# aiDEr-Local for [aider v0.54.0](https://github.com/paul-gauthier/aider/releases/tag/v0.54.0)
+# aiDEr-Local
 - Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. issue when saving files. I told it to use `.\output` and tried the full path. Perplexity agrees with my assumption, that its the model, but, I dont think thats the case either, there is something I did before that enabled saving of files...
+1. issue when saving files. I told it to use `.\output` and tried the full path. Perplexity agrees with my assumption, that its the model, but, I dont think thats the case either, there is something I did before that enabled saving of files. I have tried 0.All work I produce on the scripts is somewhat useless unless its going to save files. So work on the batches is on hold until I can get this fixed...
 ```
 The LLM did not conform to the edit format.
 https://aider.chat/docs/troubleshooting/edit-errors.html
