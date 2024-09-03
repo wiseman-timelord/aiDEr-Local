@@ -164,30 +164,36 @@ if %BATCH_PATH_CHOICE% geq 3 (
 goto :end_of_file
 
 :collect_files
+setlocal enabledelayedexpansion
+set "file_list="
+set "file_count=1"
+
 :collect_files_loop
+set "filename="
 set /p "filename=Enter Full-Path to File Number %file_count% (or blank to continue): "
-if "%filename%"=="" goto :run_with_files
-if not exist "%filename%" (
+if "!filename!"=="" goto :run_with_files
+if not exist "!filename!" (
     echo Error: File not found.
     timeout /t 3 >nul
     goto :collect_files_loop
 )
-set "file_list=!file_list! "%filename%""
+set "file_list=!file_list! "!filename!""
 set /a file_count+=1
-goto :collect_files_loop
+if %file_count% leq 5 goto :collect_files_loop
 
 :run_with_files
-if "%file_list%"=="" (
+if "!file_list!"=="" (
     echo No files were entered. Returning to menu.
     timeout /t 3 >nul
     goto :menu
 )
 echo Running Aider with Files using %MODEL_TYPE% model...
 if %BATCH_PATH_CHOICE% leq 2 (
-    "%PYTHON_EXE_TO_USE%" -m aider %file_list%
+    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" !file_list!
 ) else (
-    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" %file_list%
+    "%PYTHON_EXE_TO_USE%" -m aider !file_list!
 )
+endlocal
 goto :end_of_file
 
 :update_persistence
