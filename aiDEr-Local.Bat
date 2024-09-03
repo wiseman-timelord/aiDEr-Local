@@ -150,10 +150,14 @@ echo Running Aider with Ollama model...
 goto :end_of_file
 
 :collect_files
+cls
+echo ========================================================================================================================
+echo                                              Ollama Model Management
+echo ========================================================================================================================
+echo.
 setlocal enabledelayedexpansion
 set "FULL_PATH_FILES_LIST="
 set "file_count=1"
-
 :collect_files_loop
 set "FULL_PATH_TO_FILE="
 set /p "FULL_PATH_TO_FILE=Enter Full-Path to File Number %file_count% (or blank to continue): "
@@ -166,7 +170,6 @@ if not exist "%FULL_PATH_TO_FILE%" (
 set "FULL_PATH_FILES_LIST=!FULL_PATH_FILES_LIST! "!FULL_PATH_TO_FILE!""
 set /a file_count+=1
 if %file_count% leq 5 goto :collect_files_loop
-
 :run_with_files
 if "%FULL_PATH_FILES_LIST%"=="" (
     echo No files were entered. Returning to menu.
@@ -179,6 +182,11 @@ echo Running Aider with Files using Ollama model...
 goto :end_of_file
 
 :collect_files_from_folder
+cls
+echo ========================================================================================================================
+echo                                              Ollama Model Management
+echo ========================================================================================================================
+echo.
 setlocal enabledelayedexpansion
 set "folder_path="
 set /p "folder_path=Enter the full path to the folder: "

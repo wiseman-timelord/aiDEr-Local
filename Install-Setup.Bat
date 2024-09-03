@@ -80,11 +80,12 @@ echo                                                      Setup-Installer
 echo ========================================================================================================================
 echo.
 echo.
-echo     1. Re-Install Setup Tools
 echo.
-echo     2. Install `.\Requirements.Txt`
+echo     1. Install `.\Requirements.Txt`
 echo.
-echo     3. ModelFile Management
+echo     2. ModelFile Management
+echo.
+echo     3. Re-Install Setup Tools
 echo.
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
@@ -103,9 +104,9 @@ echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-3, Exit Batch = X: "
 
-if "%choice%"=="1" goto reinstall_setup_tools
-if "%choice%"=="2" goto install_requirements
-if "%choice%"=="3" goto manage_models
+if "%choice%"=="1" goto install_requirements
+if "%choice%"=="2" goto manage_models
+if "%choice%"=="3" goto reinstall_setup_tools
 if /i "%choice%"=="X" goto end_of_file
 
 echo Invalid choice. Please try again.
