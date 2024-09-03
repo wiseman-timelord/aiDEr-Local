@@ -162,7 +162,8 @@ Updated: .\data\persistence.txt
 
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
-- Python v3.9-3.12 - Now working with whatever version of Python is specified by the user during setup.
+- Python v3.9-3.12 - USes whatever Python version is specified by the user in `Install-Setup.Bat`
+- Aider v0.54.10-0.54.12 - These ranges of versions, I have tested so far.
 
 ### USAGE: 
 1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users or `aider` will have issues.
