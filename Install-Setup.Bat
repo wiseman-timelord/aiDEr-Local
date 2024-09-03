@@ -88,8 +88,9 @@ echo.
 echo     3. Re-Install Setup Tools
 echo.
 echo.
-echo ------------------------------------------------------------------------------------------------------------------------
 echo.
+echo ------------------------------------------------------------------------------------------------------------------------
+
 echo.
 echo     * Admin Status:
 echo Administrator
@@ -99,7 +100,6 @@ echo %SCRIPT_DIRECTORY_PATH%
 echo.
 echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
-echo.
 echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-3, Exit Batch = X: "
@@ -154,12 +154,12 @@ echo.
 echo.
 echo.
 echo.
-echo  ========================================================================================================================
-set /p "MODEL_MANAGE_CHOICE=Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: "
+echo  =======================================================================================================================
+set /p "model_choice=Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: "
 
-if /i "%MODEL_MANAGE_CHOICE%"=="I" goto install_model_prompt
-if /i "%MODEL_MANAGE_CHOICE%"=="R" goto remove_model_prompt
-if /i "%MODEL_MANAGE_CHOICE%"=="B" goto main_menu
+if /i "%model_choice%"=="I" goto install_model_prompt
+if /i "%model_choice%"=="R" goto remove_model_prompt
+if /i "%model_choice%"=="B" goto main_menu
 
 echo Invalid choice. Please try again.
 timeout /t 2 >nul
@@ -176,49 +176,49 @@ for %%A in ("%TARGET_MODEL_PATH%") do (
 )
 
 :: Convert the last folder name to lowercase and sanitize it
-for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%last_folder%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "OLLAMA_MODEL_NAME=%%c"
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%last_folder%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "TARGET_MODEL_NAME=%%c"
 
-:confirm_OLLAMA_MODEL_NAME
-echo Model name will be: %OLLAMA_MODEL_NAME%
-set /p "confirm=Is this model name okay? (Y/N): "
-if /i "%confirm%"=="Y" goto install_model
-for %%C in ("%TARGET_MODEL_PATH%") do set "proposed_OLLAMA_MODEL_NAME=%%~nC"
-set "proposed_OLLAMA_MODEL_NAME=%proposed_OLLAMA_MODEL_NAME: =-%"
-for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%proposed_OLLAMA_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "proposed_OLLAMA_MODEL_NAME=%%c"
-echo Do you want to use the model file name instead? "%proposed_OLLAMA_MODEL_NAME%" (Y/N):
-set /p "confirm=Is this model name okay? (Y/N): "
-if /i "%confirm%"=="Y" (
-    set "OLLAMA_MODEL_NAME=%proposed_OLLAMA_MODEL_NAME%"
+:CONFIRMATION_PROCESS_TARGET_MODEL_NAME
+echo Model name will be: %TARGET_MODEL_NAME%
+set /p "CONFIRMATION_PROCESS=Is this model name okay? (Y/N): "
+if /i "%CONFIRMATION_PROCESS%"=="Y" goto install_model
+for %%C in ("%TARGET_MODEL_PATH%") do set "proposed_TARGET_MODEL_NAME=%%~nC"
+set "proposed_TARGET_MODEL_NAME=%proposed_TARGET_MODEL_NAME: =-%"
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%proposed_TARGET_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "proposed_TARGET_MODEL_NAME=%%c"
+echo Do you want to use the model file name instead? "%proposed_TARGET_MODEL_NAME%" (Y/N):
+set /p "CONFIRMATION_PROCESS=Is this model name okay? (Y/N): "
+if /i "%CONFIRMATION_PROCESS%"=="Y" (
+    set "TARGET_MODEL_NAME=%proposed_TARGET_MODEL_NAME%"
     goto install_model
 )
-set /p "OLLAMA_MODEL_NAME=Please enter the desired model name: "
-set "OLLAMA_MODEL_NAME=%OLLAMA_MODEL_NAME: =-%"
-for /f "usebackq tokens=*" %%d in (`powershell -Command "$name = '%OLLAMA_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "OLLAMA_MODEL_NAME=%%d"
-goto confirm_OLLAMA_MODEL_NAME
+set /p "TARGET_MODEL_NAME=Please enter the desired model name: "
+set "TARGET_MODEL_NAME=%TARGET_MODEL_NAME: =-%"
+for /f "usebackq tokens=*" %%d in (`powershell -Command "$name = '%TARGET_MODEL_NAME%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "TARGET_MODEL_NAME=%%d"
+goto CONFIRMATION_PROCESS_TARGET_MODEL_NAME
 :install_model
 echo Installing Model to Ollama...
-ollama create "%OLLAMA_MODEL_NAME%" -f "%TARGET_MODELFILE_PATH%"
+ollama create "%TARGET_MODEL_NAME%" -f "%TARGET_MODELFILE_PATH%"
 if errorlevel 1 (
     echo Error: Failed to install model.
     timeout /t 3 >nul
 ) else (
-    echo Model %OLLAMA_MODEL_NAME% installed successfully.
-    set "MODEL_SELECTION=%OLLAMA_MODEL_NAME%"
+    echo Model %TARGET_MODEL_NAME% installed successfully.
+    set "MODEL_SELECTION=%TARGET_MODEL_NAME%"
     call :update_persistence
 )
 timeout /t 2 >nul
 goto manage_models
 
 :remove_model_prompt
-set /p "model_to_delete=Enter the model name to delete or 'B' to go back: "
-if /i "%model_to_delete%"=="B" goto manage_models
-set /p "confirm=Are you sure you want to delete %model_to_delete%? (Y/N): "
-if /i "%confirm%"=="Y" (
-    ollama rm %model_to_delete% || echo Error: Failed to delete model.
-    if "%model_to_delete%"=="%MODEL_SELECTION%" (
+set /p "TARGET_MODEL_DELETE=Enter the model name to delete or 'B' to go back: "
+if /i "%TARGET_MODEL_DELETE%"=="B" goto manage_models
+set /p "CONFIRMATION_PROCESS=Are you sure you want to delete %TARGET_MODEL_DELETE%? (Y/N): "
+if /i "%CONFIRMATION_PROCESS%"=="Y" (
+    ollama rm %TARGET_MODEL_DELETE% || echo Error: Failed to delete model.
+    if "%TARGET_MODEL_DELETE%"=="%MODEL_SELECTION%" (
         set "MODEL_SELECTION=No_Model_Selected"
         call :update_persistence
-        echo Model %model_to_delete% deleted. Model selection cleared.
+        echo Model %TARGET_MODEL_DELETE% deleted. Model selection cleared.
     )
 )
 timeout /t 2 >nul
@@ -238,7 +238,10 @@ goto :eof
 
 :end_of_file
 cls
+echo ========================================================================================================================
+echo                                                      Setup-Installer
+echo ========================================================================================================================
 echo.
 echo All processes finished.
-pause
+timeout /t 5 >nul
 exit /b
