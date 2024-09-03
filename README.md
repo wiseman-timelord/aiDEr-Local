@@ -40,31 +40,29 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
                                                    AiDEr-Local Launcher
 ========================================================================================================================
 
-    1. Run Aider with, Ollama and Selected Model
 
-    2. Run Aider with, Ollama and Selected Model and Files
+    1. Run Aider with Ollama and Selected Model
 
-    3. Run Aider with LM Studio (Not Working)
+    2. Run Aider with Ollama and Selected Model and Files
 
-    4. Run Aider with, LM Studio and Files (Not Working)
+    3. Run Aider with Ollama and Selected Model and Files from Folder
 
-    5. Manage Ollama Settings
-
+    4. Manage Ollama Settings
 
 ------------------------------------------------------------------------------------------------------------------------
 
     * Model Selected:
-DeepSeek-Coder-V2-Lite-Instruct
+DeepSeek-Coder-V2-Lite-Instruct:latest
 
     * Threads Used:
-21
+0
 
     * Python Location:
-C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
+C:\Users\Mastar\AppData\Local\Programs\Python\Python312\python.exe
 
 
 ========================================================================================================================
-Selection; Menu Options = 1-5, Exit Batch = X:
+Selection; Menu Options = 1-4, Exit Batch = X:
 
 ```
 - The `aiDEr-Local.Bat` Running with Ollama...
