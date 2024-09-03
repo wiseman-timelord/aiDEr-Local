@@ -69,8 +69,8 @@ if exist "%USER_PYTHON_PATH%" (
 )
 :found_python
 echo Python %PYTHON_VERSION_NODECIMAL% found.
-call :update_persistence
 timeout /t 1 >nul
+call :update_persistence
 :: FIND PYTHON BLOCK, DO NOT MODIFY: END
 
 :main_menu
@@ -164,10 +164,37 @@ echo Invalid choice. Please try again.
 timeout /t 2 >nul
 goto manage_models
 
+:: Main script section for installing a model
 :install_model_prompt
 set /p "model_path=Enter the full path to the model including filename: "
 set /p "modelfile_path=Enter the full path to the ModelFile: "
-set /p "model_name=Enter a name for the new model: "
+
+:: Extract the last folder name from the model path
+for %%A in ("%model_path%") do (
+    for %%B in ("%%~dpA\.") do set "last_folder=%%~nxB"
+)
+
+:: Convert the last folder name to lowercase and sanitize it
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%last_folder%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "model_name=%%c"
+
+:confirm_model_name
+echo Model name will be: %model_name%
+set /p "confirm=Is this model name okay? (Y/N): "
+if /i "%confirm%"=="Y" goto install_model
+for %%C in ("%model_path%") do set "proposed_model_name=%%~nC"
+set "proposed_model_name=%proposed_model_name: =-%"
+for /f "usebackq tokens=*" %%c in (`powershell -Command "$name = '%proposed_model_name%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "proposed_model_name=%%c"
+echo Do you want to use the model file name instead? "%proposed_model_name%" (Y/N):
+set /p "confirm=Is this model name okay? (Y/N): "
+if /i "%confirm%"=="Y" (
+    set "model_name=%proposed_model_name%"
+    goto install_model
+)
+set /p "model_name=Please enter the desired model name: "
+set "model_name=%model_name: =-%"
+for /f "usebackq tokens=*" %%d in (`powershell -Command "$name = '%model_name%'; $name = $name -replace '[^a-zA-Z0-9-]', ''; $name = $name.ToLower(); $name"`) do set "model_name=%%d"
+goto confirm_model_name
+:install_model
 echo Installing Model to Ollama...
 ollama create "%model_name%" -f "%modelfile_path%"
 if errorlevel 1 (
@@ -205,6 +232,7 @@ goto manage_models
     echo THREADS_FOR_OLLAMA=%THREADS_FOR_OLLAMA%
 ) > ".\data\persistence.txt"
 echo Updated: .\data\persistence.txt
+timeout /t 1 >nul
 goto :eof
 
 :end_of_file
