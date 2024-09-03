@@ -3,18 +3,8 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Running with files, is there some method, we could just point to a directory, and then the batch will list all files in the directory, then obtain the full path to each, and then enter those full paths as the individual files? This would mean I just need to point it to my project folder. But we would need to expand the number of files in the list. albeit, lets chop LM Studio for now, and add a 3rd option to the menu.
-1. LM Studio is not working because the OpenAI API requires a key to use currently, so, streamlining + conversion of OpenAI to LMStudio or addition of a `--lmstudio` argument for new code, as well as conversion. Possibly Launch command isnt right...
-```
-Model gpt-4o-2024-08-06: Environment variables status:
-- OPENAI_API_KEY: ✗ Not set
-If you just set these environment variables using `setx` you may need to restart your terminal or command prompt for the
-changes to take effect.
-For more info, see: https://aider.chat/docs/llms/warnings.html
-```
-3. When LM Studio is fixed, elevate status to beta. It must work on LM Studio, I could just cut out LM Studio, but its a goal, as by putting few layers on my non-ROCM GPU, I can locally host Lamma 3.1 70B in Q6.
-4. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
-5. running with file(s) needs testing/investigating/improving.
+1. (testing) Running with files has been fixed, now implementing ability to just point to a directory, and then the batch will list all files in the directory, then obtain the full path to each in the list, and then enter those full paths as the individual files in the launch command.
+2. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
 4. Edit main branch files, after batches are finished...
 - Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
 - Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
