@@ -3,7 +3,7 @@
 - Fork Status: Alpha - Under Development.
 
 ### DEVELOPMENT:
-1. Setup-Install and aiDEr launcher, have been updated to use the default python path, and not the all users path, this fixes issues with aider trying to run `C:\Program`, however, there is still the issue when saving files, I told it to use `.\output`..
+1. Setup-Install and aiDEr launcher, have been updated to use the default python path, and not the all users path, this fixes issues with aider trying to run `C:\Program`, however, there is still the issue when saving files, I told it to use `.\output`. Its either that or the model dont understand...
 ```
 The LLM did not conform to the edit format.
 https://aider.chat/docs/troubleshooting/edit-errors.html
