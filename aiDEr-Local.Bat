@@ -53,7 +53,6 @@ echo     4. Run Aider with, LM Studio and Files (Not Working)
 echo.
 echo     5. Manage Ollama Settings
 echo.
-echo.
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo     * Model Selected: 
@@ -64,7 +63,6 @@ echo %THREADS_FOR_OLLAMA%
 echo.
 echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
-echo.
 echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
