@@ -1,6 +1,20 @@
 # aiDEr-Local
 - Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
-- Fork Status: Beta - Releases are, tested and working, but further development planned. Streaming issues may bring the project to a halt, as it happens too often, communication between ollama/litellm/aider.
+- Fork Status: Beta - Releases are, tested and working, but further development planned. Streaming issues has brought the project to a halt, communication between ollama/litellm/aider.
+```
+litellm.APIConnectionError: Ollama Error - {'error': 'error reading llm response: read tcp
+127.0.0.1:50239->127.0.0.1:50234: wsarecv: An existing connection was forcibly closed by the remote host.'}
+Traceback (most recent call last):
+  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9936, in
+chunk_creator
+    response_obj = self.handle_ollama_stream(chunk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9359, in
+handle_ollama_stream
+    raise e
+  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\utils.py", line 9334, in
+handle_ollama_stream
+```
 
 ### DESCRIPTION:
 - The aiDEr-Local project includes a set of batch scripts designed to facilitate the setup and execution of the aiDEr application in a local environment. The aiDEr-Local.Bat script serves as a user-friendly launcher, providing options to run the application with various configurations, including different models and file inputs. It ensures that settings are preserved across sessions through a persistence mechanism, enabling consistent operation without requiring reconfiguration. The accompanying Install-Setup.Bat script automates the environment setup, detecting the necessary Python installation, installing dependencies, and ensuring that the environment is properly configured. Together, these scripts provide a streamlined and reliable workflow for managing and running the aiDEr application locally.
