@@ -52,7 +52,6 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
                                                    AiDEr-Local Launcher
 ========================================================================================================================
 
-
     1. Run Aider with, Ollama and Selected Model
 
     2. Run Aider with, Ollama and Selected Model and Files
@@ -66,12 +65,14 @@ For more info, see: https://aider.chat/docs/llms/warnings.html
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
     * Model Selected:
 DeepSeek-Coder-V2-Lite-Instruct
 
     * Threads Used:
 21
+
+    * Python Location:
+C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
 
 
 ========================================================================================================================
