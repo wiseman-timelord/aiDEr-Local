@@ -1,9 +1,9 @@
+:: SCRIPT: Setup-Install.Bat
 @echo off
 setlocal EnableDelayedExpansion
 
 :: Persistence Variables
 set "PYTHON_VERSION_NODECIMAL=0"
-set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
@@ -18,7 +18,7 @@ net session >nul 2>&1 || (
     timeout /t 3 >nul
     exit /b 1
 )
-echo Status: Arministrator
+echo Status: Administrator
 timeout /t 1 >nul
 set "Script_Directory=%~dp0"
 set "Script_Directory=%Script_Directory:~0,-1%"
@@ -28,7 +28,6 @@ timeout /t 1 >nul
 :: ...ADMIN AND DP0, BLOCK, DO NOT MODIFY: END
 
 :: Check for, .\data and .\data\persistence.txt and create as required.
-echo Checking Persistence File...
 if not exist ".\data" (
     mkdir ".\data" && echo Created .\data folder.
 )
@@ -36,7 +35,6 @@ if not exist ".\data\persistence.txt" (
     (
         echo # This file stores configuration settings.
         echo PYTHON_VERSION_NODECIMAL=0
-        echo PIP_EXE_TO_USE=
         echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
         echo MODEL_SELECTION=No_Model_Selected
         echo THREADS_FOR_OLLAMA=0
@@ -48,48 +46,31 @@ if not exist ".\data\persistence.txt" (
             set "%%A=%%B"
         )
     )
-    echo Loaded: .\data\persistence.txt
 )
 echo .\Data\Persistence.Txt Done.
 timeout /t 1 >nul
 
 :: FIND PYTHON BLOCK, DO NOT MODIFY: START
 if "%PYTHON_VERSION_NODECIMAL%"=="0" (
-    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (eg. 311 or 39): "
+    set /p "PYTHON_VERSION_NODECIMAL=Enter Python Version To Use (e.g., 311 or 39): "
 )
 set "USER_PYTHON_PATH=%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
 set "ALL_USERS_PYTHON_PATH=C:\Program Files\Python%PYTHON_VERSION_NODECIMAL%\python.exe"
 if exist "%USER_PYTHON_PATH%" (
     set "PYTHON_EXE_TO_USE=%USER_PYTHON_PATH%"
-    set "PIP_EXE_TO_USE=%LocalAppData%\Programs\Python\Python%PYTHON_VERSION_NODECIMAL%\Scripts\pip.exe"
     goto :found_python
 ) else if exist "%ALL_USERS_PYTHON_PATH%" (
-    echo Error: Python %PYTHON_VERSION_NODECIMAL% not in default location!
-    echo aider requires Python installed to default folder.
-    pause
-    exit /b 1
+    set "PYTHON_EXE_TO_USE=%ALL_USERS_PYTHON_PATH%"
+    goto :found_python
 ) else (
     echo Error: Python %PYTHON_VERSION_NODECIMAL% not found!
-    echo Install Python %PYTHON_VERSION_NODECIMAL% to default location.
+    echo Please install Python %PYTHON_VERSION_NODECIMAL% to the default location.
     goto :end_of_file
 )
 :found_python
 echo Python %PYTHON_VERSION_NODECIMAL% found.
+call :update_persistence
 timeout /t 1 >nul
-echo Verifying Python and pip...
-"%PYTHON_EXE_TO_USE%" --version >nul 2>&1
-if errorlevel 1 (
-    echo Error: Unable to execute Python. Please check your Python installation.
-    goto :end_of_file
-)
-"%PIP_EXE_TO_USE%" --version >nul 2>&1
-if errorlevel 1 (
-    echo Error: Unable to execute pip. Attempting to use python -m pip instead.
-    set "USE_PYTHON_M_PIP=1"
-) else (
-    set "USE_PYTHON_M_PIP=0"
-)
-echo Verification complete.
 :: FIND PYTHON BLOCK, DO NOT MODIFY: END
 
 :main_menu
@@ -109,14 +90,14 @@ echo.
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo.
+echo     * Admin Status:
+echo Administrator
+echo.
 echo     * Working Folder:
 echo %Script_Directory%
 echo.
 echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
-echo.
-echo     * Pip Location:
-echo %PIP_EXE_TO_USE%
 echo.
 echo.
 echo ========================================================================================================================
@@ -133,34 +114,22 @@ goto main_menu
 
 :reinstall_setup_tools
 echo Ensuring setuptools and wheel are properly installed...
-if "%USE_PYTHON_M_PIP%"=="1" (
-    "%PYTHON_EXE_TO_USE%" -m pip install --upgrade --force-reinstall setuptools wheel
-) else (
-    "%PIP_EXE_TO_USE%" install --upgrade --force-reinstall setuptools wheel
-)
+"%PYTHON_EXE_TO_USE%" -m pip install --upgrade --force-reinstall setuptools wheel
 if errorlevel 1 (
     echo Failed to reinstall setuptools and wheel. Carrying On...
 )
-echo Setuptools and Wheel, Processes Finished.
+echo Setuptools and Wheel processes finished.
 echo.
 pause
 goto main_menu
 
 :install_requirements
 echo Installing Requirements...
-if "%USE_PYTHON_M_PIP%"=="1" (
-    "%PYTHON_EXE_TO_USE%" -m pip install -r requirements.txt
-) else (
-    "%PIP_EXE_TO_USE%" install -r requirements.txt
-)
+"%PYTHON_EXE_TO_USE%" -m pip install -r requirements.txt
 echo Processed: `requirements.txt`
 echo.
 echo Verifying installation...
-if "%USE_PYTHON_M_PIP%"=="1" (
-    "%PYTHON_EXE_TO_USE%" -m pip check
-) else (
-    "%PIP_EXE_TO_USE%" check
-)
+"%PYTHON_EXE_TO_USE%" -m pip check
 if errorlevel 1 (
     echo Warning: Some conflicts may still exist. Please review the output above.
 ) else (
@@ -203,7 +172,7 @@ echo Installing Model to Ollama...
 ollama create "%model_name%" -f "%modelfile_path%"
 if errorlevel 1 (
     echo Error: Failed to install model.
-	timeout /t 3 >nul
+    timeout /t 3 >nul
 ) else (
     echo Model %model_name% installed successfully.
     set "MODEL_SELECTION=%model_name%"
@@ -231,7 +200,6 @@ goto manage_models
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=%PYTHON_VERSION_NODECIMAL%
-    echo PIP_EXE_TO_USE=%PIP_EXE_TO_USE%
     echo PYTHON_EXE_TO_USE=%PYTHON_EXE_TO_USE%
     echo MODEL_SELECTION=%MODEL_SELECTION%
     echo THREADS_FOR_OLLAMA=%THREADS_FOR_OLLAMA%

@@ -4,7 +4,6 @@ setlocal enabledelayedexpansion
 
 :: Persistence Variables
 set "PYTHON_VERSION_NODECIMAL=0"
-set "PIP_EXE_TO_USE="
 set "PYTHON_EXE_TO_USE="
 set "MODEL_SELECTION=No_Model_Selected"
 set "THREADS_FOR_OLLAMA=0"
@@ -44,7 +43,6 @@ echo ===========================================================================
 echo                                                    AiDEr-Local Launcher
 echo ========================================================================================================================
 echo.
-echo.
 echo     1. Run Aider with, Ollama and Selected Model
 echo.
 echo     2. Run Aider with, Ollama and Selected Model and Files
@@ -58,12 +56,14 @@ echo.
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
-echo.
-echo     Model Selected: 
+echo     * Model Selected: 
 echo %MODEL_SELECTION%
 echo.
-echo     Threads Used:
+echo     * Threads Used:
 echo %THREADS_FOR_OLLAMA%
+echo.
+echo     * Python Location:
+echo %PYTHON_EXE_TO_USE%
 echo.
 echo.
 echo ========================================================================================================================
@@ -85,19 +85,19 @@ echo ===========================================================================
 echo.
 echo.
 echo.
-echo     Available Ollama models:
+echo.
+echo.
+echo     * Available Ollama models:
 ollama list
 echo.
-echo.
-echo     Current Model Used:
+echo     * Current Model Used:
 echo %MODEL_SELECTION%
 echo.
-echo.
-echo     CPU Threads Available:
+echo     * CPU Threads Available:
 wmic cpu get NumberOfLogicalProcessors
-echo.
-echo     Current Threads Used:
+echo     * Current Threads Used:
 echo %THREADS_FOR_OLLAMA%
+echo.
 echo.
 echo.
 echo.
@@ -197,7 +197,6 @@ echo Saving Persistence File...
 (
     echo # This file stores configuration settings.
     echo PYTHON_VERSION_NODECIMAL=!PYTHON_VERSION_NODECIMAL!
-    echo PIP_EXE_TO_USE=!PIP_EXE_TO_USE!
     echo PYTHON_EXE_TO_USE=!PYTHON_EXE_TO_USE!
     echo MODEL_SELECTION=!MODEL_SELECTION!
     echo THREADS_FOR_OLLAMA=!THREADS_FOR_OLLAMA!
