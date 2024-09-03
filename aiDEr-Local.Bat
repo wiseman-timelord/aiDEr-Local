@@ -13,8 +13,6 @@ set "MODEL_NAME_FOR_AIDER="
 set "file_list="
 set "file_count=1"
 set "OLLAMA_API_BASE=http://localhost:11434"
-set "LMSTUDIO_API_BASE=http://localhost:1234/v1"
-set "BATCH_PATH_CHOICE="
 
 :: ADMIN AND DP0, BLOCK, DO NOT MODIFY: START...
 net session >nul 2>&1 || (
@@ -43,15 +41,11 @@ echo ===========================================================================
 echo                                                    AiDEr-Local Launcher
 echo ========================================================================================================================
 echo.
-echo     1. Run Aider with, Ollama and Selected Model
+echo     1. Run Aider with Ollama and Selected Model
 echo.
-echo     2. Run Aider with, Ollama and Selected Model and Files
+echo     2. Run Aider with Ollama and Selected Model and Files
 echo.
-echo     3. Run Aider with LM Studio (Not Working)
-echo.
-echo     4. Run Aider with, LM Studio and Files (Not Working)
-echo.
-echo     5. Manage Ollama Settings
+echo     3. Manage Ollama Settings
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
@@ -65,14 +59,12 @@ echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
 echo.
 echo ========================================================================================================================
-set /p choice="Selection; Menu Options = 1-5, Exit Batch = X: "
+set /p choice="Selection; Menu Options = 1-3, Exit Batch = X: "
 
 if /i "%choice%"=="X" goto :end_of_file
-if "%choice%" geq "1" if "%choice%" leq "4" (
-    set "BATCH_PATH_CHOICE=%choice%"
-    goto :run_aider
-)
-if "%choice%"=="5" goto :manage_models
+if "%choice%"=="1" goto :run_aider
+if "%choice%"=="2" goto :collect_files
+if "%choice%"=="3" goto :manage_models
 goto :menu
 
 :manage_models
@@ -136,31 +128,21 @@ if "%MODEL_SELECTION%"=="No_Model_Selected" (
     timeout /t 3 >nul
     goto :menu
 )
-if %BATCH_PATH_CHOICE% geq 3 (
-    set "MODEL_TYPE=LM Studio"
-    start "LM Studio API Base" setx LMS_API_TO_USE "%LMSTUDIO_API_BASE%"
-) else (
-    set "API_BASE=%OLLAMA_API_BASE%"
-    set "MODEL_TYPE=Ollama"
-    echo Starting Ollama server...
-    start "Ollama Serve" cmd /c "ollama serve"
-    timeout /t 3 >nul
-    echo Setting API Base...
-    start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
-    timeout /t 3 >nul
-    if not "%THREADS_FOR_OLLAMA%"=="0" (
-        set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
-    )
-    for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
+
+set "API_BASE=%OLLAMA_API_BASE%"
+echo Starting Ollama server...
+start "Ollama Serve" cmd /c "ollama serve"
+timeout /t 3 >nul
+echo Setting API Base...
+start "Ollama API Base" setx OLLAMA_API_BASE "%OLLAMA_API_BASE%"
+timeout /t 3 >nul
+if not "%THREADS_FOR_OLLAMA%"=="0" (
+    set OLLAMA_NUM_THREADS=%THREADS_FOR_OLLAMA%
 )
-if %BATCH_PATH_CHOICE% equ 2 goto :collect_files
-if %BATCH_PATH_CHOICE% equ 4 goto :collect_files
-echo Running Aider with %MODEL_TYPE% model...
-if %BATCH_PATH_CHOICE% geq 3 (
-    "%PYTHON_EXE_TO_USE%" -m aider
-) else (
-    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
-)
+for /f "tokens=1 delims=:" %%a in ("%MODEL_SELECTION%") do set "MODEL_NAME_FOR_AIDER=%%a"
+
+echo Running Aider with Ollama model...
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%"
 goto :end_of_file
 
 :collect_files
@@ -187,12 +169,8 @@ if "!file_list!"=="" (
     timeout /t 3 >nul
     goto :menu
 )
-echo Running Aider with Files using %MODEL_TYPE% model...
-if %BATCH_PATH_CHOICE% leq 2 (
-    "%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" !file_list!
-) else (
-    "%PYTHON_EXE_TO_USE%" -m aider !file_list!
-)
+echo Running Aider with Files using Ollama model...
+"%PYTHON_EXE_TO_USE%" -m aider --model "ollama/%MODEL_NAME_FOR_AIDER%" !file_list!
 endlocal
 goto :end_of_file
 
