@@ -100,7 +100,7 @@ echo ---------------------------------------------------------------------------
 set /p "model_choice=Selection; Model Used = M, Set Threads = T, Back to Menu = B: "
 
 if /i "%model_choice%"=="B" goto :save_and_exit
-if /i "%model_choice%"=="S" goto :select_model
+if /i "%model_choice%"=="M" goto :model_used
 if /i "%model_choice%"=="T" goto :set_threads
 goto :manage_models
 
@@ -111,7 +111,7 @@ echo Number of threads set to: %THREADS_FOR_OLLAMA%
 timeout /t 2 >nul
 goto :manage_models
 
-:select_model
+:model_used
 set /p "model=Enter the model name (e.g., llama3:70b) or 'B' to go back: "
 if /i "%model%"=="B" goto :manage_models
 set "MODEL_SELECTION=%model%"
@@ -243,7 +243,8 @@ call :update_persistence
 goto :menu
 
 :end_of_file
+echo Exiting Install-Setup.
+timeout /t 5 >nul
 endlocal
-echo All Processes Finished.
 pause
 exit /b
