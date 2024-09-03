@@ -139,7 +139,11 @@ DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
 ### EXAMPLES:
 - Prompt to make a game...
 ```
-the files I have provided are all blank files, they are the files, that you should save to, in order to produce the game. I want you to produce a maze game, that is suitably sized and complicated for the number of files provided, utilize them optimally and logically. Plan it all out, the goal result is the, batch launcher and working game, it doesnt have to be amazing, but it should at least be a functional demonstration of your skills.
+Phase 1:
+the files I have provided 4 files, `data.dat`, `main.py`, `maze_game.bat`, `settings.json`, are all blank files, they are the files, that you should save to, in order to produce the game. A simple maze game in Python, using, `main.py` for main code and `settings.json` for peristent settings and `data.dat` for maps and `maze_game.bat` to run `main.py`, utilize them optimally and logically. Plan it all out, the goal is the completion, the result should be a good demonstration of your abilities. After each significant phase in editing, ensure to save the files, but ensure to save over the files provided with those filenames, do not save files with alternate names. 
+
+Phase 2 (unfinished):
+please check the current state of all 4 of the scripts... 1. they should be logical and sound. 2. Improve the scripts. 3. upgrade the scripts.
 ```
 
 ## DEVELOPMENT:
