@@ -122,14 +122,14 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 ------------------------------------------------------------------------------------------------------------------------
 
 
+    * Admin Status:
+Administrator
+
     * Working Folder:
 D:\ProgsOthers\aiDEr-Local\aider-0.54.0
 
     * Python Location:
 C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
-
-    * Pip Location:
-C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\Scripts\pip.exe
 
 
 ========================================================================================================================
