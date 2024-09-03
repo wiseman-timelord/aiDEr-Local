@@ -49,6 +49,7 @@ echo     3. Run Aider with Ollama and Selected Model and Files from Folder
 echo.
 echo     4. Manage Ollama Settings
 echo.
+echo.
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 echo     * Model Selected: 
@@ -59,7 +60,6 @@ echo %THREADS_FOR_OLLAMA%
 echo.
 echo     * Python Location:
 echo %PYTHON_EXE_TO_USE%
-echo.
 echo.
 echo ========================================================================================================================
 set /p choice="Selection; Menu Options = 1-4, Exit Batch = X: "
