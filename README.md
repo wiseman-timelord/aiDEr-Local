@@ -2,14 +2,6 @@
 - Its a fork, the main is, [here](https://github.com/paul-gauthier/aider) or [here](https://aider.chat/).
 - Fork Status: Alpha - Under Development.
 
-### DEVELOPMENT:
-1. (testing) Running with files has been fixed, now implementing ability to just point to a directory, and then the batch will list all files in the directory, then obtain the full path to each in the list, and then enter those full paths as the individual files in the launch command.
-2. Complete download of model (see NOTATIONS section) - In the mean time we are testing with "deepseek-v2-lite-instruct" in Q8 GGUF. 
-4. Edit main branch files, after batches are finished...
-- Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
-- Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
-- for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, after 3 errors in a row, as large model will likely sort it out, then revert back to local model after, and reset counter, however if it does not solve the same issue in one, then ask user if it should, additionally interact with huggingface using the larger model or allow the user to take a look at the files then re-test (requring re-prompt) or whatever would normally happen vanilla after 3 errors if it were not having the code to interact with larger models on huggingface. I also found out that deepseek provide 500,000,000 free tokens, this is clearly an idea.
-
 ### DESCRIPTION:
 - The aiDEr-Local project includes a set of batch scripts designed to facilitate the setup and execution of the aiDEr application in a local environment. The aiDEr-Local.Bat script serves as a user-friendly launcher, providing options to run the application with various configurations, including different models and file inputs. It ensures that settings are preserved across sessions through a persistence mechanism, enabling consistent operation without requiring reconfiguration. The accompanying Install-Setup.Bat script automates the environment setup, detecting the necessary Python installation, installing dependencies, and ensuring that the environment is properly configured. Together, these scripts provide a streamlined and reliable workflow for managing and running the aiDEr application locally.
 
@@ -113,40 +105,6 @@ C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
 Selection; Menu Options = 1-3, Exit Batch = X:
 
 ```
-- The `Setup-Install.Bat` Model Management for Ollama...
-```
-========================================================================================================================
-                                             Ollama Model Management
-========================================================================================================================
-
-
-
-    * Available Ollama models:
-NAME    ID      SIZE    MODIFIED
-
-
-
-
-========================================================================================================================
-Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: i
-Enter the full path to the model including filename: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-Q8_0_L.gguf
-Enter the full path to the ModelFile: L:\TEXT\bartowski\DeepSeek-Coder-V2-Lite-Instruct\DeepSeek-Coder-V2-Lite-Instruct-GGUF-q8_0_l.modelfile
-Enter a name for the new model: DeepSeek-Coder-V2-Lite-Instruct
-Installing Model to Ollama...
-transferring model data 100%
-using existing layer sha256:c41b0dbf1599296ba76343b942c39691a96a20ff382dad8cfc674889360d773e
-creating new layer sha256:04642f460a9d5cd1390c1462de1fb8b757872ba260013ff67f75958aaff28cf9
-creating new layer sha256:2c2625c551b5197ae9cad4fc90ff12a930309db1a0bb6012135b6c8bebdfc714
-creating new layer sha256:a58ff6a2ea83793a6b3f8affbf413906ef2a5bc0aad57f18cc70613c6cd49109
-creating new layer sha256:ac7bddfa75fb8d031628ac8cea54c4d48db692976927fc1b76101a7b83520d1e
-writing manifest
-success
-Model DeepSeek-Coder-V2-Lite-Instruct installed successfully.
-Updated: .\data\persistence.txt
-
-
-```
-
 
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
@@ -176,3 +134,11 @@ Llama3-Instruct                70B 	70B 	81.1 	68.8 	28.7 	3.3
 DeepSeek-Coder-V2-Lite-Instruct    16B 	2.4B 	81.1 	68.8 	24.3 	6.5
 DeepSeek-Coder-V2-Instruct    236B 	21B 	90.2 	76.2 	43.4 	12.1
 ```
+
+## DEVELOPMENT
+### DEVELOPMENT:
+With the primary project of the batches done, there are some ideas for the forking of main branch files...
+- Case-desensitivity in model names used for identification!!!
+- Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
+- Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
+- for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, after 3 errors in a row, as large model will likely sort it out, then revert back to local model after, and reset counter, however if it does not solve the same issue in one, then ask user if it should, additionally interact with huggingface using the larger model or allow the user to take a look at the files then re-test (requring re-prompt) or whatever would normally happen vanilla after 3 errors if it were not having the code to interact with larger models on huggingface. I also found out that deepseek provide 500,000,000 free tokens, this is clearly an idea.
