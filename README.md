@@ -126,10 +126,10 @@ Use /help <question> for help, run "aider --help" to see cmd line args
 D:\ProgsOthers\aiDEr-Local\aider-0.54.0
 
     * Python Location:
-C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\python.exe
+C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
 
     * Pip Location:
-C:\Users\Mastar\AppData\Local\Programs\Python\Python312\\Scripts\pip.exe
+C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\Scripts\pip.exe
 
 
 ========================================================================================================================
