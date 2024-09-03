@@ -171,7 +171,7 @@ Updated: .\data\persistence.txt
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
 - Python v3.9-3.12 - Now working with whatever version of Python is specified by the user during setup.
 
-### USAGE:
+### USAGE: 
 1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users or `aider` will have issues.
 2. Copy aider from the zip to a suitable directory, ie `D:\Programs\aider-0.5x.x`.
 3. The files are dropped into relevantly `D:\Programs\aider-0.5x.x` or whatever folder. 
@@ -180,6 +180,7 @@ Updated: .\data\persistence.txt
 6. Run The batch `aiDEr-Offline.Bat`, to, configure models/threads, and launch aider with, LM Studio or Ollama, with options to include files.
 
 ## NOTATION:
+- The batch located at `.\tools\Extract-Aider.Bat`, will extract aider zips in its own directory to an appropriate folder, using 7z installed in the default location. This is useful if windows is giving issues with, paths or folders, during extraction.
 - In `aiDEr-Local.Bat`, When selecting model, you would copy and paste, for example `DeepSeek-Coder-V2-Lite-Instruct:latest`, not `DeepSeek-Coder-V2-Lite-Instruct`.
 - As you can tell from the threads settings for ollama, its currently designed for CPU users, but if you are on GPU, then you will want to, specify a number that relates to the number of shaders or set it to `0` for `auto`. At least I think thats how it works. I have a AMD RX 470, but if you can donate on kofi, maybe I will have a, AMD RX 7600 or GeForce RTX 4060, a little sooner, and these things can be known.
 - Whats the best model for aider?? Apparently Deepseek Coder Lite Instruct in 16b is as good as llama 3 instruct 70b, but did notice that the Deepseek v2 GGUF would not load at a context higher than 8192 in LM Studio...not the 32768 or 16384 I was hoping for. (Guessing [Meta-Llama-3.1-Chat-Uncensored-GGUF](https://huggingface.co/mradermacher/Meta-Llama-3.1-Chat-Uncensored-GGUF) in Q5/6 is the best one for 64GB System Ram. The meta rounds off its abilities, and uncensored supposedly more intelligent, and its 3.1 not 3.0)... 
