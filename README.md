@@ -130,7 +130,7 @@ Is this model name okay? (Y/N): n
 Do you want to use the model file name instead? "meta-llama-31-chat-uncensoredq5km" (Y/N):
 Is this model name okay? (Y/N): n
 Please enter the desired model name: meta-llama-31-chat-uncensored
-Model name will be: meta-llama-31-chat-uncensored
+Model name will be: meta-llama-31-chat
 Is this model name okay? (Y/N): y
 Installing Model to Ollama...
 transferring model data ⠏
