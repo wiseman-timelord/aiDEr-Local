@@ -182,7 +182,7 @@ Progress the game towards completion. A simple maze game in Python, check the cu
 
 ## DEVELOPMENT:
 With the primary project of the batches done...
-- Last chance to get it working is download `Llama 3 Instruct` Q6 for my 64GB system memory. If that dont work then it rests at the point made below.
+- Last chance to get it working is, download `Llama 3 Instruct` Q6 for my 64GB system memory. If that dont work then it rests at the point made below.
 - Due to repeating errors in using aider on local models, development is stopped/slowed. May be required to wait for advancement of, my own hardware or model technologies/variantes or libraries or aider. I tried altering `.\aider\models.py` in conjunction with updating litellm to latest version, but it still doesnt identify `llama 3.1`. The problem is possibly  between LiteLLM and Ollama, though I cant rule out the models, here making simple maze game with 4 files and the `deepseek v2 lite` model...
 ```
 litellm.APIConnectionError: {"error":"error reading llm response: read tcp 127.0.0.1:50209-\u003e127.0.0.1:50207: wsarecv: An existing connection was forcibly closed by the remote host."}
