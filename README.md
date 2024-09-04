@@ -182,6 +182,7 @@ Progress the game towards completion. A simple maze game in Python, check the cu
 
 ## DEVELOPMENT:
 With the primary project of the batches done...
+- Last chance to get it working is download `Llama 3 Instruct`. If that dont work then it rests at point below.
 - Due to repeating errors in using aider on local models, development is stopped/slowed. May be required to wait for advancement of, my own hardware or model technologies/varietes. I tried altering `.\aider\models.py` in conjunction with updating litellm to latest version, to no avail. The problem is possibly  between LiteLLM and Ollama, though I cant rule out the models, here making simple maze game with 4 files and the `deepseek v2 lite` model...
 ```
 litellm.APIConnectionError: {"error":"error reading llm response: read tcp 127.0.0.1:50209-\u003e127.0.0.1:50207: wsarecv: An existing connection was forcibly closed by the remote host."}
@@ -193,10 +194,6 @@ Traceback (most recent call last):
     raise OllamaError(status_code=response.status_code, message=response.text)
 litellm.llms.ollama.OllamaError: {"error":"error reading llm response: read tcp 127.0.0.1:50209-\u003e127.0.0.1:50207: wsarecv: An existing connection was forcibly closed by the remote host."}
 ```
-- Case-desensitivity in model names used for identification.
-- Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
-- Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
-- for Intelligent use of Huggingface API to the  `https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Instruct` or `https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct`, after 3 errors in a row, as large model will likely sort it out, then revert back to local model after, and reset counter, however if it does not solve the same issue in one, then ask user if it should, additionally interact with huggingface using the larger model or allow the user to take a look at the files then re-test (requring re-prompt) or whatever would normally happen vanilla after 3 errors if it were not having the code to interact with larger models on huggingface. I also found out that deepseek provide 500,000,000 free tokens, this is clearly an idea.
 
 ### DISCLAIMER:
 Issues that may arrise as a result of the code when aider is running, are not on the part of aiDEr-Local, as currently it does nothing out of the ordinary to the actual runnings of aider.
