@@ -106,6 +106,37 @@ C:\Users\**UserName**\AppData\Local\Programs\Python\Python312\python.exe
 Selection; Menu Options = 1-3, Exit Batch = X:
 
 ```
+- The `Setup-Install.Bat` model install magic...
+```
+========================================================================================================================
+                                             Ollama Model Management
+========================================================================================================================
+
+
+
+    * Available Ollama models:
+NAME                                    ID              SIZE    MODIFIED
+deepseek-coder-v2-lite-instruct:latest  34ddb66744d3    17 GB   20 hours ago
+
+
+
+
+ =======================================================================================================================
+Selection; Install ModelCard = I, Remove Modelcard = R, Back to Menu = B: i
+Enter the full path to the model including filename: L:\TEXT\mradermacher\Meta-Llama-3.1-Chat-Uncensored-GGUF\Meta-Llama-3.1-Chat-Uncensored.Q5_K_M.gguf
+Enter the full path to the ModelFile: L:\TEXT\mradermacher\Meta-Llama-3.1-Chat-Uncensored-GGUF\Meta-Llama-3.1-Chat-Uncensored.Q5_K_M.modelfile
+Model name will be: meta-llama-31-chat-uncensored-gguf
+Is this model name okay? (Y/N): n
+Do you want to use the model file name instead? "meta-llama-31-chat-uncensoredq5km" (Y/N):
+Is this model name okay? (Y/N): n
+Please enter the desired model name: meta-llama-31-chat-uncensored
+Model name will be: meta-llama-31-chat-uncensored
+Is this model name okay? (Y/N): y
+Installing Model to Ollama...
+transferring model data ⠏
+
+```
+
 
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
