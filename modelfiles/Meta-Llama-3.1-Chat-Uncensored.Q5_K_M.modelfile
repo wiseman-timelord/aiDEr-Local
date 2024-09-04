@@ -1,0 +1,45 @@
+# Meta-Llama-3.1-Chat-Uncensored Modelfile for Ollama
+
+FROM ./Meta-Llama-3.1-Chat-Uncensored.Q5_K_M.gguf
+
+# Set the temperature to 0.7 for a balance between creativity and coherence
+PARAMETER temperature 0.7
+
+# Set the context window size to 128k to maximize the model's context capacity
+PARAMETER num_ctx 128000
+
+# Use a repeat penalty to reduce the likelihood of repetitive outputs
+PARAMETER repeat_penalty 1.1
+
+# Tail free sampling for better handling of improbable tokens
+PARAMETER tfs_z 1.0
+
+# Set the top-p sampling to balance diversity and coherence
+PARAMETER top_p 0.9
+
+# Limit token generation to a manageable number for dialogue
+PARAMETER num_predict 256
+
+# Template for passing prompt, system message, and response to the model
+TEMPLATE """
+{{ if .System }}<|start_header_id|>system<|end_header_id|>
+{{ .System }}<|eot_id|>{{ end }}
+{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+{{ .Prompt }}<|eot_id|>{{ end }}
+<|start_header_id|>assistant<|end_header_id|>
+{{ .Response }}<|eot_id|>
+"""
+
+# Set a custom system message for context
+SYSTEM "You are a helpful, multilingual assistant trained to handle diverse tasks in multiple languages."
+
+# License information for the model usage
+LICENSE """
+This model is licensed under the Llama 3.1 Community License. For more details, visit: https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE
+"""
+
+# Example message history to guide the model's initial responses
+MESSAGE user "What is the capital of France?"
+MESSAGE assistant "The capital of France is Paris."
+MESSAGE user "Translate 'Hello' to Spanish."
+MESSAGE assistant "'Hello' in Spanish is 'Hola'."
