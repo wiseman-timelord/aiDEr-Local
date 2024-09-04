@@ -110,7 +110,7 @@ Selection; Menu Options = 1-3, Exit Batch = X:
 ## REQUIREMENTS:
 - Windows v7-v11?? - version 10 is the, programming and testing, platform, and thats non-WSL.
 - Python v3.9-3.12 - USes whatever Python version is specified by the user in `Install-Setup.Bat`
-- Aider v0.54.0 - The newer versions dont popup the Ollama shell, and then aider has streaming issues. 
+- Aider v0.54.0-v0.54.12 - It works on these versions so far, testing bench is v0.54.0. 
 
 ### USAGE: 
 1. Even though My batches will detect the location of Python, I do notice that `aider` is unable to be used with python in `Program Files`, so do NOT install python for all users or `aider` will have issues.
