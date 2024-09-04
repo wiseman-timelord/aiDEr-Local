@@ -148,6 +148,17 @@ please check the current state of all 4 of the scripts. Your work is now... 1. P
 
 ## DEVELOPMENT:
 With the primary project of the batches done, there are some ideas for the forking of main branch files...
+- Due to repeating errors in using the program, development is stopped. I will try other models, but, if no better, then will wait for 0.55.0 at least...
+```
+litellm.APIConnectionError: {"error":"error reading llm response: read tcp 127.0.0.1:50209-\u003e127.0.0.1:50207: wsarecv: An existing connection was forcibly closed by the remote host."}
+Traceback (most recent call last):
+  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\main.py", line 2415, in completion
+    generator = ollama.get_ollama_response(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mastar\AppData\Local\Programs\Python\Python312\Lib\site-packages\litellm\llms\ollama.py", line 269, in get_ollama_response
+    raise OllamaError(status_code=response.status_code, message=response.text)
+litellm.llms.ollama.OllamaError: {"error":"error reading llm response: read tcp 127.0.0.1:50209-\u003e127.0.0.1:50207: wsarecv: An existing connection was forcibly closed by the remote host."}
+```
 - Case-desensitivity in model names used for identification.
 - Streamlining of identifiaction to, local models only, with exception of, huggingface (see below intelligent use of models) and and adapt openai to LM Studio.
 - Local models will be added to identify correctly the models, that I will list, that will be based upon, what is the best performing models, for a limitation of 64GB, this will mainly include ensuring no issues with, llama v3.1 Meta unfiltered and deep-seek v2 lite, in gguf.
