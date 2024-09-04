@@ -143,7 +143,7 @@ Phase 1:
 the files I have provided 4 files, `data.dat`, `main.py`, `maze_game.bat`, `settings.json`, are all blank files, they are the files, that you should save to, in order to produce the game. A simple maze game in Python, using, `main.py` for main code and `settings.json` for peristent settings and `data.dat` for maps and `maze_game.bat` to run `main.py`, utilize them optimally and logically. Plan it all out, the goal is the completion, the result should be a good demonstration of your abilities. After each significant phase in editing, ensure to save the files, but ensure to save over the files provided with those filenames, do not save files with alternate names. 
 
 Phase 2 (unfinished):
-please check the current state of all 4 of the scripts... 1. they should be logical and sound. 2. Improve the scripts. 3. upgrade the scripts.
+please check the current state of all 4 of the scripts. Your work is now... 1. Progress the game towards completion. 2. Ensure the scripts are, logical and sound. 3. Improve the code. 3. upgrade the code. ...And remember, I have provided 4 files, `data.dat`, `main.py`, `maze_game.bat`, `settings.json`, ensure to save to those files, do not save files with alternate names.
 ```
 
 ## DEVELOPMENT:
