@@ -6,7 +6,7 @@
 - The aiDEr-Local project includes a set of batch scripts designed to facilitate the setup and execution of the aiDEr application in a local environment. The aiDEr-Local.Bat script serves as a user-friendly launcher, providing options to run the application with various configurations, including different models and file inputs. It ensures that settings are preserved across sessions through a persistence mechanism, enabling consistent operation without requiring reconfiguration. The accompanying Install-Setup.Bat script automates the environment setup, detecting the necessary Python installation, installing dependencies, and ensuring that the environment is properly configured. Together, these scripts provide a streamlined and reliable workflow for managing and running the aiDEr application locally.
 
 ### FEATURES:
-- Enforces administrator privileges to ensure proper execution and environment control.
+- Enforces administrator privileges to ensure proper execution and saving of files.
 - Provides an interactive menu for selecting different modes to run the aiDEr application.
 - Supports model management, allowing users to select, delete, and configure models for Ollama.
 - Handles configuration persistence through a persistence.txt file to save and load settings across sessions.
